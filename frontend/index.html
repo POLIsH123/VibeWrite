@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeWrite.ai - Rewrite Text in Any Vibe</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="landing-page">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="logo-badge">✨ VibeWrite.ai</div>
+                <h1 class="hero-title">
+                    Rewrite anything in<br/>
+                    <span class="rotating-text" data-vibes='["Funny 😂", "Hype 🔥", "Savage 💀", "Cute 💖", "Professional 💼"]'></span>
+                </h1>
+                <p class="hero-subtitle">
+                    Your AI sidekick that transforms boring text into pure vibes.<br/>
+                    Paste. Pick. Perfect.
+                </p>
+                <button class="cta-button" onclick="openApp()">
+                    <span>Open App</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Unique Vibes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Rewrites with Pro</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">⚡</div>
+                        <div class="stat-label">Instant Results</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-decoration">
+                <div class="float-card float-1">
+                    <div class="float-emoji">😂</div>
+                    <div class="float-text">Make it hilarious</div>
+                </div>
+                <div class="float-card float-2">
+                    <div class="float-emoji">🔥</div>
+                    <div class="float-text">Pump up the hype</div>
+                </div>
+                <div class="float-card float-3">
+                    <div class="float-emoji">💀</div>
+                    <div class="float-text">Roast mode ON</div>
+                </div>
+                <div class="float-card float-4">
+                    <div class="float-emoji">💖</div>
+                    <div class="float-text">Cute & friendly</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about-section">
+            <div class="about-container">
+                <h2 class="about-title">What is VibeWrite?</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">🎭</div>
+                        <h3>5 Unique Vibes</h3>
+                        <p>Transform your text into Funny, Hype, Savage, Cute, or Professional styles. Each vibe has its own personality and flavor.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">⚡</div>
+                        <h3>Instant AI Rewrites</h3>
+                        <p>Powered by advanced Hugging Face models, get creative rewrites in seconds. No complicated setup, just paste and go.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">💎</div>
+                        <h3>Free & Pro Plans</h3>
+                        <p>Start with 5 free rewrites per day. Upgrade to Pro for unlimited rewrites at just $10/month. Cancel anytime.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-icon">🎯</div>
+                        <h3>Perfect For Everything</h3>
+                        <p>Social media posts, emails, captions, messages, presentations. Make every word count with the perfect vibe.</p>
+                    </div>
+                </div>
+
+                <div class="vibe-showcase">
+                    <h3 class="showcase-title">See the Magic in Action</h3>
+                    <div class="showcase-example">
+                        <div class="example-input">
+                            <div class="example-label">Original:</div>
+                            <p>"I'm excited about this new project"</p>
+                        </div>
+                        <div class="example-outputs">
+                            <div class="example-output">
+                                <div class="vibe-tag funny">😂 Funny</div>
+                                <p>"I'm so pumped about this project, I might actually do a happy dance (and trust me, nobody wants to see that)"</p>
+                            </div>
+                            <div class="example-output">
+                                <div class="vibe-tag hype">🔥 Hype</div>
+                                <p>"YO THIS NEW PROJECT IS ABSOLUTELY FIRE!! 🔥 LET'S GOOOO!!"</p>
+                            </div>
+                            <div class="example-output">
+                                <div class="vibe-tag professional">💼 Professional</div>
+                                <p>"I am enthusiastically looking forward to contributing to this upcoming initiative."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-section">
+                    <h3 class="pricing-title">Simple Pricing</h3>
+                    <div class="pricing-cards">
+                        <div class="pricing-card free">
+                            <div class="pricing-badge">Free</div>
+                            <div class="pricing-price">$0</div>
+                            <ul class="pricing-features">
+                                <li>✓ 5 rewrites per day</li>
+                                <li>✓ All 5 vibes</li>
+                                <li>✓ No credit card required</li>
+                            </ul>
+                            <button class="pricing-button" onclick="openApp()">Start Free</button>
+                        </div>
+                        <div class="pricing-card pro">
+                            <div class="pricing-badge popular">Pro</div>
+                            <div class="pricing-price">$10<span>/month</span></div>
+                            <ul class="pricing-features">
+                                <li>✓ Unlimited rewrites</li>
+                                <li>✓ All 5 vibes</li>
+                                <li>✓ Priority support</li>
+                                <li>✓ Cancel anytime</li>
+                            </ul>
+                            <button class="pricing-button" onclick="openApp(); setTimeout(() => document.getElementById('upgrade-modal').style.display = 'flex', 500)">Upgrade to Pro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GitHub Section -->
+            <div class="github-section">
+                <div class="github-content">
+                    <div class="github-icon">🐙</div>
+                    <div class="github-text">
+                        <span>This project is open source on GitHub</span>
+                        <a href="https://github.com/POLIsH123/VibeWrite" target="_blank" rel="noopener noreferrer">
+                            github.com/POLIsH123/VibeWrite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span>Scroll to learn more</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M7 13L12 18L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 6L12 11L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="main-app" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">✨ VibeWrite.ai</div>
+                <div class="header-actions">
+                    <div class="user-info" id="user-info">
+                        <span id="user-name"></span>
+                    </div>
+                    <div class="usage-counter" id="usage-counter">
+                        <span id="usage-text">5 rewrites left today</span>
+                    </div>
+                    <button class="upgrade-btn" id="upgrade-btn" onclick="showUpgradeModal()">
+                        ⚡ Upgrade to Pro
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-content">
+            <div class="app-container">
+                <!-- Input Section -->
+                <div class="input-section">
+                    <h2 class="section-title">Your Text</h2>
+                    <textarea 
+                        id="input-text" 
+                        class="input-textarea" 
+                        placeholder="Paste your text here... (e.g., 'I'm so excited about this new opportunity!')"
+                        maxlength="500"
+                    ></textarea>
+                    <div class="input-info">
+                        <span id="char-count">0 / 500</span>
+                    </div>
+                </div>
+
+                <!-- Vibe Selection -->
+                <div class="vibe-section">
+                    <h2 class="section-title">Pick Your Vibe</h2>
+                    <div class="vibe-grid">
+                        <button class="vibe-button" data-vibe="funny" onclick="selectVibe('funny')">
+                            <div class="vibe-emoji">😂</div>
+                            <div class="vibe-name">Funny</div>
+                            <div class="vibe-desc">Add humor & jokes</div>
+                        </button>
+                        <button class="vibe-button" data-vibe="hype" onclick="selectVibe('hype')">
+                            <div class="vibe-emoji">🔥</div>
+                            <div class="vibe-name">Hype</div>
+                            <div class="vibe-desc">Pump the energy</div>
+                        </button>
+                        <button class="vibe-button" data-vibe="savage" onclick="selectVibe('savage')">
+                            <div class="vibe-emoji">💀</div>
+                            <div class="vibe-name">Savage</div>
+                            <div class="vibe-desc">Roast mode ON</div>
+                        </button>
+                        <button class="vibe-button" data-vibe="cute" onclick="selectVibe('cute')">
+                            <div class="vibe-emoji">💖</div>
+                            <div class="vibe-name">Cute</div>
+                            <div class="vibe-desc">Sweet & friendly</div>
+                        </button>
+                        <button class="vibe-button" data-vibe="professional" onclick="selectVibe('professional')">
+                            <div class="vibe-emoji">💼</div>
+                            <div class="vibe-name">Professional</div>
+                            <div class="vibe-desc">Polished & smart</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rewrite Button -->
+                <div class="action-section">
+                    <button class="rewrite-button" id="rewrite-btn" onclick="generateRewrite()" disabled>
+                        <span id="rewrite-btn-text">Select a vibe to start</span>
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="results-section" style="display: none;">
+                    <h2 class="section-title">Your Rewrite</h2>
+                    <div class="result-card" id="result-card">
+                        <div class="result-header">
+                            <div class="result-vibe-tag" id="result-vibe-tag"></div>
+                            <button class="copy-button" onclick="copyResult()">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4C2.89543 15 2 14.1046 2 13V4C2 2.89543 2.89543 2 4 2H13C14.1046 2 15 2.89543 15 4V5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
+                        <div class="result-text" id="result-text"></div>
+                    </div>
+                    <button class="try-another-btn" onclick="resetApp()">
+                        Try Another Vibe
+                    </button>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loading-state" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Cooking up your vibe...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Back to Home Button -->
+        <button class="back-home-btn" onclick="backToHome()">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back to Home
+        </button>
+    </div>
+
+    <!-- Name Modal -->
+    <div id="name-modal" class="modal">
+        <div class="modal-content name-modal">
+            <h2>Welcome to VibeWrite! 👋</h2>
+            <p>What should we call you?</p>
+            <input type="text" id="user-name-input" placeholder="Your name..." maxlength="30">
+            <button onclick="saveName()">Let's Go!</button>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div id="upgrade-modal" class="modal">
+        <div class="modal-content upgrade-modal">
+            <button class="modal-close" onclick="closeUpgradeModal()">×</button>
+            <div class="upgrade-content">
+                <h2>Upgrade to Pro ⚡</h2>
+                <div class="upgrade-benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon">♾️</div>
+                        <div>
+                            <h4>Unlimited Rewrites</h4>
+                            <p>No daily limits, rewrite as much as you want</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">🎯</div>
+                        <div>
+                            <h4>All Vibes Unlocked</h4>
+                            <p>Access to all 5 unique writing styles</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">⚡</div>
+                        <div>
+                            <h4>Priority Support</h4>
+                            <p>Get help when you need it</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="upgrade-price">
+                    <div class="price-amount">$10<span>/month</span></div>
+                    <p>Cancel anytime, no questions asked</p>
+                </div>
+                <button class="subscribe-btn" onclick="handleSubscribe()">
+                    Subscribe Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Limit Reached Modal -->
+    <div id="limit-modal" class="modal">
+        <div class="modal-content limit-modal">
+            <button class="modal-close" onclick="closeLimitModal()">×</button>
+            <h2>Daily Limit Reached 😢</h2>
+            <p>You've used all 5 free rewrites for today. Come back tomorrow or upgrade to Pro for unlimited rewrites!</p>
+            <button class="subscribe-btn" onclick="closeLimitModal(); showUpgradeModal()">
+                Upgrade to Pro
+            </button>
+            <button class="secondary-btn" onclick="closeLimitModal()">
+                Maybe Later
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content success-modal">
+            <h2>🎉 Welcome to Pro!</h2>
+            <p>Your subscription is active. Enjoy unlimited rewrites!</p>
+            <button onclick="closeSuccessModal()">Start Writing</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
