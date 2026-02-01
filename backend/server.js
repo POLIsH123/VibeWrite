@@ -5,10 +5,17 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Import modules
-import * as aiHelper from './ai.js';
+import { rewriteText } from './ai.js';
 import * as stripeHelper from './stripe.js';
+import connectDB from './db/connection.js';
+import communityRoutes from './routes/community.js';
 
 // Initialize Express app
 const app = express();
@@ -29,6 +36,9 @@ app.use(bodyParser.json());
 
 // Raw body parser for Stripe webhooks (must come before other routes)
 app.use('/api/webhook', bodyParser.raw({ type: 'application/json' }));
+
+// Connect to database
+connectDB();
 
 // Request logging
 app.use((req, res, next) => {
@@ -59,33 +69,28 @@ app.post('/api/rewrite', async (req, res) => {
     try {
         const { text, vibe } = req.body;
 
-        // Validate input
-        const validation = aiHelper.validateInput(text);
-        if (!validation.valid) {
-            return res.status(400).json({
-                success: false,
-                error: validation.error
-            });
-        }
+        // Validation is handled within rewriteText function
 
-        // Validate vibe
-        const validVibes = ['funny', 'hype', 'savage', 'cute', 'professional'];
+        // Validate vibe - now supports 30+ styles
+        const validVibes = [
+          'funny', 'hype', 'savage', 'cute', 'professional',
+          'poetic', 'dramatic', 'mysterious', 'romantic', 'motivational',
+          'sarcastic', 'philosophical', 'nostalgic', 'rebellious', 'whimsical',
+          'scientific', 'diplomatic', 'conspiracy', 'zen', 'chaotic',
+          'aristocratic', 'streetwise', 'vintage', 'cyberpunk', 'horror',
+          'superhero', 'pirate', 'cowboy', 'alien', 'robot',
+          'childlike', 'elderly', 'celebrity', 'villain', 'superheroVillain'
+        ];
         if (!validVibes.includes(vibe)) {
             return res.status(400).json({
                 success: false,
-                error: 'Invalid vibe. Must be one of: funny, hype, savage, cute, professional'
+                error: `Invalid vibe. Must be one of: ${validVibes.join(', ')}`
             });
         }
 
-        // Generate rewrite
-        const rewrite = await aiHelper.generateRewrite(validation.text, vibe);
-
-        res.json({
-            success: true,
-            rewrite: rewrite,
-            vibe: vibe,
-            originalText: validation.text
-        });
+        // Generate rewrite - rewriteText handles the response directly
+        await rewriteText(req, res);
+        return;
 
     } catch (error) {
         console.error('Error in /api/rewrite:', error);
@@ -212,9 +217,17 @@ app.get('/api/subscription-status/:customerId', async (req, res) => {
     }
 });
 
-// ===========================
-// Error Handling
-// ===========================
+// Community Scripts Routes
+app.use('/api/community', communityRoutes);
+
+// Serve frontend static files (CSS, JS, etc.)
+app.use(express.static(join(__dirname, '..', 'frontend')));
+
+// Serve index.html for all non-API routes (SPA fallback)
+app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(join(__dirname, '..', 'frontend', 'index.html'));
+});
 
 // 404 handler
 app.use((req, res) => {
@@ -239,11 +252,10 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`
     ========================================
-    🚀 VibeWrite.ai Backend Server
+    🚀 VibeWrite.ai
     ========================================
-    Server running on: http://localhost:${PORT}
-    Environment: ${process.env.NODE_ENV || 'development'}
-    Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:8000'}
+    App:  http://localhost:${PORT}
+    API:  http://localhost:${PORT}/api
     ========================================
     `);
 });
