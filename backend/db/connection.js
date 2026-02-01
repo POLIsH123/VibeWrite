@@ -1,10 +1,11 @@
 // ===========================
-// Database Connection - SQLite Edition
+// Database Connection - SQLite Edition (Vercel Compatible)
 // ===========================
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { tmpdir } from 'os';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,9 +15,14 @@ let dbConnected = false;
 
 const connectDB = async () => {
   try {
-    // Create/connect to SQLite database
-    const dbPath = join(__dirname, '..', 'vibewrite.db');
+    // For Vercel, use /tmp directory for SQLite database
+    const isProduction = process.env.NODE_ENV === 'production';
+    const dbPath = isProduction 
+      ? join(tmpdir(), 'vibewrite.db')
+      : join(__dirname, '..', 'vibewrite.db');
+    
     console.log('📁 Database path:', dbPath);
+    console.log('🌍 Environment:', process.env.NODE_ENV || 'development');
     
     db = await open({
       filename: dbPath,
@@ -64,6 +70,13 @@ const connectDB = async () => {
     dbConnected = true;
     console.log('✅ SQLite database connected and tables created');
     
+    // In production, warn about temporary storage
+    if (isProduction) {
+      console.log('⚠️  Production mode: Database is stored in temporary directory');
+      console.log('   Data will be lost on serverless function restarts');
+      console.log('   Consider upgrading to a persistent database for production');
+    }
+    
   } catch (error) {
     console.error('⚠️  SQLite connection failed:', error.message);
     console.log('   Community features will be disabled. Main app still works!');
@@ -72,15 +85,24 @@ const connectDB = async () => {
   }
 };
 
+// Ensure database connection for serverless functions
+const ensureConnection = async () => {
+  if (!db || !dbConnected) {
+    await connectDB();
+  }
+  return db;
+};
+
 // Get database instance (replaces pool)
 const pool = {
   query: async (sql, params = []) => {
-    if (!db) throw new Error('Database not connected');
+    const database = await ensureConnection();
+    if (!database) throw new Error('Database not connected');
     
     if (sql.trim().toUpperCase().startsWith('SELECT')) {
-      return { rows: await db.all(sql, params) };
+      return { rows: await database.all(sql, params) };
     } else {
-      const result = await db.run(sql, params);
+      const result = await database.run(sql, params);
       return { 
         rows: [{ id: result.lastID }],
         rowCount: result.changes 

@@ -1,12 +1,15 @@
 // ===========================
 // VibeWrite.ai Backend Server
 // ===========================
-import 'dotenv/config';
+import { config } from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+
+// Load environment variables from root directory
+config({ path: join(dirname(fileURLToPath(import.meta.url)), '..', '.env') });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
