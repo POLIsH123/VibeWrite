@@ -10,7 +10,7 @@ let history = JSON.parse(localStorage.getItem('vibewrite_history') || '[]');
 let stats = JSON.parse(localStorage.getItem('vibewrite_stats') || '{"total":0,"vibes":{}}');
 
 const MAX_FREE_REWRITES = 5;
-const API_URL = (typeof window !== 'undefined' ? window.location.origin : '') + '/api';
+const API_URL = 'http://localhost:3000/api';
 
 const vibeEmojis = {
     funny: '😂', hype: '🔥', savage: '💀', cute: '💖', professional: '💼',
@@ -25,6 +25,9 @@ const vibeEmojis = {
 // ===========================
 // Initialization
 // ===========================
+// ===========================
+// OP Initialization - Ultra Modern
+// ===========================
 document.addEventListener('DOMContentLoaded', () => {
     checkAndResetDailyUsage();
     updateUI();
@@ -35,7 +38,183 @@ document.addEventListener('DOMContentLoaded', () => {
     if (textarea) {
         textarea.addEventListener('input', handleInput);
     }
+    
+    // OP Enhancements
+    initializeOPEffects();
+    setupIntersectionObserver();
+    setupParallaxEffects();
+    setupAdvancedAnimations();
 });
+
+// ===========================
+// OP Effects & Animations
+// ===========================
+function initializeOPEffects() {
+    // Add stagger animations to elements
+    const animateElements = document.querySelectorAll('.stat-card, .trending-card, .vibe-card, .history-item');
+    animateElements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.1}s`;
+        el.classList.add('animate-in');
+    });
+    
+    // Add floating effects to icons
+    const floatingElements = document.querySelectorAll('.trending-icon, .vibe-icon, .recent-vibe, .history-vibe');
+    floatingElements.forEach((el, index) => {
+        el.style.animationDelay = `${index * 0.5}s`;
+        el.classList.add('float-effect');
+    });
+    
+    // Add shimmer effects to buttons
+    const shimmerElements = document.querySelectorAll('.quick-start-btn, .upgrade-btn, .primary-btn');
+    shimmerElements.forEach(el => {
+        el.classList.add('shimmer-effect');
+    });
+    
+    // Add glow effects to important elements
+    const glowElements = document.querySelectorAll('.send-btn, .usage-badge');
+    glowElements.forEach(el => {
+        el.classList.add('glow-effect');
+    });
+}
+
+function setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                
+                // Add special effects for different elements
+                if (entry.target.classList.contains('stat-card')) {
+                    animateStatValue(entry.target);
+                }
+                
+                if (entry.target.classList.contains('trending-card')) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+                }
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Observe all animatable elements
+    const observeElements = document.querySelectorAll('.stat-card, .trending-card, .vibe-card, .history-item, .section');
+    observeElements.forEach(el => observer.observe(el));
+}
+
+function animateStatValue(statCard) {
+    const valueEl = statCard.querySelector('.stat-value');
+    if (!valueEl) return;
+    
+    const finalValue = parseInt(valueEl.textContent) || 0;
+    let currentValue = 0;
+    const increment = Math.ceil(finalValue / 30);
+    
+    const timer = setInterval(() => {
+        currentValue += increment;
+        if (currentValue >= finalValue) {
+            currentValue = finalValue;
+            clearInterval(timer);
+        }
+        valueEl.textContent = currentValue;
+    }, 50);
+}
+
+function setupParallaxEffects() {
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.bg-layer, .hero-bg-element');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    });
+}
+
+function setupAdvancedAnimations() {
+    // Advanced hover effects for cards
+    const cards = document.querySelectorAll('.stat-card, .trending-card, .vibe-card, .history-item');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+            
+            // Add ripple effect
+            createRipple(card, x, y);
+        });
+        
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+function createRipple(element, x, y) {
+    const ripple = document.createElement('div');
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.background = 'rgba(99, 102, 241, 0.3)';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.animation = 'ripple 0.6s linear';
+    ripple.style.left = `${x - 10}px`;
+    ripple.style.top = `${y - 10}px`;
+    ripple.style.width = '20px';
+    ripple.style.height = '20px';
+    ripple.style.pointerEvents = 'none';
+    ripple.style.zIndex = '1000';
+    
+    element.style.position = 'relative';
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Add ripple animation to CSS
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyle);
 
 // ===========================
 // Landing Page
@@ -60,40 +239,156 @@ function backToLanding() {
 }
 
 // ===========================
-// Page Navigation
+// OP Page Navigation - Ultra Modern
 // ===========================
 function showPage(pageId) {
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    // Add exit animation to current page
+    const currentPage = document.querySelector('.page[style*="flex"]');
+    if (currentPage) {
+        currentPage.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        
+        setTimeout(() => {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            
+            // Show selected page with entrance animation
+            const page = document.getElementById(`page-${pageId}`);
+            if (page) {
+                page.style.display = 'flex';
+                page.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                // Add stagger animations to page content
+                setTimeout(() => {
+                    const pageElements = page.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
+                    pageElements.forEach((el, index) => {
+                        el.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+                    });
+                }, 100);
+            }
+        }, 300);
+    } else {
+        // First load - no exit animation needed
+        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        const page = document.getElementById(`page-${pageId}`);
+        if (page) {
+            page.style.display = 'flex';
+            page.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        }
+    }
     
-    // Show selected page
-    const page = document.getElementById(`page-${pageId}`);
-    if (page) page.style.display = 'flex';
+    // Update nav with OP effects
+    document.querySelectorAll('.nav-item').forEach(n => {
+        n.classList.remove('active');
+        n.style.transform = '';
+    });
     
-    // Update nav
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const navItem = document.querySelector(`[data-page="${pageId}"]`);
-    if (navItem) navItem.classList.add('active');
+    if (navItem) {
+        navItem.classList.add('active');
+        navItem.style.animation = 'glow-pulse 1s ease-in-out';
+        
+        // Reset animation after it completes
+        setTimeout(() => {
+            navItem.style.animation = '';
+        }, 1000);
+    }
     
-    // Update title
-    const titles = { home: 'Home', rewrite: 'Rewrite', history: 'History' };
-    document.getElementById('page-title').textContent = titles[pageId] || pageId;
+    // Update title with OP gradient effect
+    const titles = { 
+        home: 'Dashboard', 
+        rewrite: 'AI Rewriter', 
+        history: 'Your History' 
+    };
+    const titleEl = document.getElementById('page-title');
+    if (titleEl) {
+        titleEl.style.animation = 'slideOutUp 0.2s ease-in';
+        
+        setTimeout(() => {
+            titleEl.textContent = titles[pageId] || pageId;
+            titleEl.style.animation = 'slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        }, 200);
+    }
     
     // Render history if on history page
     if (pageId === 'history') {
-        renderHistory();
+        setTimeout(() => {
+            renderHistory();
+        }, 400);
     }
     
-    // Close mobile sidebar
-    document.querySelector('.sidebar').classList.remove('open');
+    // Close mobile sidebar with animation
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar.classList.contains('open')) {
+        sidebar.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => {
+            sidebar.classList.remove('open');
+            sidebar.style.animation = '';
+        }, 300);
+    }
 }
 
+// Add CSS animations for page transitions
+const pageTransitionStyle = document.createElement('style');
+pageTransitionStyle.textContent = `
+    @keyframes slideOutLeft {
+        to {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutUp {
+        to {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+`;
+document.head.appendChild(pageTransitionStyle);
+
 function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
+    const sidebar = document.querySelector('.sidebar');
+    const isOpen = sidebar.classList.contains('open');
+    
+    if (isOpen) {
+        sidebar.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => {
+            sidebar.classList.remove('open');
+            sidebar.style.animation = '';
+        }, 300);
+    } else {
+        sidebar.classList.add('open');
+        sidebar.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => {
+            sidebar.style.animation = '';
+        }, 400);
+    }
 }
 
 // ===========================
-// UI Updates
+// OP UI Updates - Ultra Modern
 // ===========================
 function updateUI() {
     const userNameEl = document.getElementById('sidebar-user-name');
@@ -107,19 +402,60 @@ function updateUI() {
         userNameEl.textContent = userName;
         userAvatar.textContent = userName.charAt(0).toUpperCase();
         if (welcomeName) welcomeName.textContent = userName;
+        
+        // Add OP animation to user avatar
+        userAvatar.style.animation = 'glow-pulse 3s ease-in-out infinite';
     }
     
     if (isPro) {
         userPlan.textContent = 'Pro Plan';
-        usageBadge.textContent = 'Unlimited';
-        usageBadge.style.color = '#22c55e';
+        userPlan.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        userPlan.style.webkitBackgroundClip = 'text';
+        userPlan.style.backgroundClip = 'text';
+        userPlan.style.webkitTextFillColor = 'transparent';
+        
+        usageBadge.textContent = 'Unlimited ∞';
+        usageBadge.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        usageBadge.style.color = 'white';
+        usageBadge.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
+        
         if (upgradeBtn) upgradeBtn.style.display = 'none';
     } else {
         userPlan.textContent = 'Free Plan';
+        userPlan.style.background = '';
+        userPlan.style.webkitBackgroundClip = '';
+        userPlan.style.backgroundClip = '';
+        userPlan.style.webkitTextFillColor = '';
+        
         const remaining = MAX_FREE_REWRITES - dailyUsage;
         usageBadge.textContent = `${remaining} left today`;
-        usageBadge.style.color = remaining === 0 ? '#ef4444' : '';
+        
+        if (remaining === 0) {
+            usageBadge.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+            usageBadge.style.color = 'white';
+            usageBadge.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.4)';
+            usageBadge.style.animation = 'glow-pulse 2s ease-in-out infinite';
+        } else if (remaining <= 2) {
+            usageBadge.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+            usageBadge.style.color = 'white';
+            usageBadge.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.4)';
+        } else {
+            usageBadge.style.background = '';
+            usageBadge.style.color = '';
+            usageBadge.style.boxShadow = '';
+            usageBadge.style.animation = '';
+        }
     }
+    
+    // Add OP entrance animations
+    setTimeout(() => {
+        const elements = [userNameEl, userAvatar, userPlan, usageBadge];
+        elements.forEach((el, index) => {
+            if (el) {
+                el.style.animation = `slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+            }
+        });
+    }, 100);
 }
 
 function updateStats() {
@@ -127,10 +463,18 @@ function updateStats() {
     const favoriteEl = document.getElementById('stat-favorite');
     const todayEl = document.getElementById('stat-today');
     
-    if (totalEl) totalEl.textContent = stats.total;
-    if (todayEl) todayEl.textContent = dailyUsage;
+    if (totalEl) {
+        // Animate the stat value
+        animateStatValue(totalEl.closest('.stat-card'));
+        totalEl.textContent = stats.total;
+    }
     
-    // Find favorite vibe
+    if (todayEl) {
+        animateStatValue(todayEl.closest('.stat-card'));
+        todayEl.textContent = dailyUsage;
+    }
+    
+    // Find favorite vibe with OP animation
     if (favoriteEl) {
         let maxVibe = null;
         let maxCount = 0;
@@ -140,8 +484,33 @@ function updateStats() {
                 maxVibe = vibe;
             }
         }
-        favoriteEl.textContent = maxVibe ? vibeEmojis[maxVibe] || maxVibe : '-';
+        
+        const favoriteIcon = maxVibe ? vibeEmojis[maxVibe] || maxVibe : '-';
+        favoriteEl.textContent = favoriteIcon;
+        
+        if (maxVibe) {
+            favoriteEl.style.animation = 'float 3s ease-in-out infinite';
+            favoriteEl.style.fontSize = '32px';
+            favoriteEl.style.filter = 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.6))';
+        }
     }
+    
+    // Add OP glow effects to stat cards
+    setTimeout(() => {
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach((card, index) => {
+            card.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+            
+            // Add hover glow effect
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = '0 0 40px rgba(99, 102, 241, 0.3), 0 16px 64px rgba(0, 0, 0, 0.5)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+            });
+        });
+    }, 200);
 }
 
 function checkAndResetDailyUsage() {
@@ -168,29 +537,139 @@ function handleInput() {
 }
 
 // ===========================
-// Vibe Selection
+// OP Vibe Selection - Ultra Modern
 // ===========================
 function selectVibe(vibe) {
     currentVibe = vibe;
     
-    document.querySelectorAll('.vibe-card').forEach(card => {
-        card.classList.remove('selected');
+    // Remove previous selections with animation
+    document.querySelectorAll('.vibe-card.selected').forEach(card => {
+        card.style.animation = 'scaleOut 0.2s ease-in';
+        setTimeout(() => {
+            card.classList.remove('selected');
+            card.style.animation = '';
+        }, 200);
     });
     
-    document.querySelectorAll(`[data-vibe="${vibe}"]`).forEach(card => {
-        card.classList.add('selected');
-    });
+    // Add selection with OP animation
+    setTimeout(() => {
+        document.querySelectorAll(`[data-vibe="${vibe}"]`).forEach(card => {
+            card.classList.add('selected');
+            card.style.animation = 'scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            // Add ripple effect
+            const rect = card.getBoundingClientRect();
+            createRipple(card, rect.width / 2, rect.height / 2);
+            
+            // Add glow pulse
+            card.style.boxShadow = '0 0 40px rgba(99, 102, 241, 0.6), 0 16px 64px rgba(0, 0, 0, 0.5)';
+            
+            setTimeout(() => {
+                card.style.animation = '';
+            }, 400);
+        });
+    }, 200);
     
+    // Update send button state with animation
     const textarea = document.getElementById('input-text');
     const sendBtn = document.getElementById('rewrite-btn');
     if (textarea && sendBtn) {
-        sendBtn.disabled = !(textarea.value.trim().length > 0);
+        const canSend = textarea.value.trim().length > 0;
+        sendBtn.disabled = !canSend;
+        
+        if (canSend) {
+            sendBtn.style.animation = 'glow-pulse 2s ease-in-out infinite';
+            sendBtn.style.transform = 'scale(1.1)';
+            
+            setTimeout(() => {
+                sendBtn.style.transform = '';
+            }, 300);
+        } else {
+            sendBtn.style.animation = '';
+        }
     }
+    
+    // Show selection feedback
+    showVibeSelectionFeedback(vibe);
 }
 
+function showVibeSelectionFeedback(vibe) {
+    const feedback = document.createElement('div');
+    feedback.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 16px;
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+        animation: feedbackPop 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    `;
+    
+    feedback.textContent = `${vibeEmojis[vibe] || '✨'} ${vibe.charAt(0).toUpperCase() + vibe.slice(1)} selected!`;
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+        feedback.remove();
+    }, 1500);
+}
+
+// Add feedback animation CSS
+const feedbackStyle = document.createElement('style');
+feedbackStyle.textContent = `
+    @keyframes feedbackPop {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        20% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        80% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+    }
+    
+    @keyframes scaleOut {
+        to {
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+    }
+`;
+document.head.appendChild(feedbackStyle);
+
 function quickRewrite(vibe) {
+    // Add page transition effect
     showPage('rewrite');
-    selectVibe(vibe);
+    
+    // Wait for page transition then select vibe
+    setTimeout(() => {
+        selectVibe(vibe);
+        
+        // Focus on textarea with animation
+        const textarea = document.getElementById('input-text');
+        if (textarea) {
+            textarea.focus();
+            textarea.style.animation = 'glow-pulse 1s ease-in-out';
+            
+            setTimeout(() => {
+                textarea.style.animation = '';
+            }, 1000);
+        }
+    }, 500);
 }
 
 function toggleAllVibes() {
@@ -199,18 +678,58 @@ function toggleAllVibes() {
     const text = document.getElementById('see-all-text');
     
     if (extended.style.display === 'none') {
+        // Show with stagger animation
         extended.style.display = 'grid';
         text.textContent = 'Show less';
         btn.classList.add('expanded');
+        
+        // Animate each vibe card
+        const vibeCards = extended.querySelectorAll('.vibe-card');
+        vibeCards.forEach((card, index) => {
+            card.style.animation = `slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s both`;
+        });
+        
+        // Animate button
+        btn.style.animation = 'scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        
     } else {
-        extended.style.display = 'none';
-        text.textContent = 'See all vibes';
-        btn.classList.remove('expanded');
+        // Hide with animation
+        const vibeCards = extended.querySelectorAll('.vibe-card');
+        vibeCards.forEach((card, index) => {
+            card.style.animation = `slideOutDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.02}s both`;
+        });
+        
+        setTimeout(() => {
+            extended.style.display = 'none';
+            text.textContent = 'See all vibes';
+            btn.classList.remove('expanded');
+            
+            // Reset animations
+            vibeCards.forEach(card => {
+                card.style.animation = '';
+            });
+        }, 300 + (vibeCards.length * 20));
     }
+    
+    setTimeout(() => {
+        btn.style.animation = '';
+    }, 300);
 }
 
+// Add slide out animation
+const vibeAnimationStyle = document.createElement('style');
+vibeAnimationStyle.textContent = `
+    @keyframes slideOutDown {
+        to {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+        }
+    }
+`;
+document.head.appendChild(vibeAnimationStyle);
+
 // ===========================
-// Generate Rewrite
+// OP Generate Rewrite - Ultra Modern
 // ===========================
 async function generateRewrite() {
     const inputText = document.getElementById('input-text').value.trim();
@@ -222,17 +741,36 @@ async function generateRewrite() {
         return;
     }
     
+    // Show loading with OP animation
     document.getElementById('results-section').style.display = 'none';
-    document.getElementById('loading').style.display = 'flex';
+    const loadingEl = document.getElementById('loading');
+    loadingEl.style.display = 'flex';
+    loadingEl.style.animation = 'slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
     
     try {
+        console.log('🚀 Making API request to:', `${API_URL}/rewrite`);
+        console.log('📝 Request data:', { text: inputText, vibe: currentVibe });
+        
         const response = await fetch(`${API_URL}/rewrite`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
             body: JSON.stringify({ text: inputText, vibe: currentVibe })
         });
         
+        console.log('📡 Response status:', response.status);
+        console.log('📡 Response headers:', Object.fromEntries(response.headers.entries()));
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Response not OK:', response.status, errorText);
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+        }
+        
         const data = await response.json();
+        console.log('✅ Response data:', data);
         
         if (data.success) {
             // Update usage
@@ -252,26 +790,174 @@ async function generateRewrite() {
             updateUI();
             updateStats();
             displayResult(data.rewrite);
+            
+            // Show success feedback
+            showSuccessFeedback();
+            
         } else {
             throw new Error(data.error || 'Failed to rewrite');
         }
     } catch (error) {
-        console.error('Error:', error);
-        alert('Something went wrong. Please try again.');
+        console.error('💥 Error details:', error);
+        
+        // Show detailed error message
+        let errorMessage = 'Something went wrong. Please try again.';
+        
+        if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Cannot connect to server. Make sure the backend is running on http://localhost:3000';
+        } else if (error.message.includes('CORS')) {
+            errorMessage = 'CORS error. Check server configuration.';
+        } else if (error.message.includes('HTTP 500')) {
+            errorMessage = 'Server error. Check your OpenAI API key and server logs.';
+        } else if (error.message.includes('HTTP 400')) {
+            errorMessage = 'Invalid request. Please check your input.';
+        }
+        
+        // Show error with OP styling
+        showErrorFeedback(errorMessage);
+        
     } finally {
-        document.getElementById('loading').style.display = 'none';
+        loadingEl.style.display = 'none';
     }
 }
+
+function showSuccessFeedback() {
+    const feedback = document.createElement('div');
+    feedback.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+        animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    `;
+    
+    feedback.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span>✅</span>
+            <span>Rewrite generated successfully!</span>
+        </div>
+    `;
+    
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+        feedback.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => feedback.remove(), 300);
+    }, 3000);
+}
+
+function showErrorFeedback(message) {
+    const feedback = document.createElement('div');
+    feedback.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        z-index: 1000;
+        cursor: pointer;
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+        animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 400px;
+    `;
+    
+    feedback.innerHTML = `
+        <div style="display: flex; align-items: flex-start; gap: 8px;">
+            <span style="flex-shrink: 0;">❌</span>
+            <div>
+                <div style="font-weight: 700; margin-bottom: 4px;">Error</div>
+                <div style="font-size: 13px; opacity: 0.9;">${message}</div>
+                <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Click to dismiss</div>
+            </div>
+        </div>
+    `;
+    
+    feedback.onclick = () => {
+        feedback.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => feedback.remove(), 300);
+    };
+    
+    document.body.appendChild(feedback);
+    
+    // Auto-dismiss after 8 seconds
+    setTimeout(() => {
+        if (feedback.parentNode) {
+            feedback.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            setTimeout(() => feedback.remove(), 300);
+        }
+    }, 8000);
+}
+
+// Add notification animations
+const notificationStyle = document.createElement('style');
+notificationStyle.textContent = `
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideOutRight {
+        to {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+    }
+`;
+document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
     const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');
     
-    resultVibe.textContent = `${vibeEmojis[currentVibe] || ''} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
+    resultVibe.textContent = `${vibeEmojis[currentVibe] || '✨'} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
     resultText.textContent = text;
+    
+    // Show with OP animation
     resultsSection.style.display = 'block';
-    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    resultsSection.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    
+    // Add typewriter effect to result text
+    const originalText = text;
+    resultText.textContent = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+        if (i < originalText.length) {
+            resultText.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 20);
+        }
+    };
+    
+    setTimeout(typeWriter, 300);
+    
+    // Scroll into view smoothly
+    setTimeout(() => {
+        resultsSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest',
+            inline: 'nearest'
+        });
+    }, 400);
 }
 
 function copyResult() {
