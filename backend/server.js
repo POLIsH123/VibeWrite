@@ -256,6 +256,7 @@ app.listen(PORT, () => {
     ========================================
     App:  http://localhost:${PORT}
     API:  http://localhost:${PORT}/api
+    DB:   SQLite (auto-configured)
     ========================================
     `);
 });

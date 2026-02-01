@@ -13,79 +13,77 @@ const openai = new OpenAI({
 // Vibe prompts - 30+ expanded styles
 const vibePrompts = {
   // Core styles
-  funny: "Rewrite this with clever, playful humor. Add light jokes and wit, keep it natural, and make it genuinely funny without embarrassing the sender. Keep roughly the same length:",
+  funny: "Transform this into comedy gold—sharp wit, unexpected turns, laugh-out-loud moments. Make it hilarious but never cringe. Natural flow, similar length:",
 
-  hype: "Rewrite this with bold, high-energy excitement. Make it confident, punchy, and motivating like you’re hyping someone up. Keep it clear and about the same length:",
+  hype: "AMPLIFY THIS. Pure adrenaline, maximum energy, unstoppable confidence. Hit like a hype track that gets people MOVING. Same length, 10x impact:",
 
-  savage: "Rewrite this sharp and savage with confident attitude. Be cutting and stylish, not mean or insulting. Add a few emojis only if they amplify impact. Keep the length similar:",
+  savage: "Weaponize this text. Ice-cold confidence, devastating precision, pure fire. Stylish and sharp, never petty. Strategic emoji placement for maximum damage. Similar length:",
 
-  cute: "Rewrite this to be adorable, wholesome, and heart-melting. Use soft, sweet, playful wording that makes someone smile or blush. Keep about the same length:",
+  cute: "Make this MELT hearts. Overwhelmingly adorable, impossibly sweet, weaponized wholesomeness. The kind of cute that makes people screenshot and send to friends. Same length:",
 
-  professional: "Rewrite this in a polished, professional tone. Clear, concise, and formal like business communication. Keep the meaning and similar length:",
-
+  professional: "Executive-level polish. Razor-sharp clarity, boardroom-ready, commanding respect. This is what power sounds like in writing. Maintain length and meaning:",
 
   // Expanded styles
-  poetic: "Rewrite this as lyrical poetry with vivid imagery, metaphors, and smooth rhythm that evokes emotion:",
+  poetic: "Craft living poetry—images that breathe, metaphors that strike like lightning, rhythm that pulls readers into emotional freefall:",
 
-  dramatic: "Rewrite this with intense, theatrical emotion and larger-than-life expression, like stage drama or epic storytelling:",
+  dramatic: "UNLEASH THEATRICAL CHAOS. Shakespearean intensity, operatic emotion, scenery-chewing passion. Make every word an EVENT:",
 
-  mysterious: "Rewrite this with intrigue and suspense. Use subtle hints, shadows, and unanswered questions to create curiosity:",
+  mysterious: "Weave darkness and intrigue. What's unsaid screams louder than words. Shadows hide secrets. Questions breed obsession. Pull them deeper:",
 
-  romantic: "Rewrite this with warmth, affection, and heartfelt emotion. Make it tender and deeply expressive:",
+  romantic: "Ignite pure feeling. Words that ache with tenderness, sentences that wrap around the heart. Make love itself jealous of this language:",
 
-  motivational: "Rewrite this to inspire action and confidence. Use uplifting, empowering language that feels energizing:",
+  motivational: "SPARK THE FIRE. Inject rocket fuel into their spirit. This is the speech before the comeback, the manifesto before the revolution:",
 
-  sarcastic: "Rewrite this with dry, clever sarcasm and ironic humor. Keep it witty rather than cruel:",
+  sarcastic: "Drip with delicious irony. Razor-sharp wit, perfectly timed eye-rolls, chef's kiss levels of clever mockery. Funny, never mean:",
 
-  philosophical: "Rewrite this with deeper reflection and thoughtful insight, exploring meaning, purpose, or big ideas:",
+  philosophical: "Crack reality open. Question everything, illuminate hidden truths, turn simple thoughts into profound revelations about existence:",
 
-  nostalgic: "Rewrite this with a soft, sentimental tone that feels reflective and warmly tied to the past:",
+  nostalgic: "Bottle golden-hour memories. Soft-focus warmth, bittersweet beauty, that ache for yesterday wrapped in honey-light language:",
 
-  rebellious: "Rewrite this with bold, defiant energy that challenges norms and feels fearless and independent:",
+  rebellious: "BURN THE RULEBOOK. Unapologetic defiance, middle fingers raised in poetic rebellion. Fearless, raw, absolutely untamed:",
 
-  whimsical: "Rewrite this in a playful, imaginative, slightly magical way with creative and fanciful language:",
+  whimsical: "Sprinkle impossible magic. Logic takes a vacation, imagination runs wild, reality bends into delightful absurdity:",
 
-  scientific: "Rewrite this with precise, objective, and logical wording like a scientific explanation:",
+  scientific: "Deploy clinical precision. Hypothesis-driven, data-sharp, peer-review ready. Emotion: irrelevant. Facts: devastating:",
 
-  diplomatic: "Rewrite this tactfully and respectfully, balancing clarity with sensitivity to avoid offense:",
+  diplomatic: "Navigate minefields with silk gloves. Say everything while offending no one. Master-class in tactful communication:",
 
-  conspiracy: "Rewrite this with a suspicious tone that hints at hidden motives, secret agendas, and unseen forces:",
+  conspiracy: "THEY don't want you to know this. Connect invisible dots. See the matrix behind the curtain. Trust nothing. Question EVERYTHING:",
 
-  zen: "Rewrite this with calm, mindful, and peaceful language that feels grounded and centered:",
+  zen: "Breathe into stillness. Words float like cherry blossoms. Inner peace crystalized into language. The universe speaks through calm:",
 
-  chaotic: "Rewrite this unpredictably with wild energy, strange turns, and intentionally messy logic for comedic chaos:",
+  chaotic: "UNLEASH BEAUTIFUL DISASTER. Logic explodes, sense optional, pure unhinged energy. Controlled chaos for maximum entertainment:",
 
-  aristocratic: "Rewrite this in an elegant, refined, upper-class tone with sophisticated vocabulary and graceful phrasing:",
+  aristocratic: "Channel inherited elegance. Vocabulary drips with old money. Every syllable wears a monocle. Refinement weaponized:",
 
-  streetwise: "Rewrite this with gritty, urban slang and confident street-smart attitude while staying natural:",
+  streetwise: "Keep it 💯 real. Hood wisdom, survival smarts, urban poetry with edge. Authentic grit, no cap:",
 
-  vintage: "Rewrite this like it was written decades ago with classic phrasing and old-school charm:",
+  vintage: "Time-machine this back decades. Classic phrasing, old-soul charm, the way they wrote when words mattered more:",
 
-  cyberpunk: "Rewrite this with a futuristic, neon-lit, dystopian tech-noir vibe — high tech, low life:",
+  cyberpunk: "Jack into the neon-soaked future. Corpo-speak meets street chrome. High-tech dystopia where data bleeds and rain never stops:",
 
-  horror: "Rewrite this with eerie, unsettling imagery and creeping dread that slowly builds tension:",
+  horror: "Crawl under their skin. Dread builds in shadows. Something's wrong but you can't look away. Terror whispers in every word:",
 
-  superhero: "Rewrite this like a comic-book hero monologue — bold, action-packed, and larger than life:",
+  superhero: "HEROIC DECLARATION MODE. Cape-worthy conviction, comic-panel drama, justice in BOLD LETTERS. The speech before saving the world:",
 
-  pirate: "Rewrite this with fun nautical slang and adventurous seafaring energy like a lively pirate tale:",
+  pirate: "Hoist the colors, ya scallywag! Salt-spray adventure, treasure-hungry swagger, seven seas of rowdy nautical chaos, arrr:",
 
-  cowboy: "Rewrite this with rugged western frontier speech, relaxed drawl, and old-west storytelling style:",
+  cowboy: "Saddle up, partner. Dusty frontier wisdom, sunset drawl, campfire storytelling from the wild west's golden age:",
 
-  alien: "Rewrite this from an otherworldly perspective with strange logic and unfamiliar customs:",
+  alien: "Process through non-human logic. Translate between incompatible realities. Your customs perplex our sensors. Fascinating specimens:",
 
-  robot: "Rewrite this in a literal, logical, mechanical tone with precise and emotionless phrasing:",
+  robot: "EXECUTING COMMUNICATION PROTOCOL. Emotional subroutines: disabled. Logic circuits: optimal. Efficiency: 100%. Beep boop:",
 
-  childlike: "Rewrite this with simple, innocent language full of wonder, curiosity, and playful joy:",
+  childlike: "See with brand-new eyes! Everything's an adventure! Use simple wonder-words! Curiosity explodes! Magic is REAL!:",
 
-  elderly: "Rewrite this with gentle wisdom and reflective life experience, thoughtful and patient in tone:",
+  elderly: "Speak from decades of sunsets. Patient wisdom earned through living. Gentle truths only time can teach. Stories in every pause:",
 
-  celebrity: "Rewrite this with glamorous, confident, media-savvy language like a public figure addressing fans:",
+  celebrity: "Address the cameras. Confident, magnetic, media-trained perfection. This is how stars speak to the universe watching:",
 
-  villain: "Rewrite this with dark, menacing intent and calculated ambition, like a scheming antagonist:",
+  villain: "Architect of doom speaks. Calculated malice, sophisticated menace, genius bent toward darkness. Fear me, for I am inevitable:",
 
-  superheroVillain: "Rewrite this with grand, theatrical, world-dominating villain energy — dramatic, powerful, and intimidating:"
+  superheroVillain: "BEHOLD YOUR RECKONING. Monologue-worthy megalomania, theatrical world domination, UNLIMITED POWER in every syllable. Tremble, mortals:"
 };
-
 
 
 

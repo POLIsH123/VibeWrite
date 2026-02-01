@@ -1156,6 +1156,15 @@
                     </svg>
                     Rewrite
                 </a>
+                <a href="#" class="nav-item" data-page="community" onclick="showPage('community')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Community
+                </a>
                 <a href="#" class="nav-item" data-page="history" onclick="showPage('history')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
@@ -1474,6 +1483,116 @@
                 </div>
             </div>
 
+            <!-- Community Page -->
+            <div id="page-community" class="page" style="display: none;">
+                <div class="content-area">
+                    <!-- Locked Community State -->
+                    <div class="community-locked" id="community-locked">
+                        <div class="community-lock-content">
+                            <div class="lock-icon">🔒</div>
+                            <h2 class="lock-title">Community Features Coming Soon!</h2>
+                            <p class="lock-subtitle">We're building something amazing for the community</p>
+                            
+                            <div class="progress-section">
+                                <div class="progress-header">
+                                    <span class="progress-label">Community Scripts Collected</span>
+                                    <span class="progress-count"><span id="script-count">0</span> / 50</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <div class="progress-percentage" id="progress-percentage">0%</div>
+                            </div>
+                            
+                            <div class="lock-description">
+                                <h3>What's Coming?</h3>
+                                <ul class="feature-list">
+                                    <li>🎯 Browse community-created AI scripts</li>
+                                    <li>🗳️ Vote on your favorite prompts</li>
+                                    <li>⭐ Share your own creative scripts</li>
+                                    <li>🔥 Discover trending AI transformations</li>
+                                    <li>👥 Connect with other creators</li>
+                                </ul>
+                            </div>
+                            
+                            <button class="help-reach-btn" onclick="showContributeModal()">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                Help Us Reach 50 Scripts!
+                            </button>
+                            
+                            <div class="eta-info">
+                                <p>🚀 Community features will unlock automatically when we reach 50 scripts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unlocked Community State (hidden initially) -->
+                    <div class="community-unlocked" id="community-unlocked" style="display: none;">
+                        <div class="community-header">
+                            <div class="community-title-section">
+                                <h2 class="community-title">🎉 Community Unlocked!</h2>
+                                <p class="community-subtitle">Discover and share custom AI prompts created by the community</p>
+                            </div>
+                            <button class="primary-btn" onclick="showCreateScriptModal()" style="width: auto; padding: 16px 24px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"/>
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                Create Script
+                            </button>
+                        </div>
+
+                        <div class="community-stats">
+                            <div class="community-stat-card">
+                                <div class="community-stat-value" id="total-scripts">0</div>
+                                <div class="community-stat-label">Total Scripts</div>
+                            </div>
+                            <div class="community-stat-card">
+                                <div class="community-stat-value" id="total-votes">0</div>
+                                <div class="community-stat-label">Total Votes</div>
+                            </div>
+                            <div class="community-stat-card">
+                                <div class="community-stat-value" id="active-creators">0</div>
+                                <div class="community-stat-label">Active Creators</div>
+                            </div>
+                        </div>
+
+                        <div class="community-filters">
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-filter="all" onclick="filterScripts('all')">
+                                    All Scripts
+                                </button>
+                                <button class="filter-tab" data-filter="popular" onclick="filterScripts('popular')">
+                                    🔥 Popular
+                                </button>
+                                <button class="filter-tab" data-filter="recent" onclick="filterScripts('recent')">
+                                    ⚡ Recent
+                                </button>
+                                <button class="filter-tab" data-filter="my-scripts" onclick="filterScripts('my-scripts')">
+                                    👤 My Scripts
+                                </button>
+                            </div>
+                            <div class="search-box">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="M21 21l-4.35-4.35"/>
+                                </svg>
+                                <input type="text" placeholder="Search scripts..." id="script-search" oninput="searchScripts()">
+                            </div>
+                        </div>
+
+                        <div class="scripts-grid" id="scripts-grid">
+                            <div class="loading-scripts" id="scripts-loading">
+                                <div class="spinner"></div>
+                                <div>Loading community scripts...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- History Page -->
             <div id="page-history" class="page" style="display: none;">
                 <div class="content-area">
@@ -1552,6 +1671,109 @@
             <p>This will clear all your data and history.</p>
             <button class="primary-btn danger" onclick="confirmLogout()">Sign out</button>
             <button class="secondary-btn" onclick="closeLogoutModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Community Modals -->
+    <div id="contribute-modal" class="modal">
+        <div class="modal-box" style="max-width: 600px;">
+            <button class="modal-close" onclick="closeContributeModal()">×</button>
+            <h2>🚀 Help Us Build the Community!</h2>
+            <p>Share your creative AI script ideas to help unlock community features for everyone</p>
+            
+            <div class="contribute-progress">
+                <div class="contribute-progress-header">
+                    <span>Progress to Community Unlock</span>
+                    <span><span id="modal-script-count">0</span> / 50 scripts</span>
+                </div>
+                <div class="contribute-progress-bar">
+                    <div class="contribute-progress-fill" id="modal-progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <form id="contribute-form" onsubmit="submitContribution(event)">
+                <div class="form-field">
+                    <label for="contribute-name">Your Name</label>
+                    <input type="text" id="contribute-name" placeholder="e.g., Alex, Sarah, CodeMaster..." maxlength="50" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="contribute-script-name">Script Name</label>
+                    <input type="text" id="contribute-script-name" placeholder="e.g., Pirate Translator, Emoji Master, Shakespeare Mode..." maxlength="100" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="contribute-instructions">Script Instructions</label>
+                    <textarea id="contribute-instructions" placeholder="Describe what your script does and how it should transform text..." maxlength="500" required></textarea>
+                </div>
+                
+                <div class="form-field">
+                    <label for="contribute-example">Example (Optional)</label>
+                    <input type="text" id="contribute-example" placeholder="Show an example: 'Hello friend' → 'Ahoy there, matey!'" maxlength="200">
+                </div>
+                
+                <button type="submit" class="primary-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Contribute Script
+                </button>
+                <button type="button" class="secondary-btn" onclick="closeContributeModal()">Maybe Later</button>
+            </form>
+            
+            <div id="contribute-success" style="display: none; text-align: center; padding: 20px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                <h3>Thank You!</h3>
+                <p>Your script contribution has been added! We're one step closer to unlocking community features.</p>
+                <div class="success-progress">
+                    <span id="success-count">1</span> / 50 scripts collected
+                </div>
+                <button class="primary-btn" onclick="closeContributeModal()">Awesome!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="create-script-modal" class="modal">
+        <div class="modal-box" style="max-width: 600px;">
+            <button class="modal-close" onclick="closeCreateScriptModal()">×</button>
+            <h2>Create Community Script</h2>
+            <p>Share your custom AI prompt with the community</p>
+            
+            <form id="create-script-form" onsubmit="submitCommunityScript(event)">
+                <div class="form-field">
+                    <label for="script-name">Script Name</label>
+                    <input type="text" id="script-name" placeholder="e.g., Pirate Translator, Emoji Master..." maxlength="100" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="script-instructions">Instructions</label>
+                    <textarea id="script-instructions" placeholder="Describe what your script does and how it transforms text..." maxlength="500" required></textarea>
+                </div>
+                
+                <div class="form-field">
+                    <label for="script-example">Example (Optional)</label>
+                    <input type="text" id="script-example" placeholder="Show an example of input → output" maxlength="200">
+                </div>
+                
+                <button type="submit" class="primary-btn">Create Script</button>
+                <button type="button" class="secondary-btn" onclick="closeCreateScriptModal()">Cancel</button>
+            </form>
+            
+            <div id="create-script-success" style="display: none; text-align: center; padding: 20px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                <h3>Script Created!</h3>
+                <p>Your community script has been submitted and is now live!</p>
+                <button class="primary-btn" onclick="closeCreateScriptModal(); loadCommunityScripts();">View Scripts</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="script-detail-modal" class="modal">
+        <div class="modal-box" style="max-width: 700px;">
+            <button class="modal-close" onclick="closeScriptDetailModal()">×</button>
+            <div id="script-detail-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
         </div>
     </div>
 

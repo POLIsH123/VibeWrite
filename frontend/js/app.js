@@ -297,6 +297,7 @@ function showPage(pageId) {
     const titles = { 
         home: 'Dashboard', 
         rewrite: 'AI Rewriter', 
+        community: 'Community',
         history: 'Your History' 
     };
     const titleEl = document.getElementById('page-title');
@@ -309,10 +310,14 @@ function showPage(pageId) {
         }, 200);
     }
     
-    // Render history if on history page
+    // Load page-specific content
     if (pageId === 'history') {
         setTimeout(() => {
             renderHistory();
+        }, 400);
+    } else if (pageId === 'community') {
+        setTimeout(() => {
+            loadCommunityScripts();
         }, 400);
     }
     
@@ -1045,14 +1050,14 @@ function renderHistory() {
     empty.style.display = 'none';
     
     list.innerHTML = history.map(item => `
-        <div class="history-item">
+        <div class="history-item" data-history-id="${item.id}">
             <div class="history-header">
                 <span class="history-vibe">${vibeEmojis[item.vibe] || '✨'}</span>
                 <div class="history-meta">
                     <div class="history-vibe-name">${item.vibe.charAt(0).toUpperCase() + item.vibe.slice(1)}</div>
                     <div class="history-time">${timeAgo(item.timestamp)}</div>
                 </div>
-                <button class="history-delete" onclick="deleteHistoryItem(${item.id})">
+                <button class="history-delete" onclick="deleteHistoryItem(${item.id})" title="Delete this item">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3,6 5,6 21,6"/>
                         <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
@@ -1063,13 +1068,75 @@ function renderHistory() {
             <div class="history-result">${escapeHtml(item.rewritten)}</div>
         </div>
     `).join('');
+    
+    // Add stagger animations
+    const historyItems = list.querySelectorAll('.history-item');
+    historyItems.forEach((item, index) => {
+        item.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+    });
 }
 
 function deleteHistoryItem(id) {
+    console.log('🗑️ Deleting history item:', id);
+    
+    // Add deletion animation
+    const historyItem = document.querySelector(`[data-history-id="${id}"]`);
+    if (historyItem) {
+        historyItem.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        historyItem.style.transform = 'translateX(100%)';
+        historyItem.style.opacity = '0';
+    }
+    
+    // Actually delete from array
+    const originalLength = history.length;
     history = history.filter(item => item.id !== id);
+    
+    console.log(`📊 History items: ${originalLength} → ${history.length}`);
+    
+    // Save to localStorage
     localStorage.setItem('vibewrite_history', JSON.stringify(history));
-    renderHistory();
-    renderRecentHistory();
+    
+    // Re-render after animation
+    setTimeout(() => {
+        renderHistory();
+        renderRecentHistory();
+        
+        // Show success feedback
+        showDeleteFeedback();
+    }, 300);
+}
+
+function showDeleteFeedback() {
+    const feedback = document.createElement('div');
+    feedback.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    `;
+    
+    feedback.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span>🗑️</span>
+            <span>History item deleted</span>
+        </div>
+    `;
+    
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+        feedback.style.animation = 'slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        setTimeout(() => feedback.remove(), 300);
+    }, 2000);
 }
 
 function clearHistory() {
@@ -1277,3 +1344,571 @@ window.setPro = (val) => {
     updateUI();
     console.log('Pro:', val);
 };
+
+// ===========================
+// OP Community Features - Locked/Unlocked System
+// ===========================
+let communityScripts = [];
+let currentFilter = 'all';
+let currentSearch = '';
+const UNLOCK_THRESHOLD = 50;
+
+// Load community script count and check if unlocked
+async function loadCommunityScripts() {
+    try {
+        console.log('🌐 Loading community script count...');
+        
+        const response = await fetch(`${API_URL}/community/scripts/count`);
+        const data = await response.json();
+        
+        if (data.success) {
+            const scriptCount = data.count || 0;
+            console.log(`📊 Current script count: ${scriptCount}/${UNLOCK_THRESHOLD}`);
+            
+            // Update progress displays
+            updateCommunityProgress(scriptCount);
+            
+            // Check if community should be unlocked
+            if (scriptCount >= UNLOCK_THRESHOLD) {
+                unlockCommunity();
+                // Load actual scripts
+                await loadFullCommunityScripts();
+            } else {
+                showLockedCommunity(scriptCount);
+            }
+        } else {
+            throw new Error(data.error || 'Failed to load script count');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error loading community:', error);
+        showLockedCommunity(0);
+        showErrorFeedback('Failed to load community data. Please try again.');
+    }
+}
+
+// Update progress bars and counters
+function updateCommunityProgress(count) {
+    const percentage = Math.min((count / UNLOCK_THRESHOLD) * 100, 100);
+    
+    // Update main progress bar
+    const progressFill = document.getElementById('progress-fill');
+    const progressPercentage = document.getElementById('progress-percentage');
+    const scriptCountEl = document.getElementById('script-count');
+    
+    if (progressFill) progressFill.style.width = `${percentage}%`;
+    if (progressPercentage) progressPercentage.textContent = `${Math.round(percentage)}%`;
+    if (scriptCountEl) scriptCountEl.textContent = count;
+    
+    // Update modal progress bar
+    const modalProgressFill = document.getElementById('modal-progress-fill');
+    const modalScriptCount = document.getElementById('modal-script-count');
+    
+    if (modalProgressFill) modalProgressFill.style.width = `${percentage}%`;
+    if (modalScriptCount) modalScriptCount.textContent = count;
+}
+
+// Show locked community state
+function showLockedCommunity(count) {
+    document.getElementById('community-locked').style.display = 'block';
+    document.getElementById('community-unlocked').style.display = 'none';
+    updateCommunityProgress(count);
+}
+
+// Unlock community features
+function unlockCommunity() {
+    console.log('🎉 Community unlocked!');
+    document.getElementById('community-locked').style.display = 'none';
+    document.getElementById('community-unlocked').style.display = 'block';
+    
+    // Show unlock celebration
+    showUnlockCelebration();
+}
+
+// Show unlock celebration
+function showUnlockCelebration() {
+    const celebration = document.createElement('div');
+    celebration.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 32px 40px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 20px;
+        z-index: 1000;
+        pointer-events: none;
+        box-shadow: 0 0 60px rgba(16, 185, 129, 0.6);
+        animation: celebrationPop 3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+    `;
+    
+    celebration.innerHTML = `
+        <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+        <div>Community Unlocked!</div>
+        <div style="font-size: 16px; opacity: 0.9; margin-top: 8px;">50+ scripts collected!</div>
+    `;
+    
+    document.body.appendChild(celebration);
+    
+    setTimeout(() => {
+        celebration.remove();
+    }, 3000);
+}
+
+// Load full community scripts (when unlocked)
+async function loadFullCommunityScripts() {
+    try {
+        const response = await fetch(`${API_URL}/community/scripts`);
+        const data = await response.json();
+        
+        if (data.success) {
+            communityScripts = data.scripts || [];
+            updateCommunityStats();
+            renderCommunityScripts();
+        }
+    } catch (error) {
+        console.error('❌ Error loading full scripts:', error);
+    }
+}
+
+// Show contribute modal
+function showContributeModal() {
+    const modal = document.getElementById('contribute-modal');
+    const form = document.getElementById('contribute-form');
+    const success = document.getElementById('contribute-success');
+    
+    // Reset form
+    form.reset();
+    form.style.display = 'block';
+    success.style.display = 'none';
+    
+    // Pre-fill name if available
+    const nameInput = document.getElementById('contribute-name');
+    if (userName && nameInput) {
+        nameInput.value = userName;
+    }
+    
+    modal.style.display = 'flex';
+    modal.style.animation = 'fadeIn 0.3s ease';
+}
+
+function closeContributeModal() {
+    const modal = document.getElementById('contribute-modal');
+    modal.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Submit contribution
+async function submitContribution(event) {
+    event.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('contribute-name').value.trim(),
+        scriptName: document.getElementById('contribute-script-name').value.trim(),
+        instructions: document.getElementById('contribute-instructions').value.trim(),
+        example: document.getElementById('contribute-example').value.trim()
+    };
+    
+    if (!formData.name || !formData.scriptName || !formData.instructions) {
+        showErrorFeedback('Please fill in all required fields.');
+        return;
+    }
+    
+    try {
+        console.log('📝 Submitting contribution:', formData);
+        
+        const response = await fetch(`${API_URL}/community/contribute`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success state
+            document.getElementById('contribute-form').style.display = 'none';
+            document.getElementById('contribute-success').style.display = 'block';
+            
+            // Update success counter
+            const successCount = document.getElementById('success-count');
+            if (successCount) successCount.textContent = data.newCount;
+            
+            // Update main progress
+            updateCommunityProgress(data.newCount);
+            
+            // Check if we've unlocked community
+            if (data.newCount >= UNLOCK_THRESHOLD && data.unlocked) {
+                setTimeout(() => {
+                    closeContributeModal();
+                    unlockCommunity();
+                }, 2000);
+            }
+            
+            console.log('✅ Contribution submitted successfully!');
+            
+        } else {
+            throw new Error(data.error || 'Failed to submit contribution');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error submitting contribution:', error);
+        showErrorFeedback('Failed to submit contribution. Please try again.');
+    }
+}
+
+// Add celebration animation
+const celebrationStyle = document.createElement('style');
+celebrationStyle.textContent = `
+    @keyframes celebrationPop {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+        20% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        80% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+    }
+`;
+document.head.appendChild(celebrationStyle);
+
+// Update community stats
+function updateCommunityStats() {
+    const totalScripts = communityScripts.length;
+    const totalVotes = communityScripts.reduce((sum, script) => sum + (script.votes || 0), 0);
+    const activeCreators = new Set(communityScripts.map(script => script.author)).size;
+    
+    // Animate stat values
+    animateStatValue(document.getElementById('total-scripts'), totalScripts);
+    animateStatValue(document.getElementById('total-votes'), totalVotes);
+    animateStatValue(document.getElementById('active-creators'), activeCreators);
+}
+
+function animateStatValue(element, targetValue) {
+    if (!element) return;
+    
+    let currentValue = 0;
+    const increment = Math.ceil(targetValue / 20);
+    
+    const timer = setInterval(() => {
+        currentValue += increment;
+        if (currentValue >= targetValue) {
+            currentValue = targetValue;
+            clearInterval(timer);
+        }
+        element.textContent = currentValue;
+    }, 50);
+}
+
+// Render community scripts
+function renderCommunityScripts() {
+    const gridEl = document.getElementById('scripts-grid');
+    const loadingEl = document.getElementById('scripts-loading');
+    const emptyEl = document.getElementById('empty-scripts');
+    
+    loadingEl.style.display = 'none';
+    
+    // Filter scripts
+    let filteredScripts = [...communityScripts];
+    
+    // Apply search filter
+    if (currentSearch) {
+        filteredScripts = filteredScripts.filter(script => 
+            script.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+            script.instructions.toLowerCase().includes(currentSearch.toLowerCase()) ||
+            script.author.toLowerCase().includes(currentSearch.toLowerCase())
+        );
+    }
+    
+    // Apply category filter
+    switch (currentFilter) {
+        case 'popular':
+            filteredScripts.sort((a, b) => (b.votes || 0) - (a.votes || 0));
+            break;
+        case 'recent':
+            filteredScripts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            break;
+        case 'my-scripts':
+            filteredScripts = filteredScripts.filter(script => script.author === userName);
+            break;
+    }
+    
+    if (filteredScripts.length === 0) {
+        gridEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+        return;
+    }
+    
+    emptyEl.style.display = 'none';
+    
+    // Render script cards
+    gridEl.innerHTML = filteredScripts.map(script => `
+        <div class="script-card" onclick="showScriptDetail(${script.id})" data-script-id="${script.id}">
+            <div class="script-header">
+                <div class="script-info">
+                    <div class="script-title">${escapeHtml(script.name)}</div>
+                    <div class="script-author">by ${escapeHtml(script.author)}</div>
+                </div>
+                <div class="script-votes">
+                    <button class="vote-btn" onclick="event.stopPropagation(); voteScript(${script.id}, 'up')" title="Upvote">
+                        ▲
+                    </button>
+                    <div class="vote-count">${script.votes || 0}</div>
+                    <button class="vote-btn" onclick="event.stopPropagation(); voteScript(${script.id}, 'down')" title="Downvote">
+                        ▼
+                    </button>
+                </div>
+            </div>
+            <div class="script-description">${escapeHtml(script.instructions)}</div>
+            <div class="script-footer">
+                <div class="script-meta">
+                    <span>${timeAgo(script.created_at)}</span>
+                    <span>${script.status || 'active'}</span>
+                </div>
+                <div class="script-actions">
+                    <button class="script-action-btn primary" onclick="event.stopPropagation(); useScript(${script.id})">
+                        Use Script
+                    </button>
+                    <button class="script-action-btn" onclick="event.stopPropagation(); showScriptDetail(${script.id})">
+                        View
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Add stagger animations
+    const scriptCards = gridEl.querySelectorAll('.script-card');
+    scriptCards.forEach((card, index) => {
+        card.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+    });
+}
+
+// Filter scripts
+function filterScripts(filter) {
+    currentFilter = filter;
+    
+    // Update active tab
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+    
+    // Re-render scripts
+    renderCommunityScripts();
+}
+
+// Search scripts
+function searchScripts() {
+    currentSearch = document.getElementById('script-search').value.trim();
+    renderCommunityScripts();
+}
+
+// Vote on script
+async function voteScript(scriptId, direction) {
+    try {
+        console.log(`🗳️ Voting ${direction} on script ${scriptId}`);
+        
+        const response = await fetch(`${API_URL}/community/scripts/${scriptId}/vote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ direction, voter: userName || 'Anonymous' })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Update local script data
+            const script = communityScripts.find(s => s.id === scriptId);
+            if (script) {
+                script.votes = data.votes;
+            }
+            
+            // Re-render scripts
+            renderCommunityScripts();
+            updateCommunityStats();
+            
+            // Show feedback
+            showSuccessFeedback(`Vote ${direction === 'up' ? '👍' : '👎'} recorded!`);
+        } else {
+            throw new Error(data.error || 'Failed to vote');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error voting:', error);
+        showErrorFeedback('Failed to record vote. Please try again.');
+    }
+}
+
+// Use script (go to rewrite page with custom prompt)
+function useScript(scriptId) {
+    const script = communityScripts.find(s => s.id === scriptId);
+    if (!script) return;
+    
+    // Show page transition
+    showPage('rewrite');
+    
+    // Wait for page transition then apply script
+    setTimeout(() => {
+        // Set custom instructions in a special way
+        const textarea = document.getElementById('input-text');
+        if (textarea) {
+            textarea.placeholder = `Using "${script.name}" script: ${script.instructions}`;
+            textarea.focus();
+        }
+        
+        // Show success feedback
+        showSuccessFeedback(`🎯 Using "${script.name}" script!`);
+    }, 500);
+}
+
+// Show script detail modal
+function showScriptDetail(scriptId) {
+    const script = communityScripts.find(s => s.id === scriptId);
+    if (!script) return;
+    
+    const modal = document.getElementById('script-detail-modal');
+    const content = document.getElementById('script-detail-content');
+    
+    content.innerHTML = `
+        <div class="script-detail-header">
+            <div class="script-detail-info">
+                <div class="script-detail-title">${escapeHtml(script.name)}</div>
+                <div class="script-detail-author">Created by ${escapeHtml(script.author)}</div>
+                <div class="script-detail-meta">${timeAgo(script.created_at)} • ${script.votes || 0} votes</div>
+            </div>
+            <div class="script-detail-votes">
+                <button class="vote-btn" onclick="voteScript(${script.id}, 'up')" title="Upvote">▲</button>
+                <div class="vote-count">${script.votes || 0}</div>
+                <button class="vote-btn" onclick="voteScript(${script.id}, 'down')" title="Downvote">▼</button>
+            </div>
+        </div>
+        
+        <div class="script-detail-description">
+            <h4>Instructions</h4>
+            <p>${escapeHtml(script.instructions)}</p>
+        </div>
+        
+        <div class="script-detail-actions">
+            <button class="secondary-btn" onclick="closeScriptDetailModal()">Close</button>
+            <button class="primary-btn" onclick="useScript(${script.id}); closeScriptDetailModal();">Use Script</button>
+        </div>
+    `;
+    
+    modal.style.display = 'flex';
+    modal.style.animation = 'fadeIn 0.3s ease';
+}
+
+function closeScriptDetailModal() {
+    const modal = document.getElementById('script-detail-modal');
+    modal.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Show create script modal
+function showCreateScriptModal() {
+    const modal = document.getElementById('create-script-modal');
+    const form = document.getElementById('create-script-form');
+    const success = document.getElementById('create-script-success');
+    
+    // Reset form
+    form.reset();
+    form.style.display = 'block';
+    success.style.display = 'none';
+    
+    modal.style.display = 'flex';
+    modal.style.animation = 'fadeIn 0.3s ease';
+}
+
+function closeCreateScriptModal() {
+    const modal = document.getElementById('create-script-modal');
+    modal.style.animation = 'fadeOut 0.3s ease';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Submit community script
+async function submitCommunityScript(event) {
+    event.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('script-name').value.trim(),
+        instructions: document.getElementById('script-instructions').value.trim(),
+        example: document.getElementById('script-example').value.trim(),
+        author: userName || 'Anonymous'
+    };
+    
+    if (!formData.name || !formData.instructions) {
+        showErrorFeedback('Please fill in all required fields.');
+        return;
+    }
+    
+    try {
+        console.log('📝 Submitting community script:', formData);
+        
+        const response = await fetch(`${API_URL}/community/scripts`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Show success state
+            document.getElementById('create-script-form').style.display = 'none';
+            document.getElementById('create-script-success').style.display = 'block';
+            
+            // Add to local scripts array
+            communityScripts.unshift({
+                id: data.scriptId,
+                ...formData,
+                votes: 0,
+                created_at: new Date().toISOString(),
+                status: 'active'
+            });
+            
+            console.log('✅ Script created successfully!');
+            
+        } else {
+            throw new Error(data.error || 'Failed to create script');
+        }
+        
+    } catch (error) {
+        console.error('❌ Error creating script:', error);
+        showErrorFeedback('Failed to create script. Please try again.');
+    }
+}
+
+// Add modal fade animations
+const modalAnimationStyle = document.createElement('style');
+modalAnimationStyle.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+`;
+document.head.appendChild(modalAnimationStyle);
