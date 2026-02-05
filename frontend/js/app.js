@@ -471,26 +471,26 @@ function updateStats() {
     if (totalEl) {
         // Animate the stat value
         animateStatValue(totalEl.closest('.stat-card'));
-        totalEl.textContent = stats.total;
+        totalEl.textContent = isNaN(stats.total) || stats.total === undefined ? '0' : stats.total;
     }
     
     if (todayEl) {
         animateStatValue(todayEl.closest('.stat-card'));
-        todayEl.textContent = dailyUsage;
+        todayEl.textContent = isNaN(dailyUsage) || dailyUsage === undefined ? '0' : dailyUsage;
     }
     
     // Find favorite vibe with OP animation
     if (favoriteEl) {
         let maxVibe = null;
         let maxCount = 0;
-        for (const [vibe, count] of Object.entries(stats.vibes)) {
+        for (const [vibe, count] of Object.entries(stats.vibes || {})) {
             if (count > maxCount) {
                 maxCount = count;
                 maxVibe = vibe;
             }
         }
         
-        const favoriteIcon = maxVibe ? vibeEmojis[maxVibe] || maxVibe : '-';
+        const favoriteIcon = maxVibe ? vibeEmojis[maxVibe] || maxVibe : (stats.total > 0 ? '?' : '✨');
         favoriteEl.textContent = favoriteIcon;
         
         if (maxVibe) {
@@ -1345,6 +1345,28 @@ window.setPro = (val) => {
     console.log('Pro:', val);
 };
 
+// Reset all user data and stats
+window.resetUserData = () => {
+    dailyUsage = 0;
+    localStorage.setItem('vibewrite_daily_usage', '0');
+    
+    stats = {total: 0, vibes: {}};
+    localStorage.setItem('vibewrite_stats', JSON.stringify(stats));
+    
+    history = [];
+    localStorage.setItem('vibewrite_history', JSON.stringify([]));
+    
+    // Reset last usage date to today
+    const today = new Date().toDateString();
+    localStorage.setItem('vibewrite_last_usage_date', today);
+    lastUsageDate = today;
+    
+    updateUI();
+    updateStats();
+    renderRecentHistory();
+    console.log('All user data reset');
+};
+
 // ===========================
 // OP Community Features - Locked/Unlocked System
 // ===========================
@@ -1912,3 +1934,131 @@ modalAnimationStyle.textContent = `
     }
 `;
 document.head.appendChild(modalAnimationStyle);
+
+// Enhanced interactive UI (FAQ, steps, privacy modal, testimonials)
+document.addEventListener('DOMContentLoaded', function() {
+    // Step details toggles
+    document.querySelectorAll('.step-details-btn').forEach(btn => {
+        const details = btn.nextElementSibling;
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', (!expanded).toString());
+            if (expanded) {
+                details.hidden = true;
+                details.style.maxHeight = null;
+            } else {
+                details.hidden = false;
+                details.style.maxHeight = details.scrollHeight + 'px';
+            }
+            btn.blur();
+        });
+    });
+
+    // 3D Tilt on step-cards
+    document.querySelectorAll('.step-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const dx = (x - cx) / cx;
+            const dy = (y - cy) / cy;
+            const rotX = dy * 6; // tune for subtlety
+            const rotY = dx * -6;
+            card.style.transform = `translateY(-8px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+
+    // Accessible FAQ accordion (with assistive text updates)
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(btn => {
+        const answer = document.getElementById(btn.getAttribute('aria-controls'));
+        const assistive = btn.querySelector('.assistive');
+        // start collapsed
+        if (answer) { answer.style.maxHeight = null; answer.style.opacity = 0; }
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+            // Close others for accordion behavior
+            faqQuestions.forEach(other => {
+                if (other !== btn) {
+                    other.setAttribute('aria-expanded', 'false');
+                    const otherAnswer = document.getElementById(other.getAttribute('aria-controls'));
+                    if (otherAnswer) { otherAnswer.style.maxHeight = null; otherAnswer.style.opacity = 0; }
+                    other.parentElement.classList.remove('active');
+                    const otherAssist = other.querySelector('.assistive'); if (otherAssist) otherAssist.textContent = 'Show';
+                }
+            });
+
+            // Toggle current item
+            btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            if (!expanded) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                answer.style.opacity = 1;
+                btn.parentElement.classList.add('active');
+                if (assistive) assistive.textContent = 'Hide';
+            } else {
+                answer.style.maxHeight = null;
+                answer.style.opacity = 0;
+                btn.parentElement.classList.remove('active');
+                if (assistive) assistive.textContent = 'Show';
+            }
+        });
+
+        // keyboard support: Enter/Space to toggle
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+        });
+    });
+
+    // Privacy modal handling
+    const openPrivacy = document.getElementById('open-privacy-modal');
+    const privacyModal = document.getElementById('privacy-modal');
+    if (openPrivacy && privacyModal) {
+        const closeBtn = privacyModal.querySelector('.modal-close');
+        const overlay = privacyModal.querySelector('.modal-overlay');
+        const closeModal = () => {
+            privacyModal.setAttribute('aria-hidden','true');
+            document.body.classList.remove('modal-open');
+        };
+        const openModal = () => {
+            privacyModal.setAttribute('aria-hidden','false');
+            document.body.classList.add('modal-open');
+            closeBtn && closeBtn.focus();
+        };
+        openPrivacy.addEventListener('click', openModal);
+        closeBtn && closeBtn.addEventListener('click', closeModal);
+        overlay && overlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e)=>{
+            if (e.key === 'Escape' && privacyModal.getAttribute('aria-hidden') === 'false') closeModal();
+        });
+    }
+
+    // Smooth testimonials carousel (fade/slide)
+    const testimonialsContainer = document.getElementById('testimonials');
+    if (testimonialsContainer) {
+        const cards = Array.from(testimonialsContainer.querySelectorAll('.testimonial-card'));
+        let idx = 0;
+        const showIndex = (i) => {
+            idx = (i + cards.length) % cards.length;
+            cards.forEach((c, j) => {
+                c.classList.toggle('active', j === idx);
+            });
+        };
+        showIndex(0);
+        const nextBtn = document.querySelector('.testimonials-nav.next');
+        const prevBtn = document.querySelector('.testimonials-nav.prev');
+        nextBtn && nextBtn.addEventListener('click', ()=> showIndex(idx+1));
+        prevBtn && prevBtn.addEventListener('click', ()=> showIndex(idx-1));
+        let auto = setInterval(()=> showIndex(idx+1), 5000);
+        // pause on hover
+        testimonialsContainer.addEventListener('mouseenter', ()=> clearInterval(auto));
+        testimonialsContainer.addEventListener('mouseleave', ()=> { clearInterval(auto); auto = setInterval(()=> showIndex(idx+1), 5000); });
+        [nextBtn, prevBtn].forEach(b=> b && b.addEventListener('click', ()=> { clearInterval(auto); auto = setInterval(()=> showIndex(idx+1), 5000); }));
+    }
+});

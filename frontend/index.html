@@ -947,6 +947,10 @@
                 VibeWrite
             </div>
             <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#examples">Examples</a></li>
                 <li><a href="#pricing">Pricing</a></li>
@@ -1006,6 +1010,145 @@
             Transform text into <span class="changing-word" id="changingWord">Professional</span> vibes
         </div>
     </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple steps to transform your text</p>
+            </div>
+            <div class="steps-grid" role="list" aria-label="How it works steps">
+                <div class="step-card animate-in" style="--delay: 0.1s" role="listitem">
+                    <div class="step-number">1</div>
+                    <div class="step-icon" aria-hidden="true">📝</div>
+                    <h3>Enter Your Text</h3>
+                    <p>Paste or type your text — we keep it private and secure.</p>
+                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                    <div class="step-details" hidden>
+                        <p>Quick paste, upload, or type directly. We support rich text and keep everything transient.</p>
+                    </div>
+                </div>
+                <div class="step-card animate-in" style="--delay: 0.3s" role="listitem">
+                    <div class="step-number">2</div>
+                    <div class="step-icon" aria-hidden="true">🎨</div>
+                    <h3>Choose a Vibe</h3>
+                    <p>Pick from our curated presets or customize tone and formality.</p>
+                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                    <div class="step-details" hidden>
+                        <p>Try presets like professional, casual, or creative; adjust length, tone, and more.</p>
+                    </div>
+                </div>
+                <div class="step-card animate-in" style="--delay: 0.5s" role="listitem">
+                    <div class="step-number">3</div>
+                    <div class="step-icon" aria-hidden="true">✨</div>
+                    <h3>Get AI Magic</h3>
+                    <p>Receive polished output instantly, with an option to tweak and retry.</p>
+                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                    <div class="step-details" hidden>
+                        <p>Outputs are editable and you can request variations until it's right.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section id="privacy" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Privacy & Data Policy</h2>
+                <p class="section-subtitle">Your data is safe with us</p>
+            </div>
+            <div class="privacy-content">
+                <div class="privacy-item">
+                    <h3>🔒 Data Security</h3>
+                    <p>All text processing happens securely and is not stored permanently.</p>
+                </div>
+                <div class="privacy-item">
+                    <h3>🗑️ Automatic Deletion</h3>
+                    <p>Your inputs are automatically deleted after processing.</p>
+                </div>
+                <div class="privacy-item">
+                    <h3>🛡️ No Tracking</h3>
+                    <p>We don't track or sell your personal information.</p>
+                </div>
+            </div>
+            <div class="privacy-cta" style="text-align:center; margin-top:20px;">
+                <button id="open-privacy-modal" class="primary-btn">Read Full Policy</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Users Say</h2>
+                <p class="section-subtitle">Real feedback from our community</p>
+            </div>
+            <div class="testimonials-wrapper">
+                <button class="testimonials-nav prev" aria-label="Previous testimonial">‹</button>
+                <div class="testimonials-grid" id="testimonials">
+                    <div class="testimonial-card" data-index="0">
+                        <div class="testimonial-avatar">SM</div>
+                        <div class="testimonial-text">"This tool saved me hours of rewriting emails and social posts!"</div>
+                        <div class="testimonial-meta"><span class="testimonial-author">Sarah M., Content Creator</span><span class="testimonial-stars">★★★★★</span></div>
+                    </div>
+                    <div class="testimonial-card" data-index="1">
+                        <div class="testimonial-avatar">MT</div>
+                        <div class="testimonial-text">"The variety of styles is incredible. Never gets boring!"</div>
+                        <div class="testimonial-meta"><span class="testimonial-author">Mike T., Marketing Manager</span><span class="testimonial-stars">★★★★★</span></div>
+                    </div>
+                    <div class="testimonial-card" data-index="2">
+                        <div class="testimonial-avatar">AR</div>
+                        <div class="testimonial-text">"Finally found an AI tool that understands tone perfectly."</div>
+                        <div class="testimonial-meta"><span class="testimonial-author">Alex R., Writer</span><span class="testimonial-stars">★★★★★</span></div>
+                    </div>
+                </div>
+                <button class="testimonials-nav next" aria-label="Next testimonial">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Everything you need to know</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" id="faq1-btn" aria-expanded="false" aria-controls="faq1">How does the AI rewriting work?<span class="assistive">Show</span></button>
+                    <div id="faq1" class="faq-answer" role="region" aria-labelledby="faq1-btn">Our advanced AI analyzes your text and transforms it while preserving the original meaning and intent.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" id="faq2-btn" aria-expanded="false" aria-controls="faq2">Is my data secure?<span class="assistive">Show</span></button>
+                    <div id="faq2" class="faq-answer" role="region" aria-labelledby="faq2-btn">Yes, all processing is secure and your text is automatically deleted after use.</div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" id="faq3-btn" aria-expanded="false" aria-controls="faq3">How many styles are available?<span class="assistive">Show</span></button>
+                    <div id="faq3" class="faq-answer" role="region" aria-labelledby="faq3-btn">We offer 30+ different writing styles including professional, casual, creative, and specialized tones.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="privacyModalTitle">
+        <div class="modal-overlay" data-dismiss="modal"></div>
+        <div class="modal-content" role="document">
+            <button class="modal-close" aria-label="Close privacy policy">&times;</button>
+            <h3 id="privacyModalTitle">Privacy & Data Policy</h3>
+            <p>We process text in memory only; inputs are deleted after processing. We never sell data and provide data access/deletion on request.</p>
+            <ul>
+                <li>Processing is ephemeral — not stored on disk.</li>
+                <li>Only minimal metadata for debugging is kept and removed.</li>
+                <li>Contact: privacy@vibewrite.example</li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Features Section -->
     <section class="features-section" id="features">

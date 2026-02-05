@@ -8,8 +8,11 @@ yarn-error.log*
 # NOTE: .env is included in this repo with PLACEHOLDER values for easy setup
 # BEFORE DEPLOYING: Make sure you don't commit your REAL API keys!
 # The included .env file has placeholders - replace them with your actual keys
+# Environment variables
+.env
 .env.production
 .env.local
+
 
 # OS files
 .DS_Store

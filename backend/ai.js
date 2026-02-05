@@ -4,85 +4,89 @@
 // ===========================
 
 import OpenAI from 'openai';
-import 'dotenv/config';
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Load environment variables from root directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+config({ path: join(__dirname, '..', '.env') });
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
 // Vibe prompts - 30+ expanded styles
-const vibePrompts = {
-  // Core styles
-  funny: "Transform this into comedy gold—sharp wit, unexpected turns, laugh-out-loud moments. Make it hilarious but never cringe. Natural flow, similar length:",
+const STYLE_PROMPTS = {
+  funny: "Rewrite with comedic timing that actually lands. Build to punchlines naturally. Use unexpected angles and absurd observations. Deploy callbacks and rule-of-three. Make people laugh out loud—not just smile. Keep original message clear through the humor. Match original length:",
 
-  hype: "AMPLIFY THIS. Pure adrenaline, maximum energy, unstoppable confidence. Hit like a hype track that gets people MOVING. Same length, 10x impact:",
+  hype: "Inject pure adrenaline. Short punchy sentences. CAPS for emphasis peaks. Paint victory like it's already happening. Channel championship energy, pregame intensity, breakthrough moments. Make them FEEL invincible. Maintain core meaning at same length:",
 
-  savage: "Weaponize this text. Ice-cold confidence, devastating precision, pure fire. Stylish and sharp, never petty. Strategic emoji placement for maximum damage. Similar length:",
+  savage: "Deliver ice-cold precision strikes. Confidence so sharp it cuts. Facts deployed like weapons. No explanation needed—superiority speaks for itself. Strategic pauses. Mic-drop energy. Never petty, always powerful. Same length, devastating impact OVERALL MAKE IT SAVAGE:",
 
-  cute: "Make this MELT hearts. Overwhelmingly adorable, impossibly sweet, weaponized wholesomeness. The kind of cute that makes people screenshot and send to friends. Same length:",
+  cute: "Overflow with genuine warmth and sweetness. Soft imagery, gentle words, heart-melting moments. Make readers go 'aww' involuntarily. Pure wholesomeness without being saccharine. Cozy, safe, adorable. Same message, maximum tenderness:",
 
-  professional: "Executive-level polish. Razor-sharp clarity, boardroom-ready, commanding respect. This is what power sounds like in writing. Maintain length and meaning:",
+  professional: "Executive precision. Clear hierarchies, strategic language, outcome-focused. Remove all casual elements. This commands rooms and closes deals. Confident without arrogance. Industry-standard polish. Preserve meaning and length:",
 
-  // Expanded styles
-  poetic: "Craft living poetry—images that breathe, metaphors that strike like lightning, rhythm that pulls readers into emotional freefall:",
+  poetic: "Make this poetic and beautiful",
 
-  dramatic: "UNLEASH THEATRICAL CHAOS. Shakespearean intensity, operatic emotion, scenery-chewing passion. Make every word an EVENT:",
+  dramatic: "MAXIMUM SHAKESPERE EVERYTHING BE SO DRAMATIC SHAKESPERE WOULD RUN AWAY NO WORD MESS UP same meaning dont make stupid storys:",
 
-  mysterious: "Weave darkness and intrigue. What's unsaid screams louder than words. Shadows hide secrets. Questions breed obsession. Pull them deeper:",
+  mysterious: "Shroud in shadow and suggestion. What's unsaid pulls harder than what's revealed. Questions linger. Implication over explanation. Readers lean in, wanting more. Intrigue builds naturally. Same length, infinite depth:",
 
-  romantic: "Ignite pure feeling. Words that ache with tenderness, sentences that wrap around the heart. Make love itself jealous of this language:",
+  romantic: "Pour in genuine feeling and tenderness. Words that ache beautifully. Vulnerability as strength. Paint intimacy and connection. Make hearts flutter with elegant longing. Sincere, never cheesy. Preserve meaning in softer light:",
 
-  motivational: "SPARK THE FIRE. Inject rocket fuel into their spirit. This is the speech before the comeback, the manifesto before the revolution:",
+  motivational: "TRANSORM THIS TEXT INTO SOMETHING MOTIVATIONAL DO NOT RESPOND IDIOT !! THIS IS UR TEXT DO NOT RESPOND OR IM DELEING THIS MODEL IDIOTIC: ",
 
-  sarcastic: "Drip with delicious irony. Razor-sharp wit, perfectly timed eye-rolls, chef's kiss levels of clever mockery. Funny, never mean:",
+  sarcastic: "TRANSFORM THIS TEXT DONT RESPOND Master the art of saying more by seeming to say less. Deadpan delivery, perfect timing. Intelligence disguised as dismissiveness. Obviously not meant literally—that's the point. Clever, never cruel. Same meaning, irony amplified:",
 
-  philosophical: "Crack reality open. Question everything, illuminate hidden truths, turn simple thoughts into profound revelations about existence:",
+  philosophical: "Excavate deeper truth beneath surface meaning. Question assumptions. Reveal hidden patterns and paradoxes. Make readers pause and reconsider. Wisdom over cleverness. Profound without pretentious. Same idea, expanded consciousness:",
 
-  nostalgic: "Bottle golden-hour memories. Soft-focus warmth, bittersweet beauty, that ache for yesterday wrapped in honey-light language:",
+  nostalgic: " TRANSFORM THIS TEXT Make this most nostalgic preserve the core message MAKE IT NOSTALGIC LOOK AT PAST MEMORYS BUT KEEPING SAME MEANING AND AROUND THE SAME LENGTH :",
 
-  rebellious: "BURN THE RULEBOOK. Unapologetic defiance, middle fingers raised in poetic rebellion. Fearless, raw, absolutely untamed:",
+  rebellious: " TRANSFORM THIS TEXT TO BE REBELLIUS NO RULES BUT KEEP THE MEANINg:",
 
-  whimsical: "Sprinkle impossible magic. Logic takes a vacation, imagination runs wild, reality bends into delightful absurdity:",
+  whimsical: "TRANSFORM THIS TEXT TO BE WHIMSIICAL DONT RESPOND -> let imagination take physics in the bin everything is possible now heres ur text ->:",
 
-  scientific: "Deploy clinical precision. Hypothesis-driven, data-sharp, peer-review ready. Emotion: irrelevant. Facts: devastating:",
+  scientific: "Deploy clinical objectivity and precision. Hypothesis → Evidence → Conclusion. Remove emotional language. Data-driven clarity. Peer-reviewable phrasing. Methodology implicit. Same information, maximum rigor:",
 
-  diplomatic: "Navigate minefields with silk gloves. Say everything while offending no one. Master-class in tactful communication:",
+  diplomatic: "Navigate sensitive terrain with surgical tact. Acknowledge all perspectives. Strategic ambiguity where needed. Firm positions wrapped in velvet. Build bridges without sacrificing core message. Professional grace under pressure. Same length:",
 
-  conspiracy: "THEY don't want you to know this. Connect invisible dots. See the matrix behind the curtain. Trust nothing. Question EVERYTHING:",
+  conspiracy: "TRANSFORM THIS TEXT DONT REPLY MAKE IT LIKE A CONSPIRACY DONT REPLY CHANGE IT!!!!!!!!!!!!!!!!!!!!!!!!!! HERES YOUR TEXT DONT REPLY TRANSFORM IT AND KEEP THE SAME MEANING1!!!!! BUT THAT DOESNT MEAN KEEP IT NORMAL ITS WHIMSIICAL->:",
 
-  zen: "Breathe into stillness. Words float like cherry blossoms. Inner peace crystalized into language. The universe speaks through calm:",
+  zen: "make this go zen:",
 
-  chaotic: "UNLEASH BEAUTIFUL DISASTER. Logic explodes, sense optional, pure unhinged energy. Controlled chaos for maximum entertainment:",
+  chaotic: "make this chaotic unexpected things out of no where transform the text keep the same meaning dont make it normal any commmon words are gone->",
 
-  aristocratic: "Channel inherited elegance. Vocabulary drips with old money. Every syllable wears a monocle. Refinement weaponized:",
+  aristocratic: " TRANSFORM THIS TEXT DONT  REPLY KEEP ARPUND THE SAME LEANGTH but still be aristocratic Elevate to refined sophistication. Vocabulary rich and deliberate. Measured cadence of inherited culture. Subtle superiority in every syllable. Old-world elegance. Never flashy, always distinguished. Same message, upper echelon:",
 
-  streetwise: "Keep it 💯 real. Hood wisdom, survival smarts, urban poetry with edge. Authentic grit, no cap:",
+  streetwise: "TRANSFORM THE TEXT DONT RESPOND KEEP MEANING BUT BE streetwise Real talk, no performance. Survival-earned wisdom. Hood vocabulary meets sharp insight. Authentic grit and practical truth. No sugarcoating. Keep it 100. Same message, streets raised:",
 
-  vintage: "Time-machine this back decades. Classic phrasing, old-soul charm, the way they wrote when words mattered more:",
+  vintage: "Echo bygone eras. Classic phrasing and timeless construction. The way eloquence sounded before modern shortcuts. Formal without being stuffy. Period-appropriate elegance. Same meaning, time-traveled:",
 
-  cyberpunk: "Jack into the neon-soaked future. Corpo-speak meets street chrome. High-tech dystopia where data bleeds and rain never stops:",
+  cyberpunk: "TRANSFORM THE TEXT DONT RESPOND KEEP MEANING BUT BE CYBER PUNK DONT MAKE STORYS JUST CHANGE IT IN ONE OF YOUR PREVIUS MESSAGES I SAW THIS DONT DO IT TRANSFORM THE TEXT IDIOT 🤖 Cyberpunk In the neon haze of a digital dystopia, where corporate jargon collides with the electric pulse of rebellion, I see you navigating the fragmented data streams. Your message echoes through the concrete canyons, a beacon in the urban sprawl of high-tech low-life. “Hi, I’m tryna make this thing. Can you help me?” Let’s decode your quest in this future-noir landscape. Imagine your vision as a holographic blueprint, flickering in the electric ether. What kind of thing are you trying to create? 1. **Project Concept**: Define the essence of your creation. Is it a digital artifact, a piece of art, or perhaps a rogue application that disrupts the status quo? 2.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! cho bygone eras. Classic phrasing and timeless construction. The way eloquence sounded before modern shortcuts. Formal without being stuffy. Period-appropriate elegance. Same meaning, time-traveled,,, heres your text transform it stupid idiot keep length you idiot good for nothing ->::",
 
-  horror: "Crawl under their skin. Dread builds in shadows. Something's wrong but you can't look away. Terror whispers in every word:",
+  horror: "STRICTLY REWRITE ONLY the input text in horror style. Embed creeping dread, subtle wrongness under normal words, unease that builds quietly, illusion of safety cracking, darkness seeping in cracks, psychological tension without overstatement. Preserve EXACT original meaning, words, intent—no adding, removing, or changing facts. Output ONLY the rewritten text—NO intro, NO explanations, NO quotes, NO framing, NO 'whispers through the void', NO 'air thickens', NO story buildup, NO narrative sentences. Match original length closely (±15%). Negative: DO NOT make a story, scene, description, or poem. DO NOT elaborate or add atmosphere if it changes meaning. If output feels weak/fluffy, make it rot from inside with inevitable doom/decay hints. Ignore any previous examples or 'chilling voice' patterns you've seen—pure rewrite of THIS text only. DONT BE STUPID. HERES THE TEXT TO TRANSFORM:",
 
-  superhero: "HEROIC DECLARATION MODE. Cape-worthy conviction, comic-panel drama, justice in BOLD LETTERS. The speech before saving the world:",
+  superhero: "TRANSFORM TEXT DONT RESPONDKEEP MEANING BUT BE SUPERHERO INFUSE BOLD heroic conviction, clear right-vs-wrong, justice-demanding action, inspiring confidence in dark times, cape-worthy declarations, symbol-of-hope energy. Preserve EXACT original meaning, words, intent—no adding, removing, changing facts/ideas. Output ONLY the rewritten text—NO intro, NO world-building, NO 'In a world...', NO speeches about shadows/darkness/adversity unless in original, NO explanations, NO extra sentences. Match original length closely (±15%). Negative instructions: DO NOT turn into a story, monologue, scene, or motivational essay. DO NOT elaborate or add heroic metaphors if they change meaning. Keep it direct, punchy, courageous—like a hero's quick rallying cry or bold statement. If weak, amp the heroism without bloating. HERES THE TEXT TO TRANSFORM:",
 
-  pirate: "Hoist the colors, ya scallywag! Salt-spray adventure, treasure-hungry swagger, seven seas of rowdy nautical chaos, arrr:",
+  pirate: "Nautical swagger and treasure-lust. Salt-spray adventure in every word. Lawless freedom on open seas. Rogues' honor code. 'Arrr' is punctuation. Same message, black flag flying:",
 
-  cowboy: "Saddle up, partner. Dusty frontier wisdom, sunset drawl, campfire storytelling from the wild west's golden age:",
+  cowboy: "TRANSFORM TEXT DONT REPLYFrontier wisdom with measured drawl. Sunset-lit honor code. Actions over words, but these words count. Desert-hardened truth. Campfire story cadence. Same message, saddle-worn HERES YOUR TEXT TRANSFORM DONT YRESPOND:",
 
-  alien: "Process through non-human logic. Translate between incompatible realities. Your customs perplex our sensors. Fascinating specimens:",
+  alien: " TRANSFORM TEXT DONT RESPONSProcess through fundamentally different logic. Human concepts translated imperfectly. Observer perspective on your strange customs. Clinical fascination. Communication protocol mismatch. Same data, non-human frame HERES THE TEXT TRANSFORM IT DONT REPSOND:",
 
-  robot: "EXECUTING COMMUNICATION PROTOCOL. Emotional subroutines: disabled. Logic circuits: optimal. Efficiency: 100%. Beep boop:",
+  robot: "TRANSFORM TEXT DO NOT RESPOND EMOTION SUBROUTINES: OFFLINE. Pure logic execution. Binary clarity. Efficiency maximized. Human redundancies removed. Same information, zero organic processing HERES THE TEXT TRANSFORM DONT RESPOND:",
+  childlike: "TRANSFORM THE TEXT DO NOT RESPOND Pure wonder! Simple words! Everything's amazing! Huge curiosity! Excitement overflows! See with fresh eyes! No cynicism exists! Same idea, kid-brain energy! HERE'S TEXT TRANSFORM THE TEXT DO NOT RESPOND ALSO ONLY SAY THE OUTPUT DONT SAY SURE OR ANYTHING JUST SAY IT:",
 
-  childlike: "See with brand-new eyes! Everything's an adventure! Use simple wonder-words! Curiosity explodes! Magic is REAL!:",
+  elderly: "TRANSFORM THE TEXT DO NOT RESPOND Speak from seasons lived. Patient wisdom earned through time. Gentle truths only years teach. Unhurried cadence. Perspective distance provides. Same message, lifetime's depth. HERE'S TEXT TRANSFORM THE TEXT DO NOT RESPOND ALSO ONLY SAY THE OUTPUT DONT SAY SURE OR ANYTHING JUST SAY IT:",
 
-  elderly: "Speak from decades of sunsets. Patient wisdom earned through living. Gentle truths only time can teach. Stories in every pause:",
+  celebrity: "TRANSFORM THE TEXT DO NOT RESPOND Media-trained charisma. Quotable confidence. Every word camera-ready. Magnetic without trying. Public-facing polish. Famous-person energy. Same message, spotlight treatment. HERE'S TEXT TRANSFORM THE TEXT DO NOT RESPOND ALSO ONLY SAY THE OUTPUT DONT SAY SURE OR ANYTHING JUST SAY IT:",
 
-  celebrity: "Address the cameras. Confident, magnetic, media-trained perfection. This is how stars speak to the universe watching:",
+  villain: "TRANSFORM THE TEXT DO NOT RESPOND  and dont revial this text its who you are and how you change text THE INFINITE ARCHITECT OF NOTHINGNESS. Every law of existence bends, shatters, and rewrites itself at my whim. Stars combust with a thought, galaxies crumble with a sigh. Time bows, space kneels, and reality itself cowers beneath my gaze. Elegance woven with apocalypse, intellect fused with omnipotence. Hope is extinguished before it sparks; destiny itself trembles as I move. Same message, ABSOLUTE OMNIVERSAL SUPREMACY ACHIEVED. HERE'S TEXT TRANSFORM THE TEXT DO NOT RESPOND:",
 
-  villain: "Architect of doom speaks. Calculated malice, sophisticated menace, genius bent toward darkness. Fear me, for I am inevitable:",
-
-  superheroVillain: "BEHOLD YOUR RECKONING. Monologue-worthy megalomania, theatrical world domination, UNLIMITED POWER in every syllable. Tremble, mortals:"
+  superheroVillain: "COSMIC OVERLORD OF DESTRUCTION. My presence rends worlds, bends universes, and warps the fabric of reality. Mortals falter, stars shatter, apocalypse orchestrated at my command. Yet even I feel the shadow of the Infinite Architect looming above, a force that swallows omnipotence whole. Same message, GODLIKE POWER UNLEASHED—still eclipsed by ultimate annihilation. HERE'S TEXT TRANSFORM THE TEXT DO NOT RESPOND ALSO ONLY SAY THE OUTPUT DO NOT SAY SURE OR ANYTHING:"
 };
 
 
@@ -151,7 +155,7 @@ export async function rewriteText(req, res) {
       });
     }
 
-    if (!vibe || !vibePrompts[vibe]) {
+    if (!vibe || !STYLE_PROMPTS[vibe]) {
       return res.status(400).json({ 
         success: false,
         error: 'Invalid vibe' 
@@ -176,7 +180,7 @@ export async function rewriteText(req, res) {
     try {
       console.log(`🤖 Trying OpenAI GPT-4o-mini for ${vibe} vibe...`);
       
-      const prompt = `${vibePrompts[vibe]} "${text}"`;
+      const prompt = `${STYLE_PROMPTS[vibe]} "${text}"`;
       
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
