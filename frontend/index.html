@@ -393,35 +393,57 @@
             box-shadow: 0 25px 80px rgba(99, 102, 241, 0.7);
         }
 
-        /* Sticky Text Section - THE COOL PARALLAX EFFECT */
-        .sticky-text-section {
-            height: 400vh;
-            position: relative;
+        /* Examples Section */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
         }
 
-        .sticky-text {
-            position: sticky;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: center;
-            font-size: clamp(50px, 10vw, 120px);
-            font-weight: 900;
-            z-index: 10;
-            line-height: 1.1;
+        .example-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
         }
 
-        .sticky-text .changing-word {
-            display: inline-block;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient-shift 4s ease-in-out infinite;
-            min-width: 400px;
+        .example-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .example-before, .example-after {
+            margin-bottom: 20px;
+        }
+
+        .example-before h4, .example-after h4 {
+            color: #6366f1;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .example-before p, .example-after p {
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .example-arrow {
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.6));
+            font-size: 24px;
+            color: #8b5cf6;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .examples-cta {
+            text-align: center;
+            margin-top: 60px;
         }
 
         /* Features Section */
@@ -1004,10 +1026,51 @@
         </div>
     </section>
 
-    <!-- Sticky Text Section - THE PARALLAX MAGIC -->
-    <section class="sticky-text-section">
-        <div class="sticky-text">
-            Transform text into <span class="changing-word" id="changingWord">Professional</span> vibes
+    <!-- Examples Section -->
+    <section id="examples" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <h2 class="section-title">See It In Action</h2>
+                <p class="section-subtitle">Transform your text instantly</p>
+            </div>
+            <div class="examples-grid">
+                <div class="example-card animate-in" style="--delay: 0.1s">
+                    <div class="example-before">
+                        <h4>Original Text</h4>
+                        <p>"Hey, I need this report done by tomorrow. Can you help?"</p>
+                    </div>
+                    <div class="example-arrow">→</div>
+                    <div class="example-after">
+                        <h4>Professional</h4>
+                        <p>"I require this report to be completed by tomorrow. Would you be able to assist?"</p>
+                    </div>
+                </div>
+                <div class="example-card animate-in" style="--delay: 0.3s">
+                    <div class="example-before">
+                        <h4>Original Text</h4>
+                        <p>"This product is amazing! You should totally buy it."</p>
+                    </div>
+                    <div class="example-arrow">→</div>
+                    <div class="example-after">
+                        <h4>Casual</h4>
+                        <p>"This product rocks! You gotta check it out."</p>
+                    </div>
+                </div>
+                <div class="example-card animate-in" style="--delay: 0.5s">
+                    <div class="example-before">
+                        <h4>Original Text</h4>
+                        <p>"The meeting is at 3 PM in conference room B."</p>
+                    </div>
+                    <div class="example-arrow">→</div>
+                    <div class="example-after">
+                        <h4>Friendly</h4>
+                        <p>"Hey team, let's meet at 3 PM in the conference room B!"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="examples-cta">
+                <button class="hero-cta" onclick="openApp()">Try It Now</button>
+            </div>
         </div>
     </section>
 
@@ -1961,53 +2024,6 @@
             });
         }
 
-        // Enhanced word cycling with scroll-based changes
-        const words = ['Professional', 'Funny', 'Savage', 'Romantic', 'Pirate', 'Shakespearean', 'Zen', 'Dramatic', 'Mysterious', 'Whimsical', 'Cyberpunk', 'Vintage'];
-        let currentWordIndex = 0;
-
-        function changeWord() {
-            const wordElement = document.getElementById('changingWord');
-            if (wordElement) {
-                wordElement.style.opacity = '0';
-                wordElement.style.transform = 'translateY(30px) scale(0.9)';
-                
-                setTimeout(() => {
-                    currentWordIndex = (currentWordIndex + 1) % words.length;
-                    wordElement.textContent = words[currentWordIndex];
-                    wordElement.style.opacity = '1';
-                    wordElement.style.transform = 'translateY(0) scale(1)';
-                }, 400);
-            }
-        }
-
-        // Enhanced parallax effect for sticky text
-        function updateStickyText() {
-            const stickySection = document.querySelector('.sticky-text-section');
-            const stickyText = document.querySelector('.sticky-text');
-            
-            if (stickySection && stickyText) {
-                const rect = stickySection.getBoundingClientRect();
-                const progress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
-                
-                // Change word based on scroll progress
-                const wordIndex = Math.floor(progress * words.length);
-                const clampedIndex = Math.min(wordIndex, words.length - 1);
-                
-                if (clampedIndex !== currentWordIndex) {
-                    currentWordIndex = clampedIndex;
-                    const wordElement = document.getElementById('changingWord');
-                    if (wordElement) {
-                        wordElement.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                        wordElement.textContent = words[currentWordIndex];
-                    }
-                }
-                
-                // Add scale effect based on scroll
-                const scale = 1 + (progress * 0.2);
-                stickyText.style.transform = `translateY(-50%) scale(${scale})`;
-            }
-        }
-
         // Enhanced intersection observer for examples
         function setupExampleAnimations() {
             const examples = document.querySelectorAll('.example-showcase');
@@ -2093,9 +2109,6 @@
             setupExampleAnimations();
             setupTiltEffect();
             setupSmoothScroll();
-            
-            // Start automatic word changing
-            setInterval(changeWord, 4000);
         });
 
         // Optimized scroll event listener
@@ -2104,7 +2117,6 @@
             updateScrollProgress();
             updateStickyNav();
             updateFAB();
-            updateStickyText();
             updateParallax();
             ticking = false;
         }
