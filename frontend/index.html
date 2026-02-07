@@ -3043,11 +3043,11 @@
                     const centerY = rect.height / 2;
 
                     // Calculate tilt (you can tweak the divisor for more/less tilt)
-                    const rotateX = (y - centerY) / 10; // tilt up/down
-                    const rotateY = (centerX - x) / 10; // tilt left/right
+                    const rotateX = (y - centerY) / 25; // tilt up/down
+                    const rotateY = (centerX - x) / 25; // tilt left/right
 
-                    // Apply rotation and scale for "magnetic" effect
-                    card.style.transform = `perspective(1000px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    // Apply rotation and scale for "magnetic" effect (subtler)
+                    card.style.transform = `perspective(1000px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                 });
 
                 card.addEventListener('mouseleave', () => {
