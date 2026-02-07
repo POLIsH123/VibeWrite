@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
         /* Ultra Modern Landing Page - 10x Better */
         * {
@@ -36,7 +38,7 @@
         }
 
         .bg-particles {
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
@@ -45,7 +47,7 @@
         }
 
         .bg-grid {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
             background-size: 120px 120px;
@@ -61,32 +63,60 @@
         }
 
         .bg-mesh {
-            background: 
+            background:
                 conic-gradient(from 0deg at 50% 50%, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1), rgba(99, 102, 241, 0.1));
             animation: mesh-rotate 60s linear infinite;
             opacity: 0.2;
         }
 
         @keyframes float-bg {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            25% { transform: translateY(-30px) rotate(1deg) scale(1.05); }
-            50% { transform: translateY(20px) rotate(-1deg) scale(0.95); }
-            75% { transform: translateY(-10px) rotate(0.5deg) scale(1.02); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translateY(-30px) rotate(1deg) scale(1.05);
+            }
+
+            50% {
+                transform: translateY(20px) rotate(-1deg) scale(0.95);
+            }
+
+            75% {
+                transform: translateY(-10px) rotate(0.5deg) scale(1.02);
+            }
         }
 
         @keyframes grid-move {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(120px, 120px) rotate(360deg); }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(120px, 120px) rotate(360deg);
+            }
         }
 
         @keyframes dots-move {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(80px, 80px) scale(1.1); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(80px, 80px) scale(1.1);
+            }
         }
 
         @keyframes mesh-rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* Scroll Progress Bar */
@@ -235,10 +265,23 @@
         }
 
         @keyframes float-elements {
-            0%, 100% { transform: translateY(0px) scale(1) rotate(0deg); }
-            25% { transform: translateY(-40px) scale(1.1) rotate(90deg); }
-            50% { transform: translateY(20px) scale(0.9) rotate(180deg); }
-            75% { transform: translateY(-20px) scale(1.05) rotate(270deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-40px) scale(1.1) rotate(90deg);
+            }
+
+            50% {
+                transform: translateY(20px) scale(0.9) rotate(180deg);
+            }
+
+            75% {
+                transform: translateY(-20px) scale(1.05) rotate(270deg);
+            }
         }
 
         .hero-content {
@@ -265,11 +308,14 @@
         }
 
         @keyframes glow-pulse {
-            0%, 100% { 
+
+            0%,
+            100% {
                 box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
                 transform: scale(1);
             }
-            50% { 
+
+            50% {
                 box-shadow: 0 0 50px rgba(99, 102, 241, 0.6);
                 transform: scale(1.02);
             }
@@ -295,11 +341,25 @@
             transform: translateY(120px);
         }
 
-        .hero-title .word:nth-child(1) { animation-delay: 0.1s; }
-        .hero-title .word:nth-child(2) { animation-delay: 0.2s; }
-        .hero-title .word:nth-child(3) { animation-delay: 0.3s; }
-        .hero-title .word:nth-child(4) { animation-delay: 0.4s; }
-        .hero-title .word:nth-child(5) { animation-delay: 0.5s; }
+        .hero-title .word:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .hero-title .word:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .hero-title .word:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .hero-title .word:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .hero-title .word:nth-child(5) {
+            animation-delay: 0.5s;
+        }
 
         @keyframes slideInUp {
             to {
@@ -319,6 +379,44 @@
             filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
         }
 
+        /* 1. The Text Gradient for "Powerful" */
+        .gradient-text-powerfull {
+            /* Multi-color gradient background */
+            background: linear-gradient(135deg, #0ea5e9, #6366f1, #8b5cf6, #f97316, #ef4444);
+            background-size: 400% 400%;
+
+            /* Clips the background to only show through the letter shapes */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* Animation and positioning */
+            animation: gradient-shift 5s ease-in-out infinite;
+            position: relative;
+            filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
+        }
+
+        /* 2. The Colorful Underline for "Powerful" */
+        .gradient-text-powerfull::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            /* Distance below the word */
+            left: 0;
+            right: 0;
+            height: 8px;
+            /* Thickness of the line */
+            border-radius: 4px;
+
+            /* Matches the gradient and animation as the text */
+            background: linear-gradient(90deg, #0ea5e9, #6366f1, #8b5cf6, #f97316, #ef4444);
+            background-size: 400% 400%;
+            animation: gradient-shift 5s ease-in-out infinite;
+
+            /* Adds the neon glow */
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+        }
+
         .gradient-text::after {
             content: '';
             position: absolute;
@@ -334,11 +432,27 @@
         }
 
         @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            20% { background-position: 100% 50%; }
-            40% { background-position: 200% 50%; }
-            60% { background-position: 300% 50%; }
-            80% { background-position: 400% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            20% {
+                background-position: 100% 50%;
+            }
+
+            40% {
+                background-position: 200% 50%;
+            }
+
+            60% {
+                background-position: 300% 50%;
+            }
+
+            80% {
+                background-position: 400% 50%;
+            }
         }
 
         .hero-subtitle {
@@ -468,12 +582,22 @@
         }
 
         @keyframes float-icon {
-            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            33% { transform: translateY(-15px) rotate(5deg) scale(1.05); }
-            66% { transform: translateY(10px) rotate(-3deg) scale(0.98); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+
+            33% {
+                transform: translateY(-15px) rotate(5deg) scale(1.05);
+            }
+
+            66% {
+                transform: translateY(10px) rotate(-3deg) scale(0.98);
+            }
         }
 
-        .feature-icon.orange { 
+        .feature-icon.orange {
             background: linear-gradient(135deg, #f59e0b, #ea580c, #dc2626);
             -webkit-background-clip: text;
             background-clip: text;
@@ -481,7 +605,7 @@
             filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.6));
         }
 
-        .feature-icon.purple { 
+        .feature-icon.purple {
             background: linear-gradient(135deg, #8b5cf6, #6366f1, #4f46e5);
             -webkit-background-clip: text;
             background-clip: text;
@@ -489,7 +613,7 @@
             filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
         }
 
-        .feature-icon.pink { 
+        .feature-icon.pink {
             background: linear-gradient(135deg, #ec4899, #be185d, #9d174d);
             -webkit-background-clip: text;
             background-clip: text;
@@ -609,21 +733,21 @@
             letter-spacing: 3px;
         }
 
-        .vibe-funny { 
+        .vibe-funny {
             background: linear-gradient(135deg, #f59e0b, #ea580c);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .vibe-professional { 
+        .vibe-professional {
             background: linear-gradient(135deg, #6366f1, #4f46e5);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .vibe-shakespearean { 
+        .vibe-shakespearean {
             background: linear-gradient(135deg, #ec4899, #be185d);
             -webkit-background-clip: text;
             background-clip: text;
@@ -638,8 +762,17 @@
         }
 
         @keyframes pulse-arrow {
-            0%, 100% { opacity: 0.7; transform: scale(1) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1.3) rotate(5deg); }
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3) rotate(5deg);
+            }
         }
 
         /* Pricing Section */
@@ -838,41 +971,41 @@
             .nav-content {
                 padding: 15px 20px;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .hero-content {
                 padding: 0 20px;
             }
-            
+
             .features-section,
             .examples-section,
             .pricing-section {
                 padding: 150px 20px;
             }
-            
+
             .features-grid {
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
-            
+
             .example-showcase {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 30px;
             }
-            
+
             .arrow {
                 transform: rotate(90deg);
             }
-            
+
             .pricing-cards {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
-            
+
             .pricing-card.featured {
                 transform: none;
             }
@@ -895,345 +1028,1087 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5855eb, #7c3aed);
         }
+
+        /* Landing Page Sections - How It Works & Privacy */
+        .section {
+            padding: 200px 40px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            font-size: clamp(50px, 8vw, 90px);
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+            text-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .section-subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Animated Glow Blobs */
+        .glow-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        .blob-1 {
+            top: -200px;
+            left: -200px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+        }
+
+        .blob-2 {
+            bottom: -200px;
+            right: -200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 60%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+            animation-delay: -10s;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(100px, 50px) scale(1.1);
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism 2.0 Card Enhancements */
+        .step-card,
+        .testimonial-card {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-card:hover,
+        .testimonial-card:hover {
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 20px 80px rgba(99, 102, 241, 0.4);
+        }
+
+        /* How It Works - Step Cards */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
+            perspective: 1500px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .step-card:hover::before {
+            opacity: 1;
+        }
+
+        .step-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.3);
+        }
+
+        .step-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 80px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.15;
+            z-index: 0;
+            text-decoration: none !important;
+        }
+
+        .step-icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            animation: float-icon 4s ease-in-out infinite;
+        }
+
+        .step-card h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-card p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+
+        .step-details-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-details-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.5);
+            color: #6366f1;
+        }
+
+        .step-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-details p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* How It Works Progress Line */
+        .steps-grid {
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 150px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .steps-grid::before {
+                display: none;
+            }
+        }
+
+        /* Shimmer Button Effect */
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-150%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(150%) rotate(45deg);
+            }
+        }
+
+        /* Inline testimonial debug styles removed; using frontend/css/style.css */
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: white;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #ffffff !important;
+            margin-bottom: 30px;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .testimonial-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-author {
+            font-size: 16px;
+            font-weight: 700;
+            color: #ffffff !important;
+        }
+
+        .testimonial-stars {
+            font-size: 24px;
+            color: #f59e0b !important;
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+        }
+
+        .testimonials-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .badge-mini {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .vibe-card.vibe-bundle-pro {
+            border-color: rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .vibe-card.vibe-bundle-genz {
+            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .testimonials-nav:hover {
+            background: rgba(99, 102, 241, 0.8);
+            border-color: #6366f1;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .testimonials-nav.prev {
+            left: 0;
+        }
+
+        .testimonials-nav.next {
+            right: 0;
+        }
+
+        /* App Sections Branding */
+        .settings-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .settings-group h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-field input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-field input:focus {
+            outline: none;
+            border-color: #6366f1;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .setting-item {
+            padding: 15px 0;
+        }
+
+        .drafts-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .faq-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateX(10px);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.3);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 30px 35px;
+            background: transparent;
+            border: none;
+            color: #ffffff !important;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 32px;
+            font-weight: 300;
+            color: #6366f1 !important;
+            transition: transform 0.4s ease;
+        }
+
+        .faq-question[aria-expanded="true"]::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-question:hover {
+            color: #6366f1 !important;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 35px;
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 18px;
+            line-height: 1.7;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 800px;
+            padding: 0 35px 35px;
+            margin-top: 15px;
+            opacity: 1;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        /* Pulsing FAQ active state */
+        .faq-item.active {
+            border-color: rgba(99, 102, 241, 0.6) !important;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+            animation: pulse-border 2s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            from {
+                border-color: rgba(99, 102, 241, 0.3);
+            }
+
+            to {
+                border-color: rgba(99, 102, 241, 0.8);
+            }
+        }
+
+        /* Primary Button Styles */
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.4);
+        }
+
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s;
+        }
+
+        .primary-btn:hover::before {
+            left: 100%;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 80px rgba(99, 102, 241, 0.7);
+        }
+
+        /* Assistive text for accessibility */
+        .assistive {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .modal-content {
+            background: rgba(26, 26, 46, 0.98);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(30px);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .modal-content li {
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content li:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive Design for Sections */
+        @media (max-width: 768px) {
+            .section {
+                padding: 100px 20px;
+            }
+
+            .section-title {
+                font-size: 40px;
+            }
+
+            .section-subtitle {
+                font-size: 18px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+                gap: 30px;
+            }
+
+            .testimonials-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .faq-item {
+                margin-bottom: 20px;
+            }
+
+            .faq-question {
+                padding: 20px 25px;
+                font-size: 18px;
+            }
+
+            .faq-answer {
+                padding: 0 25px;
+                font-size: 16px;
+            }
+
+            .faq-question[aria-expanded="true"]+.faq-answer {
+                padding: 0 25px 25px;
+            }
+
+            .step-card {
+                padding: 35px;
+            }
+
+            .step-number {
+                font-size: 60px;
+                top: 15px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div id="landing-page">
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Multi-Layer Background -->
-    <div class="bg-layer bg-particles"></div>
-    <div class="bg-layer bg-grid"></div>
-    <div class="bg-layer bg-dots"></div>
-    <div class="bg-layer bg-mesh"></div>
+        <!-- Multi-Layer Background -->
+        <div class="bg-layer bg-particles"></div>
+        <div class="bg-layer bg-grid"></div>
+        <div class="bg-layer bg-dots"></div>
+        <div class="bg-layer bg-mesh"></div>
 
-    <!-- Sticky Navigation -->
-    <nav class="sticky-nav" id="stickyNav">
-        <div class="nav-content">
-            <div class="nav-logo">
-                <div class="nav-logo-icon">✨</div>
-                VibeWrite
+        <!-- Animated Glow Blobs -->
+        <div class="glow-blob blob-1"></div>
+        <div class="glow-blob blob-2"></div>
+        <div class="glow-blob blob-3"></div>
+
+        <!-- Sticky Navigation -->
+        <nav class="sticky-nav" id="stickyNav">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <div class="nav-logo-icon">✨</div>
+                    VibeWrite
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <button class="plan-button primary" onclick="openApp()" style="width: auto; padding: 15px 30px;">
+                    Open App
+                </button>
             </div>
-            <ul class="nav-links">
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#examples">Examples</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-            </ul>
-            <button class="plan-button primary" onclick="openApp()" style="width: auto; padding: 15px 30px;">
-                Open App
-            </button>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-bg-element"></div>
-        <div class="hero-bg-element"></div>
-        <div class="hero-bg-element"></div>
-        <div class="hero-bg-element"></div>
-        
-        <div class="hero-content">
-            <div class="hero-badge">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-                AI-Powered Text Transformation
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                </svg>
-            </div>
-            
-            <h1 class="hero-title">
-                <span class="line">
-                    <span class="word">Rewrite</span>
-                    <span class="word">any</span>
-                    <span class="word">text</span>
-                </span>
-                <span class="line">
-                    <span class="word">in</span>
-                    <span class="word gradient-text">any vibe</span>
-                </span>
-            </h1>
-            
-            <p class="hero-subtitle">
-                Paste your text. Pick a style. Get <strong>AI-powered rewrites</strong> in seconds.
-            </p>
-            
-            <button class="hero-cta" onclick="openApp()">
-                Get started free
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="9,18 15,12 9,6"/>
-                </svg>
-            </button>
-        </div>
-    </section>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg-element"></div>
+            <div class="hero-bg-element"></div>
+            <div class="hero-bg-element"></div>
+            <div class="hero-bg-element"></div>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="section">
-        <div class="container">
-            <div class="section-header animate-in">
-                <h2 class="section-title">How It Works</h2>
-                <p class="section-subtitle">Simple steps to transform your text</p>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                    AI-Powered Text Transformation
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="line">
+                        <span class="word">Rewrite</span>
+                        <span class="word">any</span>
+                        <span class="word">text</span>
+                    </span>
+                    <span class="line">
+                        <span class="word">in</span>
+                        <span class="word gradient-text">any vibe</span>
+                    </span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Paste your text. Pick a style. Get <strong>AI-powered rewrites</strong> in seconds.
+                </p>
+
+                <button class="hero-cta" onclick="openApp()">
+                    Get started free
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6" />
+                    </svg>
+                </button>
             </div>
-            <div class="steps-grid" role="list" aria-label="How it works steps">
-                <div class="step-card animate-in" style="--delay: 0.1s" role="listitem">
-                    <div class="step-number">1</div>
-                    <div class="step-icon" aria-hidden="true">📝</div>
-                    <h3>Enter Your Text</h3>
-                    <p>Paste or type your text — we keep it private and secure.</p>
-                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
-                    <div class="step-details" hidden>
-                        <p>Quick paste, upload, or type directly. We support rich text and keep everything transient.</p>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subtitle">Simple steps to transform your text</p>
+                </div>
+                <div class="steps-grid" role="list" aria-label="How it works steps">
+                    <div class="step-card reveal" style="transition-delay: 0.1s" role="listitem">
+                        <div class="step-number">1</div>
+                        <div class="step-icon" aria-hidden="true">📝</div>
+                        <h3>Enter Your Text</h3>
+                        <p>Paste or type your text — we keep it private and secure.</p>
+                        <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                        <div class="step-details" hidden>
+                            <p>We support various formats and long-form content.</p>
+                        </div>
+                    </div>
+                    <div class="step-card reveal" style="transition-delay: 0.3s" role="listitem">
+                        <div class="step-number">2</div>
+                        <div class="step-icon" aria-hidden="true">🎨</div>
+                        <h3>Choose a Vibe</h3>
+                        <p>Pick from our curated presets or customize tone and formality.</p>
+                        <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                        <div class="step-details" hidden>
+                            <p>Choose from 30+ styles or describe your own vibe.</p>
+                        </div>
+                    </div>
+                    <div class="step-card reveal" style="transition-delay: 0.5s" role="listitem">
+                        <div class="step-number">3</div>
+                        <div class="step-icon" aria-hidden="true">✨</div>
+                        <h3>Get AI Magic</h3>
+                        <p>Receive polished output instantly, with an option to tweak and retry.</p>
+                        <button class="step-details-btn" aria-expanded="false">Learn more</button>
+                        <div class="step-details" hidden>
+                            <p>Outputs are editable and you can request variations until it's right.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step-card animate-in" style="--delay: 0.3s" role="listitem">
-                    <div class="step-number">2</div>
-                    <div class="step-icon" aria-hidden="true">🎨</div>
-                    <h3>Choose a Vibe</h3>
-                    <p>Pick from our curated presets or customize tone and formality.</p>
-                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
-                    <div class="step-details" hidden>
-                        <p>Try presets like professional, casual, or creative; adjust length, tone, and more.</p>
+            </div>
+        </section>
+
+        <!-- Privacy Section Removed - Modal still available via nav -->
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">What Users Say</h2>
+                    <p class="section-subtitle">Real feedback from our community</p>
+                </div>
+                <div class="testimonials-wrapper">
+                    <button class="testimonials-nav prev" aria-label="Previous testimonial">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round">
+                            </polyline>
+                        </svg>
+                    </button>
+                    <div class="testimonials-grid-container">
+                        <div class="testimonials-grid" id="testimonials-track">
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">SM</div>
+                                <div class="testimonial-text">"This tool saved me hours of rewriting emails and social
+                                    posts!"</div>
+                                <div class="testimonial-meta">
+                                    <span class="testimonial-author">Sarah M., Content Creator</span>
+                                    <span class="testimonial-stars">★★★★★</span>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">JD</div>
+                                <div class="testimonial-text">"The AI really understands the tone I'm going for. It's
+                                    like having a co-writer."</div>
+                                <div class="testimonial-meta">
+                                    <span class="testimonial-author">John D., Marketer</span>
+                                    <span class="testimonial-stars">★★★★★</span>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">AK</div>
+                                <div class="testimonial-text">"Clean UI, fast results, and actually helpful vibes. Best
+                                    AI text tool I've used."</div>
+                                <div class="testimonial-meta">
+                                    <span class="testimonial-author">Alex K., Blogger</span>
+                                    <span class="testimonial-stars">★★★★★</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="testimonials-nav next" aria-label="Next testimonial">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true" focusable="false">
+                            <polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">Questions?</h2>
+                    <p class="section-subtitle">Everything you need to know about VibeWrite</p>
+                </div>
+                <div class="faq-grid reveal">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Is VibeWrite free to use?
+                        </button>
+                        <div class="faq-answer">
+                            Yes! We offer a generous free tier for individuals to explore and improve their writing.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            How does the AI understand 'vibes'?
+                        </button>
+                        <div class="faq-answer">
+                            Our advanced AI models are trained on millions of writing samples across different styles,
+                            allowing them to capture subtle nuances in tone and formality.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            Is my data secure?
+                        </button>
+                        <div class="faq-answer">
+                            Absolutely. We use end-to-end encryption and never store your personal data or use your
+                            writing to train public models without consent.
+                        </div>
                     </div>
                 </div>
-                <div class="step-card animate-in" style="--delay: 0.5s" role="listitem">
-                    <div class="step-number">3</div>
-                    <div class="step-icon" aria-hidden="true">✨</div>
-                    <h3>Get AI Magic</h3>
-                    <p>Receive polished output instantly, with an option to tweak and retry.</p>
-                    <button class="step-details-btn" aria-expanded="false">Learn more</button>
-                    <div class="step-details" hidden>
-                        <p>Outputs are editable and you can request variations until it's right.</p>
+            </div>
+        </section>
+
+        <!-- Privacy Modal -->
+        <div id="privacy-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="privacyModalTitle">
+            <div class="modal-overlay" data-dismiss="modal"></div>
+            <div class="modal-content" role="document">
+                <button class="modal-close" aria-label="Close privacy policy">&times;</button>
+                <h3 id="privacyModalTitle">Privacy & Data Policy</h3>
+                <p>We process text in memory only; inputs are deleted after processing. We never sell data and provide
+                    data access/deletion on request.</p>
+                <ul>
+                    <li>Processing is ephemeral — not stored on disk.</li>
+                    <li>Only minimal metadata for debugging is kept and removed.</li>
+                    <li>Contact: privacy@vibewrite.example</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="features-container">
+                <h2 class="features-title"><span class="gradient-text-powerfull">Powerful</span> Features</h2>
+
+                <div class="features-grid">
+                    <div class="feature-card" data-tilt>
+                        <div class="feature-icon orange">35+</div>
+                        <h3 class="feature-title">Vibes</h3>
+                        <p class="feature-description">From funny to professional, savage to romantic, pirate to
+                            shakespearean — we've got every vibe you need to express yourself perfectly.</p>
+                    </div>
+
+                    <div class="feature-card" data-tilt>
+                        <div class="feature-icon purple">AI</div>
+                        <h3 class="feature-title">Powered</h3>
+                        <p class="feature-description">Real GPT-4 rewrites powered by advanced AI. Not templates. Not
+                            shortcuts. Actually intelligent text transformation.</p>
+                    </div>
+
+                    <div class="feature-card" data-tilt>
+                        <div class="feature-icon pink">∞</div>
+                        <h3 class="feature-title">Unlimited</h3>
+                        <p class="feature-description">Enjoy unlimited rewrites for free. No daily limits. No
+                            restrictions. Pure creative freedom at your fingertips.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Privacy Section -->
-    <section id="privacy" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Privacy & Data Policy</h2>
-                <p class="section-subtitle">Your data is safe with us</p>
-            </div>
-            <div class="privacy-content">
-                <div class="privacy-item">
-                    <h3>🔒 Data Security</h3>
-                    <p>All text processing happens securely and is not stored permanently.</p>
-                </div>
-                <div class="privacy-item">
-                    <h3>🗑️ Automatic Deletion</h3>
-                    <p>Your inputs are automatically deleted after processing.</p>
-                </div>
-                <div class="privacy-item">
-                    <h3>🛡️ No Tracking</h3>
-                    <p>We don't track or sell your personal information.</p>
-                </div>
-            </div>
-            <div class="privacy-cta" style="text-align:center; margin-top:20px;">
-                <button id="open-privacy-modal" class="primary-btn">Read Full Policy</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What Users Say</h2>
-                <p class="section-subtitle">Real feedback from our community</p>
-            </div>
-            <div class="testimonials-wrapper">
-                <button class="testimonials-nav prev" aria-label="Previous testimonial">‹</button>
-                <div class="testimonials-grid" id="testimonials">
-                    <div class="testimonial-card" data-index="0">
-                        <div class="testimonial-avatar">SM</div>
-                        <div class="testimonial-text">"This tool saved me hours of rewriting emails and social posts!"</div>
-                        <div class="testimonial-meta"><span class="testimonial-author">Sarah M., Content Creator</span><span class="testimonial-stars">★★★★★</span></div>
-                    </div>
-                    <div class="testimonial-card" data-index="1">
-                        <div class="testimonial-avatar">MT</div>
-                        <div class="testimonial-text">"The variety of styles is incredible. Never gets boring!"</div>
-                        <div class="testimonial-meta"><span class="testimonial-author">Mike T., Marketing Manager</span><span class="testimonial-stars">★★★★★</span></div>
-                    </div>
-                    <div class="testimonial-card" data-index="2">
-                        <div class="testimonial-avatar">AR</div>
-                        <div class="testimonial-text">"Finally found an AI tool that understands tone perfectly."</div>
-                        <div class="testimonial-meta"><span class="testimonial-author">Alex R., Writer</span><span class="testimonial-stars">★★★★★</span></div>
+        <!-- Examples Section -->
+        <section class="examples-section" id="examples">
+            <div class="examples-container">
+                <div style="text-align: center; margin-bottom: 80px;">
+                    <div
+                        style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 12px 24px; border-radius: 25px; font-size: 16px; color: #ffc107; margin-bottom: 50px; font-weight: 600;">
+                        ⭐ Real Examples
                     </div>
                 </div>
-                <button class="testimonials-nav next" aria-label="Next testimonial">›</button>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                <p class="section-subtitle">Everything you need to know</p>
-            </div>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question" id="faq1-btn" aria-expanded="false" aria-controls="faq1">How does the AI rewriting work?<span class="assistive">Show</span></button>
-                    <div id="faq1" class="faq-answer" role="region" aria-labelledby="faq1-btn">Our advanced AI analyzes your text and transforms it while preserving the original meaning and intent.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" id="faq2-btn" aria-expanded="false" aria-controls="faq2">Is my data secure?<span class="assistive">Show</span></button>
-                    <div id="faq2" class="faq-answer" role="region" aria-labelledby="faq2-btn">Yes, all processing is secure and your text is automatically deleted after use.</div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" id="faq3-btn" aria-expanded="false" aria-controls="faq3">How many styles are available?<span class="assistive">Show</span></button>
-                    <div id="faq3" class="faq-answer" role="region" aria-labelledby="faq3-btn">We offer 30+ different writing styles including professional, casual, creative, and specialized tones.</div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <h2 class="examples-title">
+                    See the <span class="gradient-text">magic</span>
+                </h2>
+                <p class="examples-subtitle">Watch how AI transforms ordinary text into extraordinary vibes</p>
 
-    <!-- Privacy Modal -->
-    <div id="privacy-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="privacyModalTitle">
-        <div class="modal-overlay" data-dismiss="modal"></div>
-        <div class="modal-content" role="document">
-            <button class="modal-close" aria-label="Close privacy policy">&times;</button>
-            <h3 id="privacyModalTitle">Privacy & Data Policy</h3>
-            <p>We process text in memory only; inputs are deleted after processing. We never sell data and provide data access/deletion on request.</p>
-            <ul>
-                <li>Processing is ephemeral — not stored on disk.</li>
-                <li>Only minimal metadata for debugging is kept and removed.</li>
-                <li>Contact: privacy@vibewrite.example</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="features-container">
-            <h2 class="features-title">Powerful Features</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card" data-tilt>
-                    <div class="feature-icon orange">35+</div>
-                    <h3 class="feature-title">Vibes</h3>
-                    <p class="feature-description">From funny to professional, savage to romantic, pirate to shakespearean — we've got every vibe you need to express yourself perfectly.</p>
-                </div>
-                
-                <div class="feature-card" data-tilt>
-                    <div class="feature-icon purple">AI</div>
-                    <h3 class="feature-title">Powered</h3>
-                    <p class="feature-description">Real GPT-4 rewrites powered by advanced AI. Not templates. Not shortcuts. Actually intelligent text transformation.</p>
-                </div>
-                
-                <div class="feature-card" data-tilt>
-                    <div class="feature-icon pink">∞</div>
-                    <h3 class="feature-title">Unlimited</h3>
-                    <p class="feature-description">Go pro and rewrite as much as you want. No daily limits. No restrictions. Pure creative freedom at your fingertips.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Examples Section -->
-    <section class="examples-section" id="examples">
-        <div class="examples-container">
-            <div style="text-align: center; margin-bottom: 80px;">
-                <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 12px 24px; border-radius: 25px; font-size: 16px; color: #ffc107; margin-bottom: 50px; font-weight: 600;">
-                    ⭐ Real Examples
-                </div>
-            </div>
-            
-            <h2 class="examples-title">
-                See the <span class="gradient-text">magic</span>
-            </h2>
-            <p class="examples-subtitle">Watch how AI transforms ordinary text into extraordinary vibes</p>
-            
-            <div class="example-showcase" data-example="1">
-                <div class="example-card">
-                    <div class="example-label">ORIGINAL</div>
-                    <div class="example-text">"I'm excited about this project"</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="example-card">
-                    <div class="example-label vibe-funny">● FUNNY</div>
-                    <div class="example-text">"I'm so pumped I might do a happy dance (nobody wants to see that)"</div>
-                </div>
-            </div>
-            
-            <div class="example-showcase" data-example="2">
-                <div class="example-card">
-                    <div class="example-label">ORIGINAL</div>
-                    <div class="example-text">"Please review my work"</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="example-card">
-                    <div class="example-label vibe-professional">● PROFESSIONAL</div>
-                    <div class="example-text">"I would greatly appreciate your expert feedback at your earliest convenience"</div>
-                </div>
-            </div>
-            
-            <div class="example-showcase" data-example="3">
-                <div class="example-card">
-                    <div class="example-label">ORIGINAL</div>
-                    <div class="example-text">"I like you"</div>
-                </div>
-                <div class="arrow">→</div>
-                <div class="example-card">
-                    <div class="example-label vibe-shakespearean">● SHAKESPEAREAN</div>
-                    <div class="example-text">"Thou art the sun to my moon, the fire to my ice, the very essence of my being"</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing-section" id="pricing">
-        <div class="pricing-container">
-            <h2 class="pricing-title">
-                Simple <span class="gradient-text">pricing</span>
-            </h2>
-            <p class="pricing-subtitle">Start free. Go unlimited when you're ready.</p>
-            
-            <div class="pricing-cards">
-                <div class="pricing-card">
-                    <h3 class="plan-name">Free</h3>
-                    <div class="plan-price">
-                        <span class="currency">$</span>0
+                <div class="example-showcase" data-example="1">
+                    <div class="example-card">
+                        <div class="example-label">ORIGINAL</div>
+                        <div class="example-text">"I'm excited about this project"</div>
                     </div>
-                    <ul class="plan-features">
-                        <li>5 rewrites per day</li>
-                        <li>All 35+ vibes</li>
-                        <li>History saved</li>
-                        <li>Basic support</li>
-                    </ul>
-                    <button class="plan-button secondary" onclick="openApp()">Start free</button>
-                </div>
-                
-                <div class="pricing-card featured">
-                    <h3 class="plan-name">Pro</h3>
-                    <div class="plan-price">
-                        <span class="currency">$</span>10<span class="period">/mo</span>
+                    <div class="arrow">→</div>
+                    <div class="example-card">
+                        <div class="example-label vibe-funny">● FUNNY</div>
+                        <div class="example-text">"I'm so pumped I might do a happy dance (nobody wants to see that)"
+                        </div>
                     </div>
-                    <ul class="plan-features">
-                        <li>Unlimited rewrites</li>
-                        <li>All 35+ vibes</li>
-                        <li>Priority support</li>
-                        <li>Advanced features</li>
-                        <li>Export options</li>
-                    </ul>
-                    <button class="plan-button primary" onclick="openApp()">Upgrade to Pro</button>
+                </div>
+
+                <div class="example-showcase" data-example="2">
+                    <div class="example-card">
+                        <div class="example-label">ORIGINAL</div>
+                        <div class="example-text">"Please review my work"</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="example-card">
+                        <div class="example-label vibe-professional">● PROFESSIONAL</div>
+                        <div class="example-text">"I would greatly appreciate your expert feedback at your earliest
+                            convenience"</div>
+                    </div>
+                </div>
+
+                <div class="example-showcase" data-example="3">
+                    <div class="example-card">
+                        <div class="example-label">ORIGINAL</div>
+                        <div class="example-text">"I like you"</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="example-card">
+                        <div class="example-label vibe-shakespearean">● SHAKESPEAREAN</div>
+                        <div class="example-text">"Thou art the sun to my moon, the fire to my ice, the very essence of
+                            my being"</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Floating Action Button -->
-    <button class="fab" id="fab" onclick="scrollToTop()">↑</button>
+        <!-- Pricing section removed as per user request (everything is free) -->
+
+
+        <!-- Open Source Section -->
+        <section class="section" style="padding: 100px 40px; text-align: center; background: rgba(0,0,0,0.5);">
+            <div class="container">
+                <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 20px;">Open Source</h2>
+                <p style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-bottom: 30px;">
+                    This project is publicly available on GitHub. Check out the code, contribute, or leave a star!
+                </p>
+                <a href="https://github.com/POLIsH123/VibeWrite" target="_blank" class="secondary-btn"
+                    style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; padding: 15px 30px;">
+                    <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="fab" onclick="scrollToTop()">↑</button>
     </div> <!-- End landing-page -->
 
     <!-- Main App (hidden initially) -->
@@ -1245,58 +2120,76 @@
                     ✨ VibeWrite
                 </div>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <a href="#" class="nav-item active" data-page="home" onclick="showPage('home')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        <polyline points="9,22 9,12 15,12 15,22"/>
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9,22 9,12 15,12 15,22" />
                     </svg>
                     Home
                 </a>
                 <a href="#" class="nav-item" data-page="rewrite" onclick="showPage('rewrite')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                     </svg>
                     Rewrite
                 </a>
                 <a href="#" class="nav-item" data-page="community" onclick="showPage('community')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                     Community
                 </a>
                 <a href="#" class="nav-item" data-page="history" onclick="showPage('history')">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12,6 12,12 16,14"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12,6 12,12 16,14" />
                     </svg>
                     History
                 </a>
+                <a href="#" class="nav-item" data-page="settings" onclick="showPage('settings')">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    Settings
+                </a>
             </nav>
-            
+
             <div class="sidebar-footer">
-                <div class="user-badge">
-                    <div class="user-avatar" id="user-avatar">U</div>
-                    <div class="user-details">
-                        <div class="user-name" id="sidebar-user-name">User</div>
-                        <div class="user-plan" id="user-plan">Free Plan</div>
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="sidebar-avatar">U</div>
+                    <div class="user-info">
+                        <div class="user-name" id="sidebar-name">User</div>
+                        <div class="user-plan">Free Version</div>
                     </div>
                 </div>
-                <div class="sidebar-buttons">
-                    <button class="upgrade-btn" id="upgrade-btn" onclick="showUpgradeModal()">Upgrade</button>
-                    <button class="logout-btn" onclick="logout()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                            <polyline points="16,17 21,12 16,7"/>
-                            <line x1="21" y1="12" x2="9" y2="12"/>
-                        </svg>
-                    </button>
-                </div>
+                <!-- Payments at the end - Upgrade button -->
+                <button class="nav-item upgrade-btn" type="button"
+                    style="margin-top: 10px; background: linear-gradient(135deg,#6366f1,#a855f7); color: #fff; border-radius: 10px; font-size: 13px; padding: 10px 12px; display:inline-flex;align-items:center;gap:8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        style="color:rgba(255,255,255,0.9)">
+                        <path d="M12 2v6" />
+                        <path d="M12 22v-6" />
+                        <path d="M2 12h6" />
+                        <path d="M22 12h-6" />
+                    </svg>
+                    Upgrade
+                </button>
+                <button class="logout-btn" onclick="logout()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    Logout
+                </button>
             </div>
         </aside>
 
@@ -1306,10 +2199,11 @@
             <header class="header">
                 <div class="header-left">
                     <button class="mobile-menu-btn" onclick="toggleSidebar()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="3" y1="6" x2="21" y2="6"/>
-                            <line x1="3" y1="12" x2="21" y2="12"/>
-                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
                         </svg>
                     </button>
                 </div>
@@ -1317,7 +2211,9 @@
                     <h1 class="page-title" id="page-title">Home</h1>
                 </div>
                 <div class="header-right">
-                    <div class="usage-badge" id="usage-badge">5 left today</div>
+                    <div class="usage-badge" id="usage-badge"
+                        style="background: rgba(139, 92, 246, 0.03); border-color: rgba(139, 92, 246, 0.06); color: #a78bfa;">
+                        0 left today</div>
                 </div>
             </header>
 
@@ -1345,13 +2241,15 @@
                     </div>
 
                     <button class="quick-start-btn" onclick="showPage('rewrite')">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                         </svg>
                         <span>Start rewriting</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9,18 15,12 9,6"/>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="9,18 15,12 9,6" />
                         </svg>
                     </button>
 
@@ -1401,9 +2299,10 @@
                             <div class="input-footer">
                                 <span class="char-count" id="char-count">0/500</span>
                                 <button class="send-btn" id="rewrite-btn" onclick="generateRewrite()" disabled>
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="22" y1="2" x2="11" y2="13"/>
-                                        <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13" />
+                                        <polygon points="22,2 15,22 11,13 2,9 22,2" />
                                     </svg>
                                 </button>
                             </div>
@@ -1439,6 +2338,32 @@
                                 <div class="vibe-icon">📜</div>
                                 <div class="vibe-label">Poetic</div>
                             </div>
+                            <div class="vibe-card vibe-bundle-pro" data-vibe="businessPro"
+                                onclick="selectVibe('businessPro')">
+                                <div class="vibe-icon">👔</div>
+                                <div class="vibe-label">Business Pro</div>
+
+                            </div>
+                            <div class="vibe-card vibe-bundle-genz" data-vibe="genZTalk"
+                                onclick="selectVibe('genZTalk')">
+                                <div class="vibe-icon">🧢</div>
+                                <div class="vibe-label">Gen-Z Talk</div>
+
+                            </div>
+                        </div>
+
+                        <div class="vibe-grid-footer" style="margin-top: 25px; text-align: center;">
+                            <button class="see-all-btn" onclick="toggleAllVibes()">
+                                <span id="see-all-text">See all vibes</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div id="extended-vibes" class="vibe-grid"
+                            style="display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
                             <div class="vibe-card" data-vibe="sarcastic" onclick="selectVibe('sarcastic')">
                                 <div class="vibe-icon">🙄</div>
                                 <div class="vibe-label">Sarcastic</div>
@@ -1463,99 +2388,127 @@
                                 <div class="vibe-icon">🧘</div>
                                 <div class="vibe-label">Zen</div>
                             </div>
+                            <div class="vibe-card" data-vibe="nostalgic" onclick="selectVibe('nostalgic')">
+                                <div class="vibe-icon">🕰️</div>
+                                <div class="vibe-label">Nostalgic</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="rebellious" onclick="selectVibe('rebellious')">
+                                <div class="vibe-icon">🤘</div>
+                                <div class="vibe-label">Rebellious</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="whimsical" onclick="selectVibe('whimsical')">
+                                <div class="vibe-icon">✨</div>
+                                <div class="vibe-label">Whimsical</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="scientific" onclick="selectVibe('scientific')">
+                                <div class="vibe-icon">🔬</div>
+                                <div class="vibe-label">Scientific</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="diplomatic" onclick="selectVibe('diplomatic')">
+                                <div class="vibe-icon">🤝</div>
+                                <div class="vibe-label">Diplomatic</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="conspiracy" onclick="selectVibe('conspiracy')">
+                                <div class="vibe-icon">👁️</div>
+                                <div class="vibe-label">Conspiracy</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="chaotic" onclick="selectVibe('chaotic')">
+                                <div class="vibe-icon">🌀</div>
+                                <div class="vibe-label">Chaotic</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="aristocratic" onclick="selectVibe('aristocratic')">
+                                <div class="vibe-icon">👑</div>
+                                <div class="vibe-label">Aristocratic</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="streetwise" onclick="selectVibe('streetwise')">
+                                <div class="vibe-icon">🏙️</div>
+                                <div class="vibe-label">Streetwise</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="vintage" onclick="selectVibe('vintage')">
+                                <div class="vibe-icon">📻</div>
+                                <div class="vibe-label">Vintage</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="cyberpunk" onclick="selectVibe('cyberpunk')">
+                                <div class="vibe-icon">🤖</div>
+                                <div class="vibe-label">Cyberpunk</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="horror" onclick="selectVibe('horror')">
+                                <div class="vibe-icon">👻</div>
+                                <div class="vibe-label">Horror</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="superhero" onclick="selectVibe('superhero')">
+                                <div class="vibe-icon">🦸</div>
+                                <div class="vibe-label">Superhero</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="pirate" onclick="selectVibe('pirate')">
+                                <div class="vibe-icon">🏴‍☠️</div>
+                                <div class="vibe-label">Pirate</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="cowboy" onclick="selectVibe('cowboy')">
+                                <div class="vibe-icon">🤠</div>
+                                <div class="vibe-label">Cowboy</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="alien" onclick="selectVibe('alien')">
+                                <div class="vibe-icon">👽</div>
+                                <div class="vibe-label">Alien</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
+                                <div class="vibe-icon">🤖</div>
+                                <div class="vibe-label">Robot</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="childlike" onclick="selectVibe('childlike')">
+                                <div class="vibe-icon">🧒</div>
+                                <div class="vibe-label">Childlike</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="elderly" onclick="selectVibe('elderly')">
+                                <div class="vibe-icon">🧓</div>
+                                <div class="vibe-label">Elderly</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="celebrity" onclick="selectVibe('celebrity')">
+                                <div class="vibe-icon">🌟</div>
+                                <div class="vibe-label">Celebrity</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="villain" onclick="selectVibe('villain')">
+                                <div class="vibe-icon">🦹</div>
+                                <div class="vibe-label">Villain</div>
+                            </div>
+                            <div class="vibe-card" data-vibe="superheroVillain"
+                                onclick="selectVibe('superheroVillain')">
+                                <div class="vibe-icon">💀</div>
+                                <div class="vibe-label">Supervillain</div>
+                            </div>
                         </div>
-                        
-                        <div class="extended-vibes" id="extended-vibes" style="display: none;">
-                            <div class="vibe-grid">
-                                <div class="vibe-card" data-vibe="nostalgic" onclick="selectVibe('nostalgic')">
-                                    <div class="vibe-icon">🕰️</div>
-                                    <div class="vibe-label">Nostalgic</div>
+
+                        <div class="vibe-designer-section"
+                            style="margin-top: 40px; padding: 25px; background: rgba(99, 102, 241, 0.1); border: 1px dashed rgba(99, 102, 241, 0.4); border-radius: 20px; text-align: center;">
+                            <div style="font-size: 24px; margin-bottom: 10px;">🎨</div>
+                            <h3>Vibe Designer</h3>
+                            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">Create your own custom
+                                rewriting style</p>
+
+                        </div>
+
+                        <!-- Pricing Section -->
+                        <div class="pricing-section" style="margin-top:28px;">
+                            <h2 style="text-align:center;margin-bottom:12px;">Upgrade for unlimited rewrites</h2>
+                            <div class="pricing-grid">
+                                <div class="pricing-card">
+                                    <div class="pricing-badge">Free</div>
+                                    <div class="pricing-price">7 / day</div>
+                                    <div class="pricing-features">Limited daily rewrites · Try all free vibes</div>
+                                    <div style="margin-top:12px;"><button class="secondary-btn" disabled>Current
+                                            Plan</button></div>
                                 </div>
-                                <div class="vibe-card" data-vibe="rebellious" onclick="selectVibe('rebellious')">
-                                    <div class="vibe-icon">🤘</div>
-                                    <div class="vibe-label">Rebellious</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="whimsical" onclick="selectVibe('whimsical')">
-                                    <div class="vibe-icon">✨</div>
-                                    <div class="vibe-label">Whimsical</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="scientific" onclick="selectVibe('scientific')">
-                                    <div class="vibe-icon">🔬</div>
-                                    <div class="vibe-label">Scientific</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="diplomatic" onclick="selectVibe('diplomatic')">
-                                    <div class="vibe-icon">🤝</div>
-                                    <div class="vibe-label">Diplomatic</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="conspiracy" onclick="selectVibe('conspiracy')">
-                                    <div class="vibe-icon">👁️</div>
-                                    <div class="vibe-label">Conspiracy</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="chaotic" onclick="selectVibe('chaotic')">
-                                    <div class="vibe-icon">🌀</div>
-                                    <div class="vibe-label">Chaotic</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="aristocratic" onclick="selectVibe('aristocratic')">
-                                    <div class="vibe-icon">👑</div>
-                                    <div class="vibe-label">Aristocratic</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="streetwise" onclick="selectVibe('streetwise')">
-                                    <div class="vibe-icon">🏙️</div>
-                                    <div class="vibe-label">Streetwise</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="vintage" onclick="selectVibe('vintage')">
-                                    <div class="vibe-icon">📻</div>
-                                    <div class="vibe-label">Vintage</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="cyberpunk" onclick="selectVibe('cyberpunk')">
-                                    <div class="vibe-icon">🤖</div>
-                                    <div class="vibe-label">Cyberpunk</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="horror" onclick="selectVibe('horror')">
-                                    <div class="vibe-icon">👻</div>
-                                    <div class="vibe-label">Horror</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="superhero" onclick="selectVibe('superhero')">
-                                    <div class="vibe-icon">🦸</div>
-                                    <div class="vibe-label">Superhero</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="pirate" onclick="selectVibe('pirate')">
-                                    <div class="vibe-icon">🏴‍☠️</div>
-                                    <div class="vibe-label">Pirate</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="cowboy" onclick="selectVibe('cowboy')">
-                                    <div class="vibe-icon">🤠</div>
-                                    <div class="vibe-label">Cowboy</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="alien" onclick="selectVibe('alien')">
-                                    <div class="vibe-icon">👽</div>
-                                    <div class="vibe-label">Alien</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
-                                    <div class="vibe-icon">🤖</div>
-                                    <div class="vibe-label">Robot</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="childlike" onclick="selectVibe('childlike')">
-                                    <div class="vibe-icon">🧒</div>
-                                    <div class="vibe-label">Childlike</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="elderly" onclick="selectVibe('elderly')">
-                                    <div class="vibe-icon">🧓</div>
-                                    <div class="vibe-label">Elderly</div>
-                                </div>
-                                <div class="vibe-card" data-vibe="villain" onclick="selectVibe('villain')">
-                                    <div class="vibe-icon">🦹</div>
-                                    <div class="vibe-label">Villain</div>
+                                <div class="pricing-card pricing-pro">
+                                    <div class="pricing-badge">Pro</div>
+                                    <div class="pricing-price">$4.99 / month</div>
+                                    <div class="pricing-features">Unlimited rewrites · All vibes unlocked · Priority
+                                        support</div>
+                                    <div style="margin-top:12px;"><button id="subscribe-pro-btn"
+                                            class="primary-btn">Subscribe</button></div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <button class="see-all-btn" onclick="toggleAllVibes()">
-                            <span id="see-all-text">See all vibes</span>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6,9 12,15 18,9"/>
-                            </svg>
-                        </button>
                     </div>
 
                     <div class="loading" id="loading" style="display: none;">
@@ -1569,14 +2522,10 @@
                                 <div class="result-vibe" id="result-vibe">Funny</div>
                                 <div class="result-actions">
                                     <button class="icon-btn" onclick="copyResult()" title="Copy">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                                        </svg>
-                                    </button>
-                                    <button class="icon-btn" onclick="saveToFavorites()" title="Save">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                                         </svg>
                                     </button>
                                 </div>
@@ -1597,7 +2546,7 @@
                             <div class="lock-icon">🔒</div>
                             <h2 class="lock-title">Community Features Coming Soon!</h2>
                             <p class="lock-subtitle">We're building something amazing for the community</p>
-                            
+
                             <div class="progress-section">
                                 <div class="progress-header">
                                     <span class="progress-label">Community Scripts Collected</span>
@@ -1608,7 +2557,7 @@
                                 </div>
                                 <div class="progress-percentage" id="progress-percentage">0%</div>
                             </div>
-                            
+
                             <div class="lock-description">
                                 <h3>What's Coming?</h3>
                                 <ul class="feature-list">
@@ -1619,14 +2568,16 @@
                                     <li>👥 Connect with other creators</li>
                                 </ul>
                             </div>
-                            
+
                             <button class="help-reach-btn" onclick="showContributeModal()">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                                 </svg>
                                 Help Us Reach 50 Scripts!
                             </button>
-                            
+
                             <div class="eta-info">
                                 <p>🚀 Community features will unlock automatically when we reach 50 scripts</p>
                             </div>
@@ -1638,12 +2589,15 @@
                         <div class="community-header">
                             <div class="community-title-section">
                                 <h2 class="community-title">🎉 Community Unlocked!</h2>
-                                <p class="community-subtitle">Discover and share custom AI prompts created by the community</p>
+                                <p class="community-subtitle">Discover and share custom AI prompts created by the
+                                    community</p>
                             </div>
-                            <button class="primary-btn" onclick="showCreateScriptModal()" style="width: auto; padding: 16px 24px;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="12" y1="5" x2="12" y2="19"/>
-                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                            <button class="primary-btn" onclick="showCreateScriptModal()"
+                                style="width: auto; padding: 16px 24px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
                                 </svg>
                                 Create Script
                             </button>
@@ -1675,16 +2629,19 @@
                                 <button class="filter-tab" data-filter="recent" onclick="filterScripts('recent')">
                                     ⚡ Recent
                                 </button>
-                                <button class="filter-tab" data-filter="my-scripts" onclick="filterScripts('my-scripts')">
+                                <button class="filter-tab" data-filter="my-scripts"
+                                    onclick="filterScripts('my-scripts')">
                                     👤 My Scripts
                                 </button>
                             </div>
                             <div class="search-box">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="M21 21l-4.35-4.35"/>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <path d="M21 21l-4.35-4.35" />
                                 </svg>
-                                <input type="text" placeholder="Search scripts..." id="script-search" oninput="searchScripts()">
+                                <input type="text" placeholder="Search scripts..." id="script-search"
+                                    oninput="searchScripts()">
                             </div>
                         </div>
 
@@ -1698,6 +2655,7 @@
                 </div>
             </div>
 
+
             <!-- History Page -->
             <div id="page-history" class="page" style="display: none;">
                 <div class="content-area">
@@ -1708,12 +2666,75 @@
                         </div>
                         <div class="history-list" id="history-list">
                             <div class="empty-state" id="empty-history">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <polyline points="12,6 12,12 16,14"/>
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12,6 12,12 16,14" />
                                 </svg>
                                 <p>No history yet</p>
                                 <a href="#" class="see-all-link" onclick="showPage('rewrite')">Start rewriting</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="page-settings" class="page" style="display: none;">
+                <div class="content-area">
+                    <div class="section">
+                        <div class="section-header">
+                            <div class="section-title">Account Settings</div>
+                            <p class="section-subtitle">Manage your profile and preferences</p>
+                        </div>
+
+                        <div class="settings-card">
+                            <div class="settings-group">
+                                <h3>Profile Information</h3>
+                                <div class="form-field">
+                                    <label>Display Name</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" id="settings-name-input" placeholder="Your name">
+                                        <button class="primary-btn" onclick="updateProfileName()"
+                                            style="width: auto; padding: 0 20px;">Update</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-group"
+                                style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                                <h3>App Preferences</h3>
+                                <div class="setting-item"
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <div>
+                                        <div style="font-weight: 600;">Compact Mode</div>
+                                        <div style="font-size: 14px; opacity: 0.7;">Make the interface smaller</div>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="compact-toggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item"
+                                    style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-weight: 600;">AI Suggestions</div>
+                                        <div style="font-size: 14px; opacity: 0.7;">Show real-time vibe tips</div>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-group"
+                                style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                                <h3 style="color: #ef4444;">Danger Zone</h3>
+                                <p style="font-size: 14px; opacity: 0.7; margin-bottom: 15px;">Once you delete your
+                                    data, there is no going back.</p>
+                                <button class="secondary-btn" onclick="resetAppData()"
+                                    style="border-color: #ef4444; color: #ef4444;">Reset All App Data</button>
                             </div>
                         </div>
                     </div>
@@ -1732,23 +2753,7 @@
         </div>
     </div>
 
-    <div id="upgrade-modal" class="modal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeUpgradeModal()">×</button>
-            <h2>Upgrade to Pro</h2>
-            <div class="price-tag">$10<span>/month</span></div>
-            <ul class="feature-list">
-                <li>Unlimited rewrites</li>
-                <li>All 35+ vibes</li>
-                <li>Priority support</li>
-                <li>Advanced features</li>
-                <li>Export options</li>
-            </ul>
-            <button class="primary-btn" onclick="handleSubscribe()">Subscribe now</button>
-            <button class="secondary-btn" onclick="closeUpgradeModal()">Maybe later</button>
-            <p class="modal-note">Cancel anytime. No hidden fees.</p>
-        </div>
-    </div>
+    <!-- Upgrade and Success modals removed (Everything is free) -->
 
     <div id="limit-modal" class="modal">
         <div class="modal-box">
@@ -1757,15 +2762,6 @@
             <p>You've used all 5 free rewrites today. Upgrade to Pro for unlimited access!</p>
             <button class="primary-btn" onclick="showUpgradeModal(); closeLimitModal();">Upgrade to Pro</button>
             <button class="secondary-btn" onclick="closeLimitModal()">Try again tomorrow</button>
-        </div>
-    </div>
-
-    <div id="success-modal" class="modal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeSuccessModal()">×</button>
-            <h2>🎉 Welcome to Pro!</h2>
-            <p>You now have unlimited access to all vibes and features. Happy rewriting!</p>
-            <button class="primary-btn" onclick="closeSuccessModal()">Start rewriting</button>
         </div>
     </div>
 
@@ -1785,7 +2781,7 @@
             <button class="modal-close" onclick="closeContributeModal()">×</button>
             <h2>🚀 Help Us Build the Community!</h2>
             <p>Share your creative AI script ideas to help unlock community features for everyone</p>
-            
+
             <div class="contribute-progress">
                 <div class="contribute-progress-header">
                     <span>Progress to Community Unlock</span>
@@ -1795,37 +2791,44 @@
                     <div class="contribute-progress-fill" id="modal-progress-fill" style="width: 0%"></div>
                 </div>
             </div>
-            
+
             <form id="contribute-form" onsubmit="submitContribution(event)">
                 <div class="form-field">
                     <label for="contribute-name">Your Name</label>
-                    <input type="text" id="contribute-name" placeholder="e.g., Alex, Sarah, CodeMaster..." maxlength="50" required>
+                    <input type="text" id="contribute-name" placeholder="e.g., Alex, Sarah, CodeMaster..."
+                        maxlength="50" required>
                 </div>
-                
+
                 <div class="form-field">
                     <label for="contribute-script-name">Script Name</label>
-                    <input type="text" id="contribute-script-name" placeholder="e.g., Pirate Translator, Emoji Master, Shakespeare Mode..." maxlength="100" required>
+                    <input type="text" id="contribute-script-name"
+                        placeholder="e.g., Pirate Translator, Emoji Master, Shakespeare Mode..." maxlength="100"
+                        required>
                 </div>
-                
+
                 <div class="form-field">
                     <label for="contribute-instructions">Script Instructions</label>
-                    <textarea id="contribute-instructions" placeholder="Describe what your script does and how it should transform text..." maxlength="500" required></textarea>
+                    <textarea id="contribute-instructions"
+                        placeholder="Describe what your script does and how it should transform text..." maxlength="500"
+                        required></textarea>
                 </div>
-                
+
                 <div class="form-field">
                     <label for="contribute-example">Example (Optional)</label>
-                    <input type="text" id="contribute-example" placeholder="Show an example: 'Hello friend' → 'Ahoy there, matey!'" maxlength="200">
+                    <input type="text" id="contribute-example"
+                        placeholder="Show an example: 'Hello friend' → 'Ahoy there, matey!'" maxlength="200">
                 </div>
-                
+
                 <button type="submit" class="primary-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
                     Contribute Script
                 </button>
                 <button type="button" class="secondary-btn" onclick="closeContributeModal()">Maybe Later</button>
             </form>
-            
+
             <div id="contribute-success" style="display: none; text-align: center; padding: 20px;">
                 <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
                 <h3>Thank You!</h3>
@@ -1843,32 +2846,37 @@
             <button class="modal-close" onclick="closeCreateScriptModal()">×</button>
             <h2>Create Community Script</h2>
             <p>Share your custom AI prompt with the community</p>
-            
+
             <form id="create-script-form" onsubmit="submitCommunityScript(event)">
                 <div class="form-field">
                     <label for="script-name">Script Name</label>
-                    <input type="text" id="script-name" placeholder="e.g., Pirate Translator, Emoji Master..." maxlength="100" required>
+                    <input type="text" id="script-name" placeholder="e.g., Pirate Translator, Emoji Master..."
+                        maxlength="100" required>
                 </div>
-                
+
                 <div class="form-field">
                     <label for="script-instructions">Instructions</label>
-                    <textarea id="script-instructions" placeholder="Describe what your script does and how it transforms text..." maxlength="500" required></textarea>
+                    <textarea id="script-instructions"
+                        placeholder="Describe what your script does and how it transforms text..." maxlength="500"
+                        required></textarea>
                 </div>
-                
+
                 <div class="form-field">
                     <label for="script-example">Example (Optional)</label>
-                    <input type="text" id="script-example" placeholder="Show an example of input → output" maxlength="200">
+                    <input type="text" id="script-example" placeholder="Show an example of input → output"
+                        maxlength="200">
                 </div>
-                
+
                 <button type="submit" class="primary-btn">Create Script</button>
                 <button type="button" class="secondary-btn" onclick="closeCreateScriptModal()">Cancel</button>
             </form>
-            
+
             <div id="create-script-success" style="display: none; text-align: center; padding: 20px;">
                 <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
                 <h3>Script Created!</h3>
                 <p>Your community script has been submitted and is now live!</p>
-                <button class="primary-btn" onclick="closeCreateScriptModal(); loadCommunityScripts();">View Scripts</button>
+                <button class="primary-btn" onclick="closeCreateScriptModal(); loadCommunityScripts();">View
+                    Scripts</button>
             </div>
         </div>
     </div>
@@ -1895,7 +2903,7 @@
         function updateStickyNav() {
             const nav = document.getElementById('stickyNav');
             const scrollTop = window.pageYOffset;
-            
+
             if (scrollTop > window.innerHeight * 0.6) {
                 nav.classList.add('visible');
             } else {
@@ -1907,7 +2915,7 @@
         function updateFAB() {
             const fab = document.getElementById('fab');
             const scrollTop = window.pageYOffset;
-            
+
             if (scrollTop > window.innerHeight * 1.5) {
                 fab.classList.add('visible');
             } else {
@@ -1926,7 +2934,7 @@
         // Enhanced intersection observer for examples
         function setupExampleAnimations() {
             const examples = document.querySelectorAll('.example-showcase');
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
@@ -1939,7 +2947,7 @@
                 threshold: 0.2,
                 rootMargin: '0px 0px -150px 0px'
             });
-            
+
             examples.forEach(example => {
                 observer.observe(example);
             });
@@ -1948,22 +2956,22 @@
         // Enhanced 3D tilt effect
         function setupTiltEffect() {
             const cards = document.querySelectorAll('[data-tilt]');
-            
+
             cards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    
+
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    
+
                     const rotateX = (y - centerY) / 8;
                     const rotateY = (centerX - x) / 8;
-                    
+
                     card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(30px)`;
                 });
-                
+
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(1500px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
                 });
@@ -1973,13 +2981,13 @@
         // Smooth scroll for navigation
         function setupSmoothScroll() {
             const links = document.querySelectorAll('.nav-links a');
-            
+
             links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const targetId = link.getAttribute('href').substring(1);
                     const targetElement = document.getElementById(targetId);
-                    
+
                     if (targetElement) {
                         targetElement.scrollIntoView({
                             behavior: 'smooth',
@@ -1994,7 +3002,7 @@
         function updateParallax() {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.hero-bg-element');
-            
+
             parallaxElements.forEach((element, index) => {
                 const speed = 0.3 + (index * 0.15);
                 const yPos = -(scrolled * speed);
@@ -2005,10 +3013,192 @@
 
         // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
+            // Priority: Scroll Reveal first to ensure visibility
+            setupScrollReveal();
+
+            // Other features
+            setupFAQ();
+            setupTestimonialCarousel();
             setupExampleAnimations();
             setupTiltEffect();
             setupSmoothScroll();
+            setupPrivacyModal();
+            setupMagneticCards();
         });
+
+        // Magnetic / Tilt effect for cards
+        function setupMagneticCards() {
+            const cards = document.querySelectorAll('.step-card, .testimonial-card');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+
+                    // Mouse position relative to the element
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // Center of the element
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    // Calculate tilt (you can tweak the divisor for more/less tilt)
+                    const rotateX = (y - centerY) / 10; // tilt up/down
+                    const rotateY = (centerX - x) / 10; // tilt left/right
+
+                    // Apply rotation and scale for "magnetic" effect
+                    card.style.transform = `perspective(1000px) scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    // Reset rotation
+                    card.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+                });
+            });
+        }
+
+
+        // Scroll Reveal Intersection Observer
+        function setupScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        }
+
+        function setupFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (!question) return;
+
+                question.onclick = () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Close others
+                    faqItems.forEach(faq => {
+                        faq.classList.remove('active');
+                        faq.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+                    });
+
+                    // Toggle this one
+                    if (!isActive) {
+                        item.classList.add('active');
+                        question.setAttribute('aria-expanded', 'true');
+                    }
+                };
+            });
+        }
+
+        function setupTestimonialCarousel() {
+            const track = document.getElementById('testimonials-track');
+            const cards = document.querySelectorAll('.testimonial-card');
+            const prev = document.querySelector('.testimonials-nav.prev');
+            const next = document.querySelector('.testimonials-nav.next');
+            const wrapper = document.querySelector('.testimonials-wrapper');
+
+            if (!track || cards.length === 0 || !prev || !next) return;
+
+            let currentIndex = 0;
+            let autoPlayInterval;
+
+            function updateCarousel() {
+                const cardWidth = cards[0].offsetWidth;
+                const gap = 30;
+                const offset = -currentIndex * (cardWidth + gap);
+                track.style.transform = `translateX(${offset}px)`;
+            }
+
+            function nextSlide() {
+                const visibleCount = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+                if (currentIndex < cards.length - visibleCount) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                const visibleCount = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = Math.max(0, cards.length - visibleCount);
+                }
+                updateCarousel();
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay();
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoPlay() {
+                if (autoPlayInterval) clearInterval(autoPlayInterval);
+            }
+
+            next.onclick = () => {
+                nextSlide();
+                startAutoPlay();
+            };
+
+            prev.onclick = () => {
+                prevSlide();
+                startAutoPlay();
+            };
+
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', stopAutoPlay);
+                wrapper.addEventListener('mouseleave', startAutoPlay);
+            }
+
+            window.addEventListener('resize', updateCarousel);
+
+            // Initial call
+            setTimeout(() => {
+                updateCarousel();
+                startAutoPlay();
+            }, 500);
+        }
+
+        // Privacy Modal
+        function setupPrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            const openBtn = document.getElementById('open-privacy-modal');
+            const closeBtn = modal?.querySelector('.modal-close');
+            const overlay = modal?.querySelector('.modal-overlay');
+
+            if (!modal) return;
+
+            if (openBtn) {
+                openBtn.addEventListener('click', () => {
+                    modal.classList.add('active');
+                    modal.setAttribute('aria-hidden', 'false');
+                });
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (overlay) overlay.addEventListener('click', closeModal);
+        }
 
         // Optimized scroll event listener
         let ticking = false;
@@ -2029,5 +3219,5 @@
     </script>
     <script src="js/app.js"></script>
 </body>
-</html>
 
+</html>

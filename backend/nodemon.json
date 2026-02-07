@@ -1,0 +1,11 @@
+{
+  "watch": ["server.js", "routes", "ai.js", "stripe.js", "usageStore.js"],
+  "ignore": [
+    "frontend/**",
+    "data/**",
+    "**/*.db",
+    "backend/backend/**"
+  ],
+  "ext": "js,json",
+  "delay": "500"
+}

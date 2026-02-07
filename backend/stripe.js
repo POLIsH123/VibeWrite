@@ -183,3 +183,21 @@ export {
     createPortalSession,
     getSubscriptionStatus
 };
+
+/**
+ * Retrieve a checkout session and expand related objects
+ * @param {string} sessionId
+ */
+async function getSession(sessionId) {
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId, {
+            expand: ['subscription', 'customer']
+        });
+        return { success: true, session };
+    } catch (error) {
+        console.error('Error retrieving session:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+export { getSession };
