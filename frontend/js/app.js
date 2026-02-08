@@ -10,8 +10,8 @@ let history = JSON.parse(localStorage.getItem('vibewrite_history') || '[]');
 let stats = JSON.parse(localStorage.getItem('vibewrite_stats') || '{"total":0,"vibes":{}}');
 
 const MAX_FREE_REWRITES = 7; // Free users get 7 rewrites per day
-// Backend API URL — default local backend port
-const API_URL = 'http://localhost:3000/api';
+// Backend API URL — use relative path for production/vercel compatibility
+const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
 
 const vibeEmojis = {
     funny: '😂', hype: '🔥', savage: '💀', cute: '💖', professional: '💼',
@@ -194,6 +194,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize new features settings
     if (document.getElementById('settings-name-input')) {
         document.getElementById('settings-name-input').value = userName || '';
+    }
+
+    // Attach explicit event listeners to "Open App" buttons for reliability on Vercel
+    const navOpenBtn = document.getElementById('nav-open-app');
+    const heroOpenBtn = document.getElementById('hero-open-app');
+
+    if (navOpenBtn) {
+        navOpenBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof openApp === 'function') openApp();
+        });
+    }
+
+    if (heroOpenBtn) {
+        heroOpenBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof openApp === 'function') openApp();
+        });
+    }
+
+    const backToLandingBtn = document.getElementById('back-to-landing');
+    if (backToLandingBtn) {
+        backToLandingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (typeof backToLanding === 'function') backToLanding();
+        });
     }
 });
 
