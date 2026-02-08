@@ -3024,6 +3024,7 @@
             setupSmoothScroll();
             setupPrivacyModal();
             setupMagneticCards();
+            setupStepDetails();
         });
 
         // Magnetic / Tilt effect for cards
@@ -3198,6 +3199,24 @@
 
             if (closeBtn) closeBtn.addEventListener('click', closeModal);
             if (overlay) overlay.addEventListener('click', closeModal);
+        }
+
+        // How It Works Step Details Toggle
+        function setupStepDetails() {
+            const btns = document.querySelectorAll('.step-details-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const expanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !expanded);
+
+                    // The next sibling element .step-details
+                    const details = btn.nextElementSibling;
+                    if (details && details.classList.contains('step-details')) {
+                        details.hidden = expanded;
+                        btn.textContent = expanded ? 'Learn more' : 'Show less';
+                    }
+                });
+            });
         }
 
         // Optimized scroll event listener
