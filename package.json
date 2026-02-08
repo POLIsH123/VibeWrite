@@ -4,9 +4,23 @@
   "description": "VibeWrite.ai - AI-powered text rewriting with personality",
   "type": "module",
   "scripts": {
-    "build": "cd backend && npm install",
-    "start": "cd backend && npm start",
-    "dev": "cd backend && npm run dev"
+    "build": "npm install --prefix backend",
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
+  },
+  "dependencies": {
+    "@xenova/transformers": "^2.17.2",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "openai": "^6.17.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "stripe": "^14.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   },
   "engines": {
     "node": ">=18.0.0"

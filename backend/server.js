@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 3000;
 // CORS configuration
 // CORS configuration: allow configured FRONTEND_URL or any localhost origin in development
 app.use(cors({
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
         // Allow non-browser requests (no origin)
         if (!origin) return callback(null, true);
 
@@ -86,8 +86,8 @@ app.post('/api/rewrite', async (req, res) => {
         console.log('Origin header:', req.headers.origin || '(no origin)');
         console.log('Request IP:', req.ip);
         console.log('Forwarded for:', req.headers['x-forwarded-for']);
-        console.log('Request headers:', Object.fromEntries(Object.entries(req.headers).slice(0,50)));
-        console.log('Request body preview:', JSON.stringify(req.body).slice(0,1000));
+        console.log('Request headers:', Object.fromEntries(Object.entries(req.headers).slice(0, 50)));
+        console.log('Request body preview:', JSON.stringify(req.body).slice(0, 1000));
 
         const { text, vibe } = req.body;
 
@@ -114,7 +114,7 @@ app.post('/api/rewrite', async (req, res) => {
 
         // If client has pro cookie, skip limit
         const cookies = req.headers.cookie || '';
-        const isProCookie = cookies.split(';').map(s=>s.trim()).includes('vibewrite_pro=1');
+        const isProCookie = cookies.split(';').map(s => s.trim()).includes('vibewrite_pro=1');
         if (!isProCookie) {
             // Enforce 7/day free limit per client IP
             const clientKey = req.headers['x-forwarded-for'] || req.ip || req.connection?.remoteAddress || 'unknown';
@@ -254,15 +254,6 @@ if (process.env.NODE_ENV !== 'production') {
         }
     });
 }
-
-// Serve frontend static files (CSS, JS, etc.)
-app.use(express.static(join(__dirname, '..', 'frontend')));
-
-// Serve index.html for all non-API routes (SPA fallback)
-app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
-    res.sendFile(join(__dirname, '..', 'frontend', 'index.html'));
-});
 
 // 404 handler
 app.use((req, res) => {
