@@ -1,6 +1,8 @@
 // ===========================
 // Global State
 // ===========================
+import { Analytics } from "@vercel/analytics/next"
+
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
 let isPro = (localStorage.getItem('vibewrite_pro') === '1') || (localStorage.getItem('vibewrite_pro') === 'true') || (typeof document !== 'undefined' && document.cookie && document.cookie.includes('vibewrite_pro=1'));
