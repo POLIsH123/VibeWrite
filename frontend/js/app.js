@@ -13,6 +13,21 @@ const MAX_FREE_REWRITES = 7; // Free users get 7 rewrites per day
 // Backend API URL — use relative path for production/vercel compatibility
 const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
 
+console.log('🚀 VibeWrite.js Loading...');
+console.log('📍 API_URL:', API_URL);
+
+// Make functions global early for HTML onclick attributes
+window.openApp = openApp;
+window.backToLanding = backToLanding;
+window.scrollToSupport = scrollToSupport;
+window.quickRewrite = quickRewrite;
+window.selectVibe = selectVibe;
+window.setPro = setPro;
+window.logout = logout;
+window.toggleSidebar = toggleSidebar;
+window.toggleAllVibes = toggleAllVibes;
+window.generateRewrite = generateRewrite;
+
 const vibeEmojis = {
     funny: '😂', hype: '🔥', savage: '💀', cute: '💖', professional: '💼',
     poetic: '📜', sarcastic: '🙄', dramatic: '🎭', romantic: '💕', motivational: '💪',
@@ -156,72 +171,92 @@ async function checkPostCheckout() {
 // ===========================
 // Initialization
 // ===========================
-// ===========================
 // OP Initialization - Ultra Modern
 // ===========================
-document.addEventListener('DOMContentLoaded', () => {
-    checkAndResetDailyUsage();
-    updateUI();
-    updateStats();
-    renderRecentHistory();
+function initVibeWrite() {
+    console.log('🎬 Initializing VibeWrite App...');
+    try {
+        checkAndResetDailyUsage();
+        updateUI();
+        updateStats();
+        renderRecentHistory();
 
-    const textarea = document.getElementById('input-text');
-    if (textarea) {
-        textarea.addEventListener('input', handleInput);
+        const textarea = document.getElementById('input-text');
+        if (textarea) {
+            textarea.addEventListener('input', handleInput);
+        }
+
+        // OP Enhancements
+        initializeOPEffects();
+        setupIntersectionObserver();
+        setupParallaxEffects();
+        setupAdvancedAnimations();
+
+        // Mark locked vibes in UI
+        markLockedVibes();
+
+        // Setup pricing buttons
+        if (typeof setupPricing === 'function') setupPricing();
+
+        // Bind sidebar upgrade button
+        const sideUpgrade = document.querySelector('.upgrade-btn');
+        if (sideUpgrade) {
+            sideUpgrade.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleSubscribe();
+            });
+        }
+
+        // Check for post-checkout
+        if (typeof checkPostCheckout === 'function') checkPostCheckout();
+
+        // Initialize settings
+        if (document.getElementById('settings-name-input')) {
+            document.getElementById('settings-name-input').value = userName || '';
+        }
+
+        // Attach explicit event listeners to "Open App" buttons for reliability
+        const navOpenBtn = document.getElementById('nav-open-app');
+        const heroOpenBtn = document.getElementById('hero-open-app');
+
+        console.log('🔍 Button check:', { navOpenBtn: !!navOpenBtn, heroOpenBtn: !!heroOpenBtn });
+
+        if (navOpenBtn) {
+            navOpenBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('👆 Nav Open App clicked');
+                openApp();
+            });
+        }
+
+        if (heroOpenBtn) {
+            heroOpenBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('👆 Hero Open App clicked');
+                openApp();
+            });
+        }
+
+        const backToLandingBtn = document.getElementById('back-to-landing');
+        if (backToLandingBtn) {
+            backToLandingBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                backToLanding();
+            });
+        }
+
+        console.log('✅ VibeWrite Init Complete.');
+    } catch (err) {
+        console.error('❌ VibeWrite Init Failed:', err);
     }
+}
 
-    // OP Enhancements
-    initializeOPEffects();
-    setupIntersectionObserver();
-    setupParallaxEffects();
-    setupAdvancedAnimations();
-
-    // Mark locked vibes in UI
-    markLockedVibes();
-    // Setup pricing buttons
-    if (typeof setupPricing === 'function') setupPricing();
-    // Bind sidebar upgrade button (prevents default anchor navigation)
-    const sideUpgrade = document.querySelector('.upgrade-btn');
-    if (sideUpgrade) {
-        sideUpgrade.addEventListener('click', (e) => {
-            e.preventDefault();
-            handleSubscribe();
-        });
-    }
-    // Check for post-checkout redirect and confirm session
-    if (typeof checkPostCheckout === 'function') checkPostCheckout();
-
-    // Initialize new features settings
-    if (document.getElementById('settings-name-input')) {
-        document.getElementById('settings-name-input').value = userName || '';
-    }
-
-    // Attach explicit event listeners to "Open App" buttons for reliability on Vercel
-    const navOpenBtn = document.getElementById('nav-open-app');
-    const heroOpenBtn = document.getElementById('hero-open-app');
-
-    if (navOpenBtn) {
-        navOpenBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (typeof openApp === 'function') openApp();
-        });
-    }
-
-    if (heroOpenBtn) {
-        heroOpenBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (typeof openApp === 'function') openApp();
-        });
-    }
-
-    const backToLandingBtn = document.getElementById('back-to-landing');
-    if (backToLandingBtn) {
-        backToLandingBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (typeof backToLanding === 'function') backToLanding();
-        });
-    }
-});
+// Run init
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVibeWrite);
+} else {
+    initVibeWrite();
+}
 
 // Konami Code Easter Egg - INSANE KONAMI CODE - MAXIMUM CHAOS EDITION 🔥🔥🔥
 (function () {
@@ -2884,7 +2919,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.toggleAllVibes = toggleAllVibes;
     window.generateRewrite = generateRewrite;
 
-});
+}); // End Enhanced interactive UI
 
 // ===========================
 // SECRET CHEAT CODE 🤫
