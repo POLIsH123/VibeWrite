@@ -3043,8 +3043,8 @@
                     const centerY = rect.height / 2;
 
                     // Calculate tilt (you can tweak the divisor for more/less tilt)
-                    const rotateX = (y - centerY) / 200; // tilt up/down
-                    const rotateY = (centerX - x) / 200; // tilt left/right
+                    const rotateX = (y - centerY) / 150; // tilt up/down
+                    const rotateY = (centerX - x) / 150; // tilt left/right
 
                     // Apply rotation and scale for "magnetic" effect (subtler)
                     card.style.transform = `perspective(1000px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
