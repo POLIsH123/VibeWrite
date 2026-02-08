@@ -2846,6 +2846,18 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Previous button:', prevBtn);
         console.log('Initial index:', idx);
     }
+    // Make functions global for HTML onclick attributes
+    window.openApp = openApp;
+    window.backToLanding = backToLanding;
+    window.scrollToSupport = scrollToSupport;
+    window.quickRewrite = quickRewrite;
+    window.selectVibe = selectVibe;
+    window.setPro = setPro;
+    window.logout = logout;
+    window.toggleSidebar = toggleSidebar;
+    window.toggleAllVibes = toggleAllVibes;
+    window.generateRewrite = generateRewrite;
+
 });
 
 // ===========================
