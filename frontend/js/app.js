@@ -16,17 +16,8 @@ const API_URL = window.location.origin.includes('localhost') ? 'http://localhost
 console.log('🚀 VibeWrite.js Loading...');
 console.log('📍 API_URL:', API_URL);
 
-// Make functions global early for HTML onclick attributes
-window.openApp = openApp;
-window.backToLanding = backToLanding;
-window.scrollToSupport = scrollToSupport;
-window.quickRewrite = quickRewrite;
-window.selectVibe = selectVibe;
-window.setPro = setPro;
-window.logout = logout;
-window.toggleSidebar = toggleSidebar;
-window.toggleAllVibes = toggleAllVibes;
-window.generateRewrite = generateRewrite;
+// Note: Global functions are assigned to window inside DOMContentLoaded at the bottom of the file
+// to ensure they are fully defined before exposure.
 
 const vibeEmojis = {
     funny: '😂', hype: '🔥', savage: '💀', cute: '💖', professional: '💼',
@@ -1161,6 +1152,27 @@ function toggleSidebar() {
             sidebar.style.animation = '';
         }, 400);
     }
+}
+
+function logout() {
+    localStorage.removeItem('vibewrite_username');
+    localStorage.removeItem('vibewrite_pro');
+    userName = null;
+    isPro = false;
+    backToLanding();
+    setTimeout(() => {
+        location.reload();
+    }, 500);
+}
+
+function setPro(val) {
+    console.log('💎 Setting Pro Status:', val);
+    isPro = val;
+    localStorage.setItem('vibewrite_pro', val ? '1' : '0');
+    // Also set a cookie for backend verification
+    document.cookie = `vibewrite_pro=${val ? '1' : '0'}; Path=/; Max-Age=31536000; SameSite=Lax`;
+    updateUI();
+    markLockedVibes(); // Unlock the premium ones
 }
 
 // ===========================
