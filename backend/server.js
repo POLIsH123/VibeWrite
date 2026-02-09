@@ -35,11 +35,17 @@ app.use(cors({
         if (!origin) return callback(null, true);
 
         const allowedFrontend = process.env.FRONTEND_URL;
+
+        // Allow exact match
         if (allowedFrontend && origin === allowedFrontend) return callback(null, true);
+
+        // Allow any Vercel deployment
+        if (origin.endsWith('.vercel.app')) return callback(null, true);
 
         // Allow any localhost origin (including different ports) during development
         if (/^https?:\/\/localhost(:\d+)?$/.test(origin)) return callback(null, true);
 
+        console.error('❌ CORS REJECTED:', origin);
         return callback(new Error('CORS policy: Origin not allowed'));
     },
     credentials: true
