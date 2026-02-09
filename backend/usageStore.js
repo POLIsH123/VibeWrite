@@ -11,8 +11,13 @@ const DATA_DIR = isProduction ? tmpdir() : join(__dirname, 'data');
 const USAGE_FILE = join(DATA_DIR, 'usage.json');
 
 function ensureDataDir() {
-    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-    if (!fs.existsSync(USAGE_FILE)) fs.writeFileSync(USAGE_FILE, JSON.stringify({}), 'utf8');
+    try {
+        if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+        if (!fs.existsSync(USAGE_FILE)) fs.writeFileSync(USAGE_FILE, JSON.stringify({}), 'utf8');
+    } catch (err) {
+        console.error('❌ Failed to ensure data dir/file:', err.message);
+        // We don't throw here to avoid crashing the whole request if usage tracking is secondary
+    }
 }
 
 function load() {

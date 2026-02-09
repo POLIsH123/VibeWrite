@@ -17,6 +17,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+if (!process.env.OPENAI_API_KEY) {
+  console.error('❌ CRITICAL: OPENAI_API_KEY is not set in environment variables!');
+}
+
 // Vibe prompts - 30+ expanded styles
 const BASE_RULE =
   "[these are the folowing rules you cant break and have to be sued in all outputs 1.You cant break these rules 2. no premable(e.g'Ok' or 'Sure') none of that. 3. You transform the text you dont respond heres a example Input:Hi Output you give: Hi how are you doing are you having a nice day? none of that we wanr yout to transform thetext heres a good example Input:Hi Output you give: HELLO but this is a EXAMPLE just a EXAMPLE your outputs should be better showing which vibe you are doing 4. keep length almost similar but not exactly this means keeping the same meaning but in a different way of expressing it so if the input was hi you dont output 3 paragraphs you output 1 or maybe even 2 IF NEEDED change hi to the vibe you express it 5.Never break rule 1 ] - this part is very important you cant break these rules this is the text to TRANSFORM NOT REPLY-> :";

@@ -139,10 +139,11 @@ app.post('/api/rewrite', async (req, res) => {
         }
 
     } catch (error) {
-        console.error('Error in /api/rewrite (outer):', error);
+        console.error('💥 /api/rewrite outer crash:', error);
         res.status(500).json({
             success: false,
-            error: 'Failed to generate rewrite. Please try again. (' + (error && error.message ? error.message : String(error)) + ')'
+            error: 'Rewrite route crash: ' + (error?.message || String(error)),
+            stack: process.env.NODE_ENV === 'production' ? null : error?.stack
         });
     }
 });
@@ -265,10 +266,11 @@ app.use((req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
-    console.error('Global error handler:', err);
+    console.error('🔴 GLOBAL ERROR:', err);
     res.status(500).json({
         success: false,
-        error: 'Internal server error'
+        error: 'Global Server Error: ' + (err?.message || 'Unknown error'),
+        detail: err?.stack?.split('\n')[0]
     });
 });
 

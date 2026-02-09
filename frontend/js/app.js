@@ -1,5 +1,6 @@
-import { inject } from "@vercel/analytics"
-inject();
+// ===========================
+// Global State
+// ===========================
 
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
