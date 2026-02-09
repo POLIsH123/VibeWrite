@@ -1,12 +1,13 @@
 import fs from 'fs';
-import { join } from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { dirname, join } from 'path';
+import { tmpdir } from 'os';
 
 // Use the module's directory so the data path is consistent regardless of CWD
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const DATA_DIR = join(__dirname, 'data');
+const isProduction = process.env.NODE_ENV === 'production';
+const DATA_DIR = isProduction ? tmpdir() : join(__dirname, 'data');
 const USAGE_FILE = join(DATA_DIR, 'usage.json');
 
 function ensureDataDir() {
@@ -31,7 +32,7 @@ function save(data) {
 
 function todayKey() {
     const d = new Date();
-    return d.toISOString().slice(0,10); // YYYY-MM-DD UTC-ish
+    return d.toISOString().slice(0, 10); // YYYY-MM-DD UTC-ish
 }
 
 /**
@@ -124,7 +125,7 @@ async function awaitPgIncrement(key, limit) {
         return { allowed: count <= limit, remaining: Math.max(0, limit - count), count };
     } catch (err) {
         console.error('Postgres usage increment failed:', err.message);
-        try { await client.end(); } catch (_) {}
+        try { await client.end(); } catch (_) { }
         return fileIncrementAndCheck(key, limit);
     }
 }
@@ -140,7 +141,7 @@ async function getPgUsage(key) {
         return { count };
     } catch (err) {
         console.error('Postgres getUsage failed:', err.message);
-        try { await client.end(); } catch (_) {}
+        try { await client.end(); } catch (_) { }
         return { count: 0 };
     }
 }

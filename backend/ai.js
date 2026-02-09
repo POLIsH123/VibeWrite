@@ -259,10 +259,10 @@ export async function rewriteText(req, res) {
     });
 
   } catch (err) {
-    console.error('💥 API error:', err);
+    console.error('💥 API error (outer):', err);
     return res.status(500).json({
       success: false,
-      error: 'Internal server error'
+      error: 'Internal server error: ' + (err.message || String(err))
     });
   }
 }

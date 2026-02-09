@@ -1,7 +1,5 @@
-// ===========================
-// Global State
-// ===========================
-import { Analytics } from "@vercel/analytics/next"
+import { inject } from "@vercel/analytics"
+inject();
 
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
