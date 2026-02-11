@@ -1793,7 +1793,6 @@
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#examples">Examples</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
                 </ul>
                 <button id="nav-open-app" class="plan-button primary" style="width: auto; padding: 15px 30px;">
                     Open App
@@ -1958,7 +1957,7 @@
                             Is VibeWrite free to use?
                         </button>
                         <div class="faq-answer">
-                            Yes! We offer a generous free tier for individuals to explore and improve their writing.
+                            Yes! VibeWrite is completely free to use with unlimited rewrites and all vibes available.
                         </div>
                     </div>
                     <div class="faq-item">
@@ -2167,29 +2166,15 @@
                     <div class="user-avatar" id="sidebar-avatar">U</div>
                     <div class="user-info">
                         <div class="user-name" id="sidebar-name">User</div>
-                        <div class="user-plan">Free Version</div>
+                        <div class="user-plan">Free</div>
                     </div>
                 </div>
-                <!-- Payments at the end - Upgrade button -->
-                <button class="nav-item upgrade-btn" type="button"
-                    style="margin-top: 10px; background: linear-gradient(135deg,#6366f1,#a855f7); color: #fff; border-radius: 10px; font-size: 13px; padding: 10px 12px; display:inline-flex;align-items:center;gap:8px;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        style="color:rgba(255,255,255,0.9)">
-                        <path d="M12 2v6" />
-                        <path d="M12 22v-6" />
-                        <path d="M2 12h6" />
-                        <path d="M22 12h-6" />
-                    </svg>
-                    Upgrade
-                </button>
                 <button class="logout-btn" onclick="logout()">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                         <polyline points="16 17 21 12 16 7" />
                         <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                    Logout
-                </button>
+                </div>
             </div>
         </aside>
 
@@ -2270,14 +2255,14 @@
                                 <div class="trending-name">Funny</div>
                                 <div class="trending-stat">Hot</div>
                             </div>
-                            <div class="trending-card" onclick="quickRewrite('professional')">
-                                <div class="trending-icon">💼</div>
-                                <div class="trending-name">Professional</div>
-                                <div class="trending-stat">Popular</div>
+                            <div class="trending-card" onclick="quickRewrite('cute')">
+                                <div class="trending-icon">💖</div>
+                                <div class="trending-name">Cute</div>
+                                <div class="trending-stat">Sweet</div>
                             </div>
-                            <div class="trending-card" onclick="quickRewrite('savage')">
-                                <div class="trending-icon">💀</div>
-                                <div class="trending-name">Savage</div>
+                            <div class="trending-card" onclick="quickRewrite('sarcastic')">
+                                <div class="trending-icon">🙄</div>
+                                <div class="trending-name">Sarcastic</div>
                                 <div class="trending-stat">Fire</div>
                             </div>
                             <div class="trending-card" onclick="quickRewrite('romantic')">
@@ -2318,37 +2303,25 @@
                                 <div class="vibe-icon">😂</div>
                                 <div class="vibe-label">Funny</div>
                             </div>
-                            <div class="vibe-card" data-vibe="hype" onclick="selectVibe('hype')">
-                                <div class="vibe-icon">🔥</div>
-                                <div class="vibe-label">Hype</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="savage" onclick="selectVibe('savage')">
-                                <div class="vibe-icon">💀</div>
-                                <div class="vibe-label">Savage</div>
-                            </div>
                             <div class="vibe-card" data-vibe="cute" onclick="selectVibe('cute')">
                                 <div class="vibe-icon">💖</div>
                                 <div class="vibe-label">Cute</div>
                             </div>
-                            <div class="vibe-card" data-vibe="professional" onclick="selectVibe('professional')">
-                                <div class="vibe-icon">💼</div>
-                                <div class="vibe-label">Professional</div>
+                            <div class="vibe-card" data-vibe="sarcastic" onclick="selectVibe('sarcastic')">
+                                <div class="vibe-icon">🙄</div>
+                                <div class="vibe-label">Sarcastic</div>
                             </div>
-                            <div class="vibe-card" data-vibe="poetic" onclick="selectVibe('poetic')">
-                                <div class="vibe-icon">📜</div>
-                                <div class="vibe-label">Poetic</div>
+                            <div class="vibe-card" data-vibe="romantic" onclick="selectVibe('romantic')">
+                                <div class="vibe-icon">💕</div>
+                                <div class="vibe-label">Romantic</div>
                             </div>
-                            <div class="vibe-card vibe-bundle-pro" data-vibe="businessPro"
-                                onclick="selectVibe('businessPro')">
-                                <div class="vibe-icon">👔</div>
-                                <div class="vibe-label">Business Pro</div>
-
+                            <div class="vibe-card" data-vibe="motivational" onclick="selectVibe('motivational')">
+                                <div class="vibe-icon">💪</div>
+                                <div class="vibe-label">Motivational</div>
                             </div>
-                            <div class="vibe-card vibe-bundle-genz" data-vibe="genZTalk"
-                                onclick="selectVibe('genZTalk')">
-                                <div class="vibe-icon">🧢</div>
-                                <div class="vibe-label">Gen-Z Talk</div>
-
+                            <div class="vibe-card" data-vibe="philosophical" onclick="selectVibe('philosophical')">
+                                <div class="vibe-icon">🤔</div>
+                                <div class="vibe-label">Philosophical</div>
                             </div>
                         </div>
 
@@ -2364,65 +2337,21 @@
 
                         <div id="extended-vibes" class="vibe-grid"
                             style="display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                            <div class="vibe-card" data-vibe="sarcastic" onclick="selectVibe('sarcastic')">
-                                <div class="vibe-icon">🙄</div>
-                                <div class="vibe-label">Sarcastic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="dramatic" onclick="selectVibe('dramatic')">
-                                <div class="vibe-icon">🎭</div>
-                                <div class="vibe-label">Dramatic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="romantic" onclick="selectVibe('romantic')">
-                                <div class="vibe-icon">💕</div>
-                                <div class="vibe-label">Romantic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="motivational" onclick="selectVibe('motivational')">
-                                <div class="vibe-icon">💪</div>
-                                <div class="vibe-label">Motivational</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="mysterious" onclick="selectVibe('mysterious')">
-                                <div class="vibe-icon">🕵️</div>
-                                <div class="vibe-label">Mysterious</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="zen" onclick="selectVibe('zen')">
-                                <div class="vibe-icon">🧘</div>
-                                <div class="vibe-label">Zen</div>
-                            </div>
                             <div class="vibe-card" data-vibe="nostalgic" onclick="selectVibe('nostalgic')">
                                 <div class="vibe-icon">🕰️</div>
                                 <div class="vibe-label">Nostalgic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="rebellious" onclick="selectVibe('rebellious')">
-                                <div class="vibe-icon">🤘</div>
-                                <div class="vibe-label">Rebellious</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="whimsical" onclick="selectVibe('whimsical')">
-                                <div class="vibe-icon">✨</div>
-                                <div class="vibe-label">Whimsical</div>
                             </div>
                             <div class="vibe-card" data-vibe="scientific" onclick="selectVibe('scientific')">
                                 <div class="vibe-icon">🔬</div>
                                 <div class="vibe-label">Scientific</div>
                             </div>
-                            <div class="vibe-card" data-vibe="diplomatic" onclick="selectVibe('diplomatic')">
-                                <div class="vibe-icon">🤝</div>
-                                <div class="vibe-label">Diplomatic</div>
-                            </div>
                             <div class="vibe-card" data-vibe="conspiracy" onclick="selectVibe('conspiracy')">
                                 <div class="vibe-icon">👁️</div>
                                 <div class="vibe-label">Conspiracy</div>
                             </div>
-                            <div class="vibe-card" data-vibe="chaotic" onclick="selectVibe('chaotic')">
-                                <div class="vibe-icon">🌀</div>
-                                <div class="vibe-label">Chaotic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="aristocratic" onclick="selectVibe('aristocratic')">
-                                <div class="vibe-icon">👑</div>
-                                <div class="vibe-label">Aristocratic</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="streetwise" onclick="selectVibe('streetwise')">
-                                <div class="vibe-icon">🏙️</div>
-                                <div class="vibe-label">Streetwise</div>
+                            <div class="vibe-card" data-vibe="zen" onclick="selectVibe('zen')">
+                                <div class="vibe-icon">🧘</div>
+                                <div class="vibe-label">Zen</div>
                             </div>
                             <div class="vibe-card" data-vibe="vintage" onclick="selectVibe('vintage')">
                                 <div class="vibe-icon">📻</div>
@@ -2432,29 +2361,9 @@
                                 <div class="vibe-icon">🤖</div>
                                 <div class="vibe-label">Cyberpunk</div>
                             </div>
-                            <div class="vibe-card" data-vibe="horror" onclick="selectVibe('horror')">
-                                <div class="vibe-icon">👻</div>
-                                <div class="vibe-label">Horror</div>
-                            </div>
                             <div class="vibe-card" data-vibe="superhero" onclick="selectVibe('superhero')">
                                 <div class="vibe-icon">🦸</div>
                                 <div class="vibe-label">Superhero</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="pirate" onclick="selectVibe('pirate')">
-                                <div class="vibe-icon">🏴‍☠️</div>
-                                <div class="vibe-label">Pirate</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="cowboy" onclick="selectVibe('cowboy')">
-                                <div class="vibe-icon">🤠</div>
-                                <div class="vibe-label">Cowboy</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="alien" onclick="selectVibe('alien')">
-                                <div class="vibe-icon">👽</div>
-                                <div class="vibe-label">Alien</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
-                                <div class="vibe-icon">🤖</div>
-                                <div class="vibe-label">Robot</div>
                             </div>
                             <div class="vibe-card" data-vibe="childlike" onclick="selectVibe('childlike')">
                                 <div class="vibe-icon">🧒</div>
@@ -2468,48 +2377,13 @@
                                 <div class="vibe-icon">🌟</div>
                                 <div class="vibe-label">Celebrity</div>
                             </div>
-                            <div class="vibe-card" data-vibe="villain" onclick="selectVibe('villain')">
-                                <div class="vibe-icon">🦹</div>
-                                <div class="vibe-label">Villain</div>
-                            </div>
-                            <div class="vibe-card" data-vibe="superheroVillain"
-                                onclick="selectVibe('superheroVillain')">
-                                <div class="vibe-icon">💀</div>
-                                <div class="vibe-label">Supervillain</div>
+                            <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
+                                <div class="vibe-icon">🤖</div>
+                                <div class="vibe-label">Robot</div>
                             </div>
                         </div>
 
-                        <div class="vibe-designer-section"
-                            style="margin-top: 40px; padding: 25px; background: rgba(99, 102, 241, 0.1); border: 1px dashed rgba(99, 102, 241, 0.4); border-radius: 20px; text-align: center;">
-                            <div style="font-size: 24px; margin-bottom: 10px;">🎨</div>
-                            <h3>Vibe Designer</h3>
-                            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">Create your own custom
-                                rewriting style</p>
-
-                        </div>
-
-                        <!-- Pricing Section -->
-                        <div class="pricing-section" style="margin-top:28px;">
-                            <h2 style="text-align:center;margin-bottom:12px;">Upgrade for unlimited rewrites</h2>
-                            <div class="pricing-grid">
-                                <div class="pricing-card">
-                                    <div class="pricing-badge">Free</div>
-                                    <div class="pricing-price">7 / day</div>
-                                    <div class="pricing-features">Limited daily rewrites · Try all free vibes</div>
-                                    <div style="margin-top:12px;"><button class="secondary-btn" disabled>Current
-                                            Plan</button></div>
-                                </div>
-                                <div class="pricing-card pricing-pro">
-                                    <div class="pricing-badge">Pro</div>
-                                    <div class="pricing-price">$4.99 / month</div>
-                                    <div class="pricing-features">Unlimited rewrites · All vibes unlocked · Priority
-                                        support</div>
-                                    <div style="margin-top:12px;"><button id="subscribe-pro-btn"
-                                            class="primary-btn">Subscribe</button></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- Pricing removed - all features are now free -->
 
                     <div class="loading" id="loading" style="display: none;">
                         <div class="spinner"></div>
@@ -2750,18 +2624,6 @@
             <p>What should we call you?</p>
             <input type="text" id="user-name-input" placeholder="Enter your name" maxlength="20">
             <button class="primary-btn" onclick="saveName()">Get started</button>
-        </div>
-    </div>
-
-    <!-- Upgrade and Success modals removed (Everything is free) -->
-
-    <div id="limit-modal" class="modal">
-        <div class="modal-box">
-            <button class="modal-close" onclick="closeLimitModal()">×</button>
-            <h2>Daily limit reached</h2>
-            <p>You've used all 5 free rewrites today. Upgrade to Pro for unlimited access!</p>
-            <button class="primary-btn" onclick="showUpgradeModal(); closeLimitModal();">Upgrade to Pro</button>
-            <button class="secondary-btn" onclick="closeLimitModal()">Try again tomorrow</button>
         </div>
     </div>
 

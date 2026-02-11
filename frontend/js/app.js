@@ -39,98 +39,17 @@ const vibeEmojis = {
     genZTalk: '🧢'
 };
 
-// Vibes locked for non-pro users
-const LOCKED_VIBES = [
-    'hype', 'savage', 'professional', 'poetic', 'businessPro', 'genZTalk', 'dramatic', 'mysterious',
-    'rebellious', 'whimsical', 'diplomatic', 'chaotic', 'aristocratic', 'streetwise', 'horror',
-    'pirate', 'cowboy', 'alien', 'robot', 'villain', 'superheroVillain'
-];
+// All vibes are now free - no locked vibes
+const LOCKED_VIBES = [];
 
 function markLockedVibes() {
-    LOCKED_VIBES.forEach(v => {
-        document.querySelectorAll(`[data-vibe="${v}"]`).forEach(card => {
-            card.classList.add('locked-vibe');
-            card.dataset.locked = 'true';
-            if (!card.querySelector('.vibe-lock')) {
-                const lock = document.createElement('div');
-                lock.className = 'vibe-lock';
-                lock.setAttribute('aria-hidden', 'true');
-                lock.innerHTML = '<span>🔒</span>';
-                card.appendChild(lock);
-            }
-        });
-    });
+    // No locked vibes anymore - all vibes are free
+    return;
 }
 
-function showSubscribeModal(vibe) {
-    // If modal exists, focus it
-    if (document.getElementById('subscribe-modal')) return;
+// Support modal removed - no payment system
 
-    const modal = document.createElement('div');
-    modal.id = 'subscribe-modal';
-    modal.className = 'modal-overlay';
-    modal.innerHTML = `
-        <div class="modal-card">
-            <h3>Subscribe to unlock premium vibes</h3>
-            <p>Upgrade to access the "${vibe.charAt(0).toUpperCase() + vibe.slice(1)}" vibe and unlimited rewrites.</p>
-            <div class="modal-actions">
-                <button id="subscribe-now" class="primary-btn">Subscribe</button>
-                <button id="subscribe-cancel" class="secondary-btn">Cancel</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    document.getElementById('subscribe-cancel').addEventListener('click', () => modal.remove());
-    document.getElementById('subscribe-now').addEventListener('click', async () => {
-        try {
-            const res = await fetch(`${API_URL}/create-checkout-session`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ vibe })
-            });
-            const data = await res.json();
-            if (data && data.url) {
-                window.location.href = data.url;
-            } else {
-                alert('Unable to start checkout.');
-            }
-        } catch (e) {
-            console.error('checkout error', e);
-            alert('Checkout failed.');
-        }
-    });
-}
-
-// Pricing / Checkout helpers
-function setupPricing() {
-    const btn = document.getElementById('subscribe-pro-btn');
-    if (btn) {
-        btn.addEventListener('click', async () => {
-            try {
-                btn.disabled = true;
-                btn.textContent = 'Redirecting...';
-                const res = await fetch(`${API_URL}/create-checkout-session`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userName: userName || 'anonymous' })
-                });
-                const data = await res.json();
-                if (data && data.url) {
-                    window.location.href = data.url;
-                } else {
-                    alert('Failed to start checkout.');
-                    btn.disabled = false;
-                    btn.textContent = 'Subscribe';
-                }
-            } catch (e) {
-                console.error('checkout error', e);
-                alert('Checkout failed.');
-                btn.disabled = false;
-                btn.textContent = 'Subscribe';
-            }
-        });
-    }
-}
+// Support button removed - no payment system
 
 // After returning from Stripe Checkout, confirm session and set Pro locally
 async function checkPostCheckout() {
@@ -187,17 +106,9 @@ function initVibeWrite() {
         // Mark locked vibes in UI
         markLockedVibes();
 
-        // Setup pricing buttons
-        if (typeof setupPricing === 'function') setupPricing();
+        // Support button removed - no payment system
 
-        // Bind sidebar upgrade button
-        const sideUpgrade = document.querySelector('.upgrade-btn');
-        if (sideUpgrade) {
-            sideUpgrade.addEventListener('click', (e) => {
-                e.preventDefault();
-                handleSubscribe();
-            });
-        }
+        // Support button removed - no payment system
 
         // Check for post-checkout
         if (typeof checkPostCheckout === 'function') checkPostCheckout();

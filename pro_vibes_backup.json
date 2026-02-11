@@ -1,0 +1,50 @@
+{
+  "pro_vibes": [
+    "hype", "savage", "professional", "poetic", "businessPro", "genZTalk", "dramatic", "mysterious",
+    "rebellious", "whimsical", "diplomatic", "chaotic", "aristocratic", "streetwise", "horror",
+    "pirate", "cowboy", "alien", "robot", "villain", "superheroVillain"
+  ],
+  "vibe_emojis": {
+    "funny": "😂", "hype": "🔥", "savage": "💀", "cute": "💖", "professional": "💼",
+    "poetic": "📜", "sarcastic": "🙄", "dramatic": "🎭", "romantic": "💕", "motivational": "💪",
+    "mysterious": "🕵️", "zen": "🧘", "nostalgic": "🕰️", "rebellious": "🤘", "whimsical": "✨",
+    "scientific": "🔬", "diplomatic": "🤝", "conspiracy": "👁️", "chaotic": "🌀", "aristocratic": "👑",
+    "streetwise": "🏙️", "vintage": "📻", "cyberpunk": "🤖", "horror": "👻", "superhero": "🦸",
+    "pirate": "🏴‍☠️",
+    "cowboy": "🤠",
+    "alien": "👽",
+    "robot": "🤖",
+    "childlike": "🧒",
+    "elderly": "🧓",
+    "celebrity": "🌟",
+    "villain": "🦹",
+    "superheroVillain": "💀",
+    "businessPro": "👔",
+    "genZTalk": "🧢"
+  },
+  "pro_vibe_prompts": {
+    "hype": "Inject pure adrenaline. Short punchy sentences. CAPS for emphasis peaks. Paint victory like it's already happening. Channel championship energy, pregame intensity, breakthrough moments. Make them FEEL invincible. Maintain core meaning.And never break these rules ->",
+    "savage": "Change this text to be savage and dont roast just make it savage",
+    "professional": "Executive precision. Clear hierarchies, strategic language, outcome-focused. Remove all casual elements. This commands rooms and closes deals. Confident without arrogance. Industry-standard polish. Preserve meaning.",
+    "poetic": "Make this poetic and beautiful. Transform with lyrical language, vivid imagery, and flowing rhythm. Preserve core meaning while elevating to artful expression NEVER DO ONE WORD .",
+    "businessPro": "Transform into high-stakes corporate communication. Strategic framing and polished executive tone. Preserve core meaning.",
+    "genZTalk": "Rewrite using modern Gen-Z slang, internet culture terms, and casual lowercase vibe while preserving original intent.",
+    "dramatic": "Maximum dramatic flair. Shakespearean intensity in every word. Grand gestures, heightened emotion, theatrical delivery. Same meaning, amplified passion. No unnecessary story elements.",
+    "mysterious": "Shroud in shadow and suggestion. What's unsaid pulls harder than what's revealed. Questions linger. Implication over explanation. Readers lean in, wanting more. Intrigue builds naturally. Infinite depth.",
+    "rebellious": "Transform into rebellious energy. Break conventions, challenge norms, defiant spirit. Keep the core meaning intact.",
+    "whimsical": "Transform with whimsical imagination. Let creativity soar, physics optional, everything magical and possible. Keep core meaning intact.",
+    "diplomatic": "Navigate sensitive terrain with surgical tact. Acknowledge all perspectives. Strategic ambiguity where needed. Firm positions wrapped in velvet. Build bridges without sacrificing core message.",
+    "chaotic": "Make this beautifully chaotic. Unexpected elements, unconventional word choices, delightful unpredictability. Transform -> text while keeping same meaning.",
+    "aristocratic": "Elevate to refined sophistication. Vocabulary rich and deliberate. Measured cadence of inherited culture. Old-world elegance. Same message, upper echelon.",
+    "streetwise": "Real talk, no performance. Survival-earned wisdom. Hood vocabulary meets sharp insight. Authentic grit and practical truth. No sugarcoating.",
+    "horror": "Strictly rewrite in horror style. Embed creeping dread and subtle unease while preserving exact original meaning and facts. Do not create a story or add elements.",
+    "pirate": "Nautical swagger and treasure-lust. Salt-spray adventure in every word. Lawless freedom on open seas. Same message, black flag flying.",
+    "cowboy": "Frontier wisdom with measured drawl. Sunset-lit honor code. Actions over words. Same message, saddle-worn.",
+    "alien": "Process through fundamentally different logic. Human concepts translated imperfectly. Observer perspective. Same data, non-human frame.",
+    "robot": "Emotion subroutines offline. Pure logic execution. Binary clarity. Efficiency maximized. Same information, zero organic processing.",
+    "villain": "Embody elegant malevolence and intellectual superiority. Absolute dominance in tone while keeping the same message.",
+    "superheroVillain": "Cosmic overlord energy. Reality-warping presence. Godlike force in every word. Same message, ultimate destructive force."
+  },
+  "backup_date": "2025-02-11",
+  "notes": "These pro vibes and their prompts were removed from VibeWrite when switching to free-only model. Stored for potential future use."
+}
