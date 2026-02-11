@@ -5,27 +5,38 @@ import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 /**
- * Create a Stripe Checkout Session for subscription
+ * Create a Stripe Checkout Session for support payment (one-time)
+ * @param {number} amount - Support amount in dollars
  * @param {string} userName - User's name for reference
  * @returns {Promise<Object>} - Checkout session with URL
  */
-async function createCheckoutSession(userName) {
+async function createSupportSession(amount, userName) {
     try {
         const session = await stripe.checkout.sessions.create({
-            mode: 'subscription',
+            mode: 'payment',
             payment_method_types: ['card'],
             line_items: [
                 {
-                    price: process.env.STRIPE_PRICE_ID,
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: 'Support VibeWrite 💝',
+                            description: `Thank you for supporting VibeWrite!`,
+                            images: []
+                        },
+                        unit_amount: amount * 100, // Convert to cents
+                    },
                     quantity: 1,
                 },
             ],
-            success_url: `${process.env.FRONTEND_URL}?success=true`,
+            success_url: `${process.env.FRONTEND_URL}?support=true`,
             cancel_url: `${process.env.FRONTEND_URL}?canceled=true`,
             metadata: {
+                type: 'support',
+                amount: amount,
                 userName: userName
             },
-            customer_email: null, // Optional: collect email during checkout
+            customer_email: null,
             billing_address_collection: 'required',
         });
 
@@ -35,7 +46,7 @@ async function createCheckoutSession(userName) {
             sessionId: session.id
         };
     } catch (error) {
-        console.error('Error creating checkout session:', error);
+        console.error('Error creating support session:', error);
         return {
             success: false,
             error: error.message
@@ -74,14 +85,18 @@ async function handleWebhookEvent(event) {
     try {
         switch (event.type) {
             case 'checkout.session.completed':
-                // Payment successful - activate subscription
+                // Payment successful - support payment or subscription
                 const session = event.data.object;
-                console.log('Checkout completed for:', session.metadata.userName);
-                // Here you would typically:
-                // 1. Update your database with subscription info
-                // 2. Send confirmation email
-                // 3. Activate pro features for the user
-                return { success: true, message: 'Subscription activated' };
+                if (session.metadata?.type === 'support') {
+                    console.log('Support payment completed for:', session.metadata.userName, 'Amount:', session.metadata.amount);
+                    // Here you would typically:
+                    // 1. Send thank you email
+                    // 2. Log support payment for analytics
+                    return { success: true, message: 'Support payment received' };
+                } else {
+                    console.log('Legacy subscription completed for:', session.metadata.userName);
+                    return { success: true, message: 'Legacy subscription activated' };
+                }
 
             case 'customer.subscription.deleted':
                 // Subscription cancelled
@@ -177,11 +192,12 @@ async function getSubscriptionStatus(customerId) {
 }
 
 export {
-    createCheckoutSession,
+    createSupportSession,
     verifyWebhookSignature,
     handleWebhookEvent,
     createPortalSession,
-    getSubscriptionStatus
+    getSubscriptionStatus,
+    getSession
 };
 
 /**
@@ -199,5 +215,3 @@ async function getSession(sessionId) {
         return { success: false, error: error.message };
     }
 }
-
-export { getSession };

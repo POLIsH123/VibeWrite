@@ -14,10 +14,9 @@ const __dirname = dirname(__filename);
 
 // Import modules
 import { rewriteText } from './ai.js';
-import * as stripeHelper from './stripe.js';
 import { incrementAndCheck, resetUsage, resetAllUsage } from './usageStore.js';
 import connectDB from './db/connection.js';
-import communityRoutes from './routes/community.js';
+// Stripe and community routes removed - all features are now free
 
 // Initialize Express app
 const app = express();
@@ -99,16 +98,11 @@ app.post('/api/rewrite', async (req, res) => {
 
         // Validation is handled within rewriteText function
 
-        // Validate vibe - now supports 30+ styles
+        // Validate vibe - now supports free vibes only
         const validVibes = [
-            'funny', 'hype', 'savage', 'cute', 'professional',
-            'poetic', 'dramatic', 'mysterious', 'romantic', 'motivational',
-            'sarcastic', 'philosophical', 'nostalgic', 'rebellious', 'whimsical',
-            'scientific', 'diplomatic', 'conspiracy', 'zen', 'chaotic',
-            'aristocratic', 'streetwise', 'vintage', 'cyberpunk', 'horror',
-            'superhero', 'pirate', 'cowboy', 'alien', 'robot',
-            'childlike', 'elderly', 'celebrity', 'villain', 'superheroVillain',
-            'businessPro', 'genZTalk'
+            'funny', 'cute', 'sarcastic', 'romantic', 'motivational',
+            'philosophical', 'nostalgic', 'scientific', 'conspiracy', 'zen',
+            'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot'
         ];
         if (!validVibes.includes(vibe)) {
             console.warn('Invalid vibe requested:', vibe);
@@ -118,20 +112,10 @@ app.post('/api/rewrite', async (req, res) => {
             });
         }
 
-        // If client has pro cookie, skip limit
+        // If client has pro cookie, skip limit (now everyone is effectively pro)
         const cookies = req.headers.cookie || '';
         const isProCookie = cookies.split(';').map(s => s.trim()).includes('vibewrite_pro=1');
-        if (!isProCookie) {
-            // Enforce 7/day free limit per client IP
-            const clientKey = req.headers['x-forwarded-for'] || req.ip || req.connection?.remoteAddress || 'unknown';
-            console.log('Client key for usage check:', clientKey);
-            const usage = await incrementAndCheck(clientKey, 7);
-            console.log('Usage check result:', usage);
-            if (!usage.allowed) {
-                console.warn('Usage limit reached for', clientKey);
-                return res.status(429).json({ success: false, error: 'Daily limit reached. Upgrade to unlimited.', remaining: 0 });
-            }
-        }
+        // Everyone gets unlimited rewrites now - no limits!
 
         // Generate rewrite - rewriteText handles the response directly
         try {
@@ -154,87 +138,8 @@ app.post('/api/rewrite', async (req, res) => {
     }
 });
 
-// Payments disabled - Everything is now free
-// Create Checkout Session
-app.post('/api/create-checkout-session', async (req, res) => {
-    try {
-        const { vibe } = req.body || {};
-        const userName = req.body?.userName || 'anonymous';
-        const session = await stripeHelper.createCheckoutSession(userName);
-        if (!session.success) return res.status(500).json({ success: false, error: session.error });
-        return res.json({ success: true, url: session.url });
-    } catch (err) {
-        console.error('create-checkout-session error', err);
-        return res.status(500).json({ success: false, error: 'Failed to create checkout session' });
-    }
-});
-
-// Stripe webhook
-app.post('/api/webhook', (req, res) => {
-    try {
-        const event = stripeHelper.verifyWebhookSignature(req);
-        if (!event) return res.status(400).send('Invalid signature');
-        stripeHelper.handleWebhookEvent(event).then(() => res.json({ received: true })).catch(e => {
-            console.error('webhook handler error', e);
-            res.status(500).end();
-        });
-    } catch (err) {
-        console.error('webhook endpoint error', err);
-        res.status(500).end();
-    }
-});
-
-// Create Portal Session
-app.post('/api/create-portal-session', async (req, res) => {
-    try {
-        const { customerId } = req.body || {};
-        if (!customerId) return res.status(400).json({ success: false, error: 'customerId required' });
-        const result = await stripeHelper.createPortalSession(customerId);
-        if (!result.success) return res.status(500).json({ success: false, error: result.error });
-        return res.json({ success: true, url: result.url });
-    } catch (err) {
-        console.error('create-portal-session error', err);
-        return res.status(500).json({ success: false, error: 'Failed to create portal session' });
-    }
-});
-
-// Subscription status
-app.get('/api/subscription-status/:customerId', async (req, res) => {
-    try {
-        const { customerId } = req.params;
-        const status = await stripeHelper.getSubscriptionStatus(customerId);
-        return res.json(status);
-    } catch (err) {
-        console.error('subscription-status error', err);
-        return res.status(500).json({ success: false, error: 'Failed to get subscription status' });
-    }
-});
-
-// Confirm checkout (called by frontend after redirect)
-app.post('/api/confirm-checkout', async (req, res) => {
-    try {
-        const { sessionId } = req.body || {};
-        if (!sessionId) return res.status(400).json({ success: false, error: 'sessionId required' });
-        const result = await stripeHelper.getSession(sessionId);
-        if (!result.success) return res.status(500).json({ success: false, error: result.error });
-
-        const session = result.session;
-        // If a subscription is present or payment succeeded, set a cookie for pro
-        const active = !!(session.subscription || session.payment_status === 'paid');
-        if (active) {
-            // Set client cookie to mark pro (1 year)
-            res.setHeader('Set-Cookie', 'vibewrite_pro=1; Path=/; Max-Age=31536000; SameSite=Lax');
-        }
-
-        return res.json({ success: true, active, session });
-    } catch (err) {
-        console.error('confirm-checkout error', err);
-        return res.status(500).json({ success: false, error: 'Failed to confirm checkout' });
-    }
-});
-
-// Community Scripts Routes
-app.use('/api/community', communityRoutes);
+// Payment system removed - all features are now free
+// Community scripts removed - starting fresh with zero scripts
 
 // Dev-only: reset usage for current client (convenience endpoint)
 if (process.env.NODE_ENV !== 'production') {
