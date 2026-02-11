@@ -1724,6 +1724,27 @@
                 grid-template-columns: 1fr;
                 padding: 0 20px;
                 gap: 30px;
+                max-height: 400px;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
+
+            .testimonials-grid::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .testimonials-grid::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 3px;
+            }
+
+            .testimonials-grid::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 3px;
+            }
+
+            .testimonials-grid::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.5);
             }
 
             .testimonials-nav {
@@ -1987,7 +2008,7 @@
 
                 <div class="features-grid">
                     <div class="feature-card" data-tilt>
-                        <div class="feature-icon orange">35+</div>
+                        <div class="feature-icon orange">10</div>
                         <h3 class="feature-title">Vibes</h3>
                         <p class="feature-description">From funny to professional, savage to romantic, pirate to
                             shakespearean — we've got every vibe you need to express yourself perfectly.</p>
