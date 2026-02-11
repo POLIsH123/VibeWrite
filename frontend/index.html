@@ -143,7 +143,7 @@
             backdrop-filter: blur(30px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(-100%);
+            transform: translateY(0);
         }
 
         .sticky-nav.visible {
@@ -1788,7 +1788,6 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#privacy">Privacy</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#features">Features</a></li>
@@ -1837,8 +1836,10 @@
 
                 <button id="hero-open-app" class="hero-cta">
                     Get started free
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
                         <polyline points="9,18 15,12 9,6" />
+                        <polygon points="15,12 21,12 21,22 15,22" />
                     </svg>
                 </button>
             </div>
@@ -1885,8 +1886,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Privacy Section Removed - Modal still available via nav -->
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="section">
@@ -2007,13 +2006,13 @@
                     <div class="feature-card" data-tilt>
                         <div class="feature-icon orange">35+</div>
                         <h3 class="feature-title">Vibes</h3>
-                        <p class="feature-description">From funny to professional, savage to romantic, pirate to
-                            shakespearean — we've got every vibe you need to express yourself perfectly.</p>
+                        <p class="feature-description">From funny to professional, savage to romantic, pirate to shakespearean — we've got every vibe you need to express yourself perfectly. Yes! VibeWrite is completely free to use with unlimited rewrites and all vibes available.</p>
                     </div>
 
                     <div class="feature-card" data-tilt>
                         <div class="feature-icon purple">AI</div>
                         <h3 class="feature-title">Powered</h3>
+                        <p class="feature-description">Real GPT-4 rewrites powered by advanced AI. Not templates. Not shortcuts. Actually intelligent text transformation.</p>
                         <p class="feature-description">Real GPT-4 rewrites powered by advanced AI. Not templates. Not
                             shortcuts. Actually intelligent text transformation.</p>
                     </div>
@@ -2083,9 +2082,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Pricing section removed as per user request (everything is free) -->
-
 
         <!-- Open Source Section -->
         <section class="section" style="padding: 100px 40px; text-align: center; background: rgba(0,0,0,0.5);">
@@ -2196,9 +2192,7 @@
                     <h1 class="page-title" id="page-title">Home</h1>
                 </div>
                 <div class="header-right">
-                    <div class="usage-badge" id="usage-badge"
-                        style="background: rgba(139, 92, 246, 0.03); border-color: rgba(139, 92, 246, 0.06); color: #a78bfa;">
-                        0 left today</div>
+                    <!-- Usage removed - unlimited rewrites -->
                 </div>
             </header>
 
