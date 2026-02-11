@@ -1894,51 +1894,34 @@
                     <h2 class="section-title">What Users Say</h2>
                     <p class="section-subtitle">Real feedback from our community</p>
                 </div>
-                <div class="testimonials-wrapper">
-                    <button class="testimonials-nav prev" aria-label="Previous testimonial">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true" focusable="false">
-                            <polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round">
-                            </polyline>
-                        </svg>
-                    </button>
-                    <div class="testimonials-grid-container">
-                        <div class="testimonials-grid" id="testimonials-track">
-                            <div class="testimonial-card">
-                                <div class="testimonial-avatar">SM</div>
-                                <div class="testimonial-text">"This tool saved me hours of rewriting emails and social
-                                    posts!"</div>
-                                <div class="testimonial-meta">
-                                    <span class="testimonial-author">Sarah M., Content Creator</span>
-                                    <span class="testimonial-stars">★★★★★</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-card">
-                                <div class="testimonial-avatar">JD</div>
-                                <div class="testimonial-text">"The AI really understands the tone I'm going for. It's
-                                    like having a co-writer."</div>
-                                <div class="testimonial-meta">
-                                    <span class="testimonial-author">John D., Marketer</span>
-                                    <span class="testimonial-stars">★★★★★</span>
-                                </div>
-                            </div>
-                            <div class="testimonial-card">
-                                <div class="testimonial-avatar">AK</div>
-                                <div class="testimonial-text">"Clean UI, fast results, and actually helpful vibes. Best
-                                    AI text tool I've used."</div>
-                                <div class="testimonial-meta">
-                                    <span class="testimonial-author">Alex K., Blogger</span>
-                                    <span class="testimonial-stars">★★★★★</span>
-                                </div>
-                            </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">SM</div>
+                        <div class="testimonial-text">"This tool saved me hours of rewriting emails and social
+                            posts!"</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-author">Sarah M., Content Creator</span>
+                            <span class="testimonial-stars">★★★★★</span>
                         </div>
                     </div>
-                    <button class="testimonials-nav next" aria-label="Next testimonial">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" aria-hidden="true" focusable="false">
-                            <polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline>
-                        </svg>
-                    </button>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">JD</div>
+                        <div class="testimonial-text">"The AI really understands the tone I'm going for. It's
+                            like having a co-writer."</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-author">John D., Marketer</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">AK</div>
+                        <div class="testimonial-text">"Clean UI, fast results, and actually helpful vibes. Best
+                            AI text tool I've used."</div>
+                        <div class="testimonial-meta">
+                            <span class="testimonial-author">Alex K., Blogger</span>
+                            <span class="testimonial-stars">★★★★★</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2887,7 +2870,6 @@
 
             // Other features
             setupFAQ();
-            setupTestimonialCarousel();
             setupExampleAnimations();
             setupTiltEffect();
             setupSmoothScroll();
@@ -2971,78 +2953,6 @@
                     }
                 };
             });
-        }
-
-        function setupTestimonialCarousel() {
-            const track = document.getElementById('testimonials-track');
-            const cards = document.querySelectorAll('.testimonial-card');
-            const prev = document.querySelector('.testimonials-nav.prev');
-            const next = document.querySelector('.testimonials-nav.next');
-            const wrapper = document.querySelector('.testimonials-wrapper');
-
-            if (!track || cards.length === 0 || !prev || !next) return;
-
-            let currentIndex = 0;
-            let autoPlayInterval;
-
-            function updateCarousel() {
-                const cardWidth = cards[0].offsetWidth;
-                const gap = 30;
-                const offset = -currentIndex * (cardWidth + gap);
-                track.style.transform = `translateX(${offset}px)`;
-            }
-
-            function nextSlide() {
-                const visibleCount = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
-                if (currentIndex < cards.length - visibleCount) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-                updateCarousel();
-            }
-
-            function prevSlide() {
-                const visibleCount = window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = Math.max(0, cards.length - visibleCount);
-                }
-                updateCarousel();
-            }
-
-            function startAutoPlay() {
-                stopAutoPlay();
-                autoPlayInterval = setInterval(nextSlide, 5000);
-            }
-
-            function stopAutoPlay() {
-                if (autoPlayInterval) clearInterval(autoPlayInterval);
-            }
-
-            next.onclick = () => {
-                nextSlide();
-                startAutoPlay();
-            };
-
-            prev.onclick = () => {
-                prevSlide();
-                startAutoPlay();
-            };
-
-            if (wrapper) {
-                wrapper.addEventListener('mouseenter', stopAutoPlay);
-                wrapper.addEventListener('mouseleave', startAutoPlay);
-            }
-
-            window.addEventListener('resize', updateCarousel);
-
-            // Initial call
-            setTimeout(() => {
-                updateCarousel();
-                startAutoPlay();
-            }, 500);
         }
 
         // Privacy Modal
