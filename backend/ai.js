@@ -217,31 +217,31 @@ export async function rewriteText(req, res) {
 
     // Validation
     if (!text || typeof text !== 'string') {
-      return res.status(400).json({
+      return {
         success: false,
         error: 'Text is required'
-      });
+      };
     }
 
     if (!vibe || !STYLE_PROMPTS[vibe]) {
-      return res.status(400).json({
+      return {
         success: false,
         error: 'Invalid vibe'
-      });
+      };
     }
 
     if (text.trim().length === 0) {
-      return res.status(400).json({
+      return {
         success: false,
         error: 'Text cannot be empty'
-      });
+      };
     }
 
     if (text.length > 500) {
-      return res.status(400).json({
+      return {
         success: false,
         error: 'Text too long (max 500 chars)'
-      });
+      };
     }
 
     // Try OpenAI
@@ -281,9 +281,9 @@ export async function rewriteText(req, res) {
 
   } catch (err) {
     console.error('💥 API error (outer):', err);
-    return res.status(500).json({
+    return {
       success: false,
       error: 'Internal server error: ' + (err.message || String(err))
-    });
+    };
   }
 }
