@@ -3037,71 +3037,7 @@
         });
     </script>
     <script src="js/app.js"></script>
-    
-    <!-- Vercel Analytics -->
-    <script>
-        // Vercel Analytics is automatically enabled for Vercel deployments
-        // Custom event tracking for VibeWrite
-        function trackEvent(eventName, parameters) {
-            // Use Vercel's built-in analytics
-            if (window.vercelAnalytics) {
-                window.vercelAnalytics.track(eventName, parameters);
-            }
-            
-            // Fallback to console for development
-            console.log('Analytics Event:', eventName, parameters);
-        }
-        
-        // Track rewrite requests
-        function trackRewrite(vibe, textLength) {
-            trackEvent('vibe_rewrite', {
-                vibe: vibe,
-                text_length: textLength,
-                timestamp: new Date().toISOString()
-            });
-        }
-        
-        // Track vibe selections
-        function trackVibeSelection(vibe) {
-            trackEvent('vibe_selected', {
-                vibe: vibe,
-                source: 'vibe_grid'
-            });
-        }
-        
-        // Track page navigation
-        function trackPageView(pageName) {
-            trackEvent('page_view', {
-                page: pageName,
-                url: window.location.href
-            });
-        }
-        
-        // Track user interactions
-        function trackUserInteraction(action, element) {
-            trackEvent('user_interaction', {
-                action: action,
-                element: element,
-                page: document.title
-            });
-        }
-        
-        // Track button clicks
-        function trackButtonClick(buttonName, location) {
-            trackEvent('button_click', {
-                button: buttonName,
-                location: location
-            });
-        }
-        
-        // Track form submissions
-        function trackFormSubmission(formName) {
-            trackEvent('form_submit', {
-                form: formName,
-                timestamp: new Date().toISOString()
-            });
-        }
-    </script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
