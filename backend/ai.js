@@ -41,7 +41,8 @@ const STYLE_PROMPTS = {
   superhero: "Infuse bold heroic conviction and justice-demanding action. Keep direct, punchy, and courageous while preserving exact meaning.",
   childlike: "Pure wonder and simple words. Everything feels amazing. Huge curiosity and excitement. Same idea with kid-like energy.",
   elderly: "Speak from seasons lived. Patient wisdom earned through time. Gentle truths and unhurried cadence. Same message with lifetime depth.",
-  celebrity: "Media-trained charisma. Quotable confidence. Every word camera-ready. Public-facing polish. Same message, spotlight treatment."
+  celebrity: "Media-trained charisma. Quotable confidence. Every word camera-ready. Public-facing polish. Same message, spotlight treatment.",
+  "change the words": "Simply change the words while keeping the exact same meaning. Use synonyms and alternative phrasing. No style changes, no tone shifts, just word replacement. Preserve 100% of original meaning with different vocabulary."
 };
 
 // append rule automatically
@@ -143,6 +144,43 @@ function fallbackRewrite(text, vibe) {
 
     celebrity: () => {
       return `I'm just like, ${sentenceCase(t)}. You know?`;
+    },
+
+    "change the words": () => {
+      // Simple word replacement with synonyms
+      const synonyms = {
+        good: 'great',
+        bad: 'poor',
+        big: 'large',
+        small: 'tiny',
+        fast: 'quick',
+        slow: 'gradual',
+        happy: 'joyful',
+        sad: 'unhappy',
+        easy: 'simple',
+        hard: 'difficult',
+        important: 'significant',
+        beautiful: 'attractive',
+        ugly: 'unattractive',
+        smart: 'intelligent',
+        stupid: 'unintelligent',
+        rich: 'wealthy',
+        poor: 'impoverished',
+        old: 'ancient',
+        new: 'fresh',
+        first: 'initial',
+        last: 'final',
+        best: 'optimal',
+        worst: 'poorest'
+      };
+      
+      let result = t;
+      Object.entries(synonyms).forEach(([word, synonym]) => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        result = result.replace(regex, synonym);
+      });
+      
+      return result;
     },
 
     robotic: () => {

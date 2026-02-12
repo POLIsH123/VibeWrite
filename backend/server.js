@@ -120,6 +120,9 @@ app.get('/health', (req, res) => {
  */
 app.post('/api/rewrite', async (req, res) => {
     try {
+        // Extract and validate input
+        const { text, vibe } = req.body;
+        
         // Input validation and sanitization
         if (!text || typeof text !== 'string' || text.trim().length === 0) {
             return res.status(400).json({
@@ -175,15 +178,13 @@ app.post('/api/rewrite', async (req, res) => {
             });
         }
 
-        const { text, vibe } = req.body;
-
         // Validation is handled within rewriteText function
 
         // Validate vibe - now supports free vibes only
         const validVibes = [
             'funny', 'cute', 'sarcastic', 'romantic', 'motivational',
             'philosophical', 'nostalgic', 'scientific', 'conspiracy', 'zen',
-            'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot'
+            'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot', 'change the words'
         ];
         if (!validVibes.includes(vibe)) {
             console.warn('Invalid vibe requested:', vibe);
