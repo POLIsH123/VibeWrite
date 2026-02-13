@@ -1485,11 +1485,11 @@ async function generateRewrite() {
             localStorage.setItem('vibewrite_stats', JSON.stringify(stats));
 
             // Save to history
-            saveToHistory(inputText, data.rewrite, currentVibe);
+            saveToHistory(inputText, data.rewrittenText || data.rewrite, currentVibe);
 
             updateUI();
             updateStats();
-            displayResult(data.rewrite);
+            displayResult(data.rewrittenText || data.rewrite);
 
             // Show success feedback
             showSuccessFeedback();
