@@ -201,7 +201,7 @@ app.post('/api/rewrite', async (req, res) => {
 
         // Generate rewrite with output validation
         try {
-            const result = await rewriteText(req, res);
+            const result = await rewriteText(req);
             
             // Validate output is actually a rewrite, not a response
             if (result && typeof result === 'object' && result.rewrittenText) {
@@ -247,10 +247,11 @@ app.post('/api/rewrite', async (req, res) => {
 
     } catch (error) {
         console.error('💥 /api/rewrite outer crash:', error);
-        res.status(500).json({
-            success: false,
-            error: 'Rewrite route crash: ' + (error?.message || String(error)),
-            stack: process.env.NODE_ENV === 'production' ? null : error?.stack
+        console.error('Error stack:', error.stack);
+        return res.status(500).json({ 
+            success: false, 
+            error: 'Server error: ' + (error.message || 'Unknown error'),
+            details: process.env.NODE_ENV === 'development' ? error.stack : undefined
         });
     }
 });

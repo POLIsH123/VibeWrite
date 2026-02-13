@@ -211,7 +211,7 @@ function cleanOutput(text) {
 // ===========================
 // MAIN API HANDLER
 // ===========================
-export async function rewriteText(req, res) {
+export async function rewriteText(req) {
   try {
     const { text, vibe } = req.body;
 
