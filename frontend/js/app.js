@@ -1434,10 +1434,11 @@ async function generateRewrite() {
 
     if (!inputText || !currentVibe) return;
 
-    if (!isPro && dailyUsage >= MAX_FREE_REWRITES) {
-        showLimitModal();
-        return;
-    }
+    // Usage limits removed - all features are now free!
+    // if (!isPro && dailyUsage >= MAX_FREE_REWRITES) {
+    //     showLimitModal();
+    //     return;
+    // }
 
     // Show loading with OP animation
     document.getElementById('results-section').style.display = 'none';
