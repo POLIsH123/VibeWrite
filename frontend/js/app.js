@@ -1623,12 +1623,17 @@ notificationStyle.textContent = `
 document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
+    if (!text) {
+        console.error('displayResult: text is undefined');
+        resultText.textContent = 'No content to display';
+        return;
+    }
+    
     const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');
 
     resultVibe.textContent = `${vibeEmojis[currentVibe] || '✨'} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
-    resultText.textContent = text;
 
     // Show with OP animation
     resultsSection.style.display = 'block';

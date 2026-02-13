@@ -265,7 +265,7 @@ export async function rewriteText(req) {
         // Return the result object instead of sending response
         return {
           success: true,
-          rewrittenText: result,
+          rewrite: result,
           vibe: vibe,
           originalText: text,
           method: 'openai'
