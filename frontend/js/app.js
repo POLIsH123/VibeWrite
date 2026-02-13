@@ -1931,37 +1931,60 @@ function scrollToSupport() {
 }
 
 function showLimitModal() {
-    document.getElementById('limit-modal').style.display = 'flex';
+    const modal = document.getElementById('limit-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+    } else {
+        console.warn('limit-modal not found');
+    }
 }
 
 function closeLimitModal() {
-    document.getElementById('limit-modal').style.display = 'none';
+    const modal = document.getElementById('limit-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function closeSuccessModal() {
-    document.getElementById('success-modal').style.display = 'none';
+    const modal = document.getElementById('success-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function openCommunityModal() {
-    document.getElementById('community-modal').style.display = 'flex';
+    const modal = document.getElementById('community-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
 }
 
 function closeCommunityModal() {
-    document.getElementById('community-modal').style.display = 'none';
-    document.getElementById('community-form').reset();
-    document.getElementById('community-form').style.display = 'block';
-    document.getElementById('community-success').style.display = 'none';
+    const modal = document.getElementById('community-modal');
+    const form = document.getElementById('community-form');
+    const success = document.getElementById('community-success');
+    
+    if (modal) modal.style.display = 'none';
+    if (form) form.reset();
+    if (success) success.style.display = 'none';
 }
 
 function closeLogoutModal() {
-    document.getElementById('logout-modal').style.display = 'none';
+    const modal = document.getElementById('logout-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // ===========================
 // Logout
 // ===========================
 function logout() {
-    document.getElementById('logout-modal').style.display = 'flex';
+    const modal = document.getElementById('logout-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
 }
 
 function confirmLogout() {
