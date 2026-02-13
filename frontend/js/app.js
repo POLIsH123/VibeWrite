@@ -1641,12 +1641,12 @@ function displayResult(text) {
     resultsSection.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
 
     // Add typewriter effect to result text
-    const originalText = text;
+    const originalText = text || '';
     resultText.textContent = '';
 
     let i = 0;
     const typeWriter = () => {
-        if (i < originalText.length) {
+        if (originalText && i < originalText.length) {
             resultText.textContent += originalText.charAt(i);
             i++;
             setTimeout(typeWriter, 20);
