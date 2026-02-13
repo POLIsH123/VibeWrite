@@ -130,6 +130,13 @@ app.post('/api/rewrite', async (req, res) => {
     console.log('🚀 /api/rewrite called at:', new Date().toISOString());
     console.log('📝 Request body:', req.body);
     
+    // Test response to verify deployment
+    return res.status(200).json({
+        success: true,
+        message: 'Test response - deployment verification',
+        timestamp: new Date().toISOString()
+    });
+    
     try {
         // Extract and validate input
         const { text, vibe } = req.body;
