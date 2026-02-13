@@ -5,7 +5,6 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import rateLimit from 'express-rate-limit';
 import crypto from 'crypto';
 
 import { fileURLToPath } from 'url';
