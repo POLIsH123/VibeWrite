@@ -24,38 +24,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ===========================
-// Security Middleware
-// ===========================
-
-// Rate limiting for API endpoints
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 50, // Limit each IP to 50 requests per windowMs
-  message: {
-    success: false,
-    error: 'Too many requests. Please try again later.'
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-// Stricter rate limiting for rewrite endpoint
-const rewriteLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 20, // Limit each IP to 20 rewrites per windowMs
-  message: {
-    success: false,
-    error: 'Rewrite limit exceeded. Please try again later.'
-  },
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-
-// Apply rate limiting to API routes
-app.use('/api/', apiLimiter);
-app.use('/api/rewrite', rewriteLimiter);
-
-// ===========================
 // Middleware
 // ===========================
 
