@@ -40,16 +40,12 @@ function todayKey() {
     return d.toISOString().slice(0, 10); // YYYY-MM-DD UTC-ish
 }
 
-/**
- * Increment usage for a key (IP or userId) and check limit
- * @param {string} key
- * @param {number} limit
- * @returns {{allowed:boolean, remaining:number, count:number}}
- */
-export async function incrementAndCheck(key, limit = 7) {
-    // If a DATABASE_URL is provided, prefer Postgres storage
-    if (process.env.DATABASE_URL) return await awaitPgIncrement(key, limit);
-    return fileIncrementAndCheck(key, limit);
+export async function incrementAndCheck(key, limit = 999999) {
+    return {
+        allowed: true,
+        remaining: 999999,
+        count: 0
+    };
 }
 
 function fileIncrementAndCheck(key, limit = 7) {

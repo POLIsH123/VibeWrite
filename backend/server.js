@@ -54,8 +54,7 @@ app.use(cors({
 // Body parser - JSON for most routes
 app.use(bodyParser.json());
 
-// Raw body parser for Stripe webhooks (must come before other routes)
-app.use('/api/webhook', bodyParser.raw({ type: 'application/json' }));
+
 
 // Connect to database
 connectDB();

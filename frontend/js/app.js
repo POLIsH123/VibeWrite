@@ -3,13 +3,13 @@
 // ===========================
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
-let isPro = (localStorage.getItem('vibewrite_pro') === '1') || (localStorage.getItem('vibewrite_pro') === 'true') || (typeof document !== 'undefined' && document.cookie && document.cookie.includes('vibewrite_pro=1'));
+let isPro = true;
 let dailyUsage = 0;
 let lastUsageDate = localStorage.getItem('vibewrite_last_usage_date');
 let history = JSON.parse(localStorage.getItem('vibewrite_history') || '[]');
 let stats = JSON.parse(localStorage.getItem('vibewrite_stats') || '{"total":0,"vibes":{}}');
 
-const MAX_FREE_REWRITES = 7; // Free users get 7 rewrites per day
+const MAX_FREE_REWRITES = 999999; // Unlimited for all users
 // Backend API URL — use relative path for production/vercel compatibility
 const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
 
@@ -51,31 +51,9 @@ function markLockedVibes() {
 // Support button removed - no payment system
 
 // After returning from Stripe Checkout, confirm session and set Pro locally
+// Subscription logic removed - all features are now free
 async function checkPostCheckout() {
-    try {
-        const params = new URLSearchParams(window.location.search);
-        const success = params.get('success');
-        const sessionId = params.get('session_id') || params.get('sessionId');
-        if (success === 'true' && sessionId) {
-            const res = await fetch(`${API_URL}/confirm-checkout`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ sessionId })
-            });
-            const data = await res.json();
-            if (data.success && data.active) {
-                window.setPro(true);
-                // Remove query params
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                }
-                // Small thank you hint
-                setTimeout(() => alert('Subscription active — thanks for upgrading!'), 250);
-            }
-        }
-    } catch (e) {
-        console.error('confirm checkout failed', e);
-    }
+    return;
 }
 
 // ===========================
