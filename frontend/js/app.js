@@ -1634,8 +1634,7 @@ function displayResult(text) {
     const resultText = document.getElementById('result-text');
 
     resultVibe.textContent = `${vibeEmojis[currentVibe] || '✨'} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
-    resultText.textContent = text;
-
+    
     // Show with OP animation
     resultsSection.style.display = 'block';
     resultsSection.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
