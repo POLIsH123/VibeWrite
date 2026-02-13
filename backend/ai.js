@@ -42,6 +42,8 @@ const STYLE_PROMPTS = {
   childlike: "Pure wonder and simple words. Everything feels amazing. Huge curiosity and excitement. Same idea with kid-like energy.",
   elderly: "Speak from seasons lived. Patient wisdom earned through time. Gentle truths and unhurried cadence. Same message with lifetime depth.",
   celebrity: "Media-trained charisma. Quotable confidence. Every word camera-ready. Public-facing polish. Same message, spotlight treatment.",
+  hype: "Transform into a high-energy, hype-focused version. Use exclamation marks, rocket emojis, and exciting language. Make it sound like a major launch or a viral moment. LFG!",
+  professional: "Rewrite with corporate elegance and professional polish. Use sophisticated vocabulary and clear, authoritative structure. Maintain a refined, expert tone suitable for official business correspondence.",
   "change the words": "Simply change the words while keeping the exact same meaning. Use synonyms and alternative phrasing. No style changes, no tone shifts, just word replacement. Preserve 100% of original meaning with different vocabulary."
 };
 
@@ -173,18 +175,26 @@ function fallbackRewrite(text, vibe) {
         best: 'optimal',
         worst: 'poorest'
       };
-      
+
       let result = t;
       Object.entries(synonyms).forEach(([word, synonym]) => {
         const regex = new RegExp(`\\b${word}\\b`, 'gi');
         result = result.replace(regex, synonym);
       });
-      
+
       return result;
     },
 
     robotic: () => {
       return `STATEMENT: ${t.toUpperCase()}. EXECUTION CONFIRMED.`;
+    },
+
+    hype: () => {
+      return `🚀 ${t.toUpperCase()}! THIS IS HUGE! LFG! 🚀`;
+    },
+
+    professional: () => {
+      return `With regard to the provided text: ${sentenceCase(t)}. Please acknowledge receipt.`;
     }
 
   };
@@ -261,7 +271,7 @@ export async function rewriteText(req) {
 
       if (result && result.length > 5 && result.toLowerCase() !== text.toLowerCase()) {
         console.log('✅ OpenAI success!');
-        
+
         // Return the result object instead of sending response
         return {
           success: true,

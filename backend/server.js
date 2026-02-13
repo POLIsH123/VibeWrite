@@ -97,14 +97,14 @@ app.get('/api/health', (req, res) => {
 app.post('/api/rewrite', async (req, res) => {
     console.log('🚀 /api/rewrite called at:', new Date().toISOString());
     console.log('📝 Request body:', req.body);
-    
+
     try {
         // Extract and validate input
         const { text, vibe } = req.body;
-        
+
         console.log('✅ Extracted - text:', text ? '"' + text + '"' : 'undefined');
         console.log('✅ Extracted - vibe:', vibe || 'undefined');
-        
+
         // Input validation and sanitization
         if (!text || typeof text !== 'string' || text.trim().length === 0) {
             return res.status(400).json({
@@ -166,7 +166,8 @@ app.post('/api/rewrite', async (req, res) => {
         const validVibes = [
             'funny', 'cute', 'sarcastic', 'romantic', 'motivational',
             'philosophical', 'nostalgic', 'scientific', 'conspiracy', 'zen',
-            'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot', 'change the words'
+            'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot', 'change the words',
+            'hype', 'professional'
         ];
         if (!validVibes.includes(vibe)) {
             console.warn('Invalid vibe requested:', vibe);
@@ -184,11 +185,11 @@ app.post('/api/rewrite', async (req, res) => {
         // Generate rewrite with output validation
         try {
             const result = await rewriteText(req);
-            
+
             // Validate output is actually a rewrite, not a response
             if (result && typeof result === 'object' && result.rewrittenText) {
                 const rewrittenText = result.rewrittenText;
-                
+
                 // Check if output looks like a response instead of a rewrite
                 const responsePatterns = [
                     /^(I|I'm|I am)\s+(a|an)/i,
@@ -202,9 +203,9 @@ app.post('/api/rewrite', async (req, res) => {
                     /import\s+\w+/i,  // Import statement
                     /```/i  // Code blocks
                 ];
-                
+
                 const isInvalidResponse = responsePatterns.some(pattern => pattern.test(rewrittenText));
-                
+
                 if (isInvalidResponse) {
                     console.error('🚨 Invalid response detected, falling back to simple rewrite');
                     return res.status(200).json({
@@ -212,26 +213,26 @@ app.post('/api/rewrite', async (req, res) => {
                         rewrittenText: text + ' (rewritten in ' + vibe + ' style)'
                     });
                 }
-                
+
                 // Send the validated result
                 return res.status(200).json(result);
             }
-            
+
             console.log('✅ Rewrite completed successfully');
             return res.status(200).json(result);
         } catch (innerErr) {
             console.error('❌ Rewrite failed:', innerErr);
-            return res.status(500).json({ 
-                success: false, 
-                error: 'Rewrite service temporarily unavailable' 
+            return res.status(500).json({
+                success: false,
+                error: 'Rewrite service temporarily unavailable'
             });
         }
 
     } catch (error) {
         console.error('💥 /api/rewrite outer crash:', error);
         console.error('Error stack:', error.stack);
-        return res.status(500).json({ 
-            success: false, 
+        return res.status(500).json({
+            success: false,
             error: 'Server error: ' + (error.message || 'Unknown error'),
             details: process.env.NODE_ENV === 'development' ? error.stack : undefined
         });
