@@ -1434,12 +1434,6 @@ async function generateRewrite() {
 
     if (!inputText || !currentVibe) return;
 
-    // Usage limits removed - all features are now free!
-    // if (!isPro && dailyUsage >= MAX_FREE_REWRITES) {
-    //     showLimitModal();
-    //     return;
-    // }
-
     // Show loading with OP animation
     document.getElementById('results-section').style.display = 'none';
     const loadingEl = document.getElementById('loading');
@@ -1624,17 +1618,12 @@ notificationStyle.textContent = `
 document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
-    if (!text) {
-        console.error('displayResult: text is undefined');
-        resultText.textContent = 'No content to display';
-        return;
-    }
-    
     const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');
 
     resultVibe.textContent = `${vibeEmojis[currentVibe] || '✨'} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
+    resultText.textContent = text;
 
     // Show with OP animation
     resultsSection.style.display = 'block';
@@ -1931,52 +1920,38 @@ function scrollToSupport() {
     }
 }
 
+function showLimitModal() {
+    document.getElementById('limit-modal').style.display = 'flex';
+}
+
 function closeLimitModal() {
-    const modal = document.getElementById('limit-modal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    document.getElementById('limit-modal').style.display = 'none';
 }
 
 function closeSuccessModal() {
-    const modal = document.getElementById('success-modal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    document.getElementById('success-modal').style.display = 'none';
 }
 
 function openCommunityModal() {
-    const modal = document.getElementById('community-modal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
+    document.getElementById('community-modal').style.display = 'flex';
 }
 
 function closeCommunityModal() {
-    const modal = document.getElementById('community-modal');
-    const form = document.getElementById('community-form');
-    const success = document.getElementById('community-success');
-    
-    if (modal) modal.style.display = 'none';
-    if (form) form.reset();
-    if (success) success.style.display = 'none';
+    document.getElementById('community-modal').style.display = 'none';
+    document.getElementById('community-form').reset();
+    document.getElementById('community-form').style.display = 'block';
+    document.getElementById('community-success').style.display = 'none';
 }
 
 function closeLogoutModal() {
-    const modal = document.getElementById('logout-modal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
+    document.getElementById('logout-modal').style.display = 'none';
 }
 
 // ===========================
 // Logout
 // ===========================
 function logout() {
-    const modal = document.getElementById('logout-modal');
-    if (modal) {
-        modal.style.display = 'flex';
-    }
+    document.getElementById('logout-modal').style.display = 'flex';
 }
 
 function confirmLogout() {
