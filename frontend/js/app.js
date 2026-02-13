@@ -1624,6 +1624,11 @@ notificationStyle.textContent = `
 document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
+    if (!text) {
+        console.error('displayResult: text is undefined');
+        return;
+    }
+    
     const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');

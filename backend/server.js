@@ -95,14 +95,8 @@ app.get('/api/health', (req, res) => {
  * Generate a rewrite in a specific vibe
  */
 app.post('/api/rewrite', async (req, res) => {
-    console.log('🚀 REWRITE ENDPOINT HIT - DEPLOYMENT TEST');
-    
-    return res.status(200).json({
-        success: true,
-        message: 'DEPLOYMENT TEST SUCCESSFUL',
-        timestamp: new Date().toISOString(),
-        body: req.body
-    });
+    console.log('🚀 /api/rewrite called at:', new Date().toISOString());
+    console.log('📝 Request body:', req.body);
     
     try {
         // Extract and validate input
