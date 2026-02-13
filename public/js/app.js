@@ -1926,15 +1926,18 @@ function scrollToSupport() {
 }
 
 function showLimitModal() {
-    document.getElementById('limit-modal').style.display = 'flex';
+    const modal = document.getElementById('limit-modal');
+    if (modal) modal.style.display = 'flex';
 }
 
 function closeLimitModal() {
-    document.getElementById('limit-modal').style.display = 'none';
+    const modal = document.getElementById('limit-modal');
+    if (modal) modal.style.display = 'none';
 }
 
 function closeSuccessModal() {
-    document.getElementById('success-modal').style.display = 'none';
+    const modal = document.getElementById('success-modal');
+    if (modal) modal.style.display = 'none';
 }
 
 function openCommunityModal() {
