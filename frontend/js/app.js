@@ -1931,15 +1931,6 @@ function scrollToSupport() {
     }
 }
 
-function showLimitModal() {
-    const modal = document.getElementById('limit-modal');
-    if (modal) {
-        modal.style.display = 'flex';
-    } else {
-        console.warn('limit-modal not found');
-    }
-}
-
 function closeLimitModal() {
     const modal = document.getElementById('limit-modal');
     if (modal) {
