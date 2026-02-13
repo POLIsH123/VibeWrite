@@ -1,7 +1,6 @@
 // ===========================
 // Global State
 // ===========================
-
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
 let isPro = (localStorage.getItem('vibewrite_pro') === '1') || (localStorage.getItem('vibewrite_pro') === 'true') || (typeof document !== 'undefined' && document.cookie && document.cookie.includes('vibewrite_pro=1'));
@@ -1485,11 +1484,11 @@ async function generateRewrite() {
             localStorage.setItem('vibewrite_stats', JSON.stringify(stats));
 
             // Save to history
-            saveToHistory(inputText, data.rewrittenText || data.rewrite, currentVibe);
+            saveToHistory(inputText, data.rewrite, currentVibe);
 
             updateUI();
             updateStats();
-            displayResult(data.rewrittenText || data.rewrite);
+            displayResult(data.rewrite);
 
             // Show success feedback
             showSuccessFeedback();
@@ -1624,28 +1623,24 @@ notificationStyle.textContent = `
 document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
-    if (!text) {
-        console.error('displayResult: text is undefined');
-        return;
-    }
-    
     const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');
 
     resultVibe.textContent = `${vibeEmojis[currentVibe] || '✨'} ${currentVibe.charAt(0).toUpperCase() + currentVibe.slice(1)}`;
-    
+    resultText.textContent = text;
+
     // Show with OP animation
     resultsSection.style.display = 'block';
     resultsSection.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
 
     // Add typewriter effect to result text
-    const originalText = text || '';
+    const originalText = text;
     resultText.textContent = '';
 
     let i = 0;
     const typeWriter = () => {
-        if (originalText && i < originalText.length) {
+        if (i < originalText.length) {
             resultText.textContent += originalText.charAt(i);
             i++;
             setTimeout(typeWriter, 20);
