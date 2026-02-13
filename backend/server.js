@@ -119,9 +119,15 @@ app.get('/health', (req, res) => {
  * Generate a rewrite in a specific vibe
  */
 app.post('/api/rewrite', async (req, res) => {
+    console.log('🚀 /api/rewrite called at:', new Date().toISOString());
+    console.log('📝 Request body:', req.body);
+    
     try {
         // Extract and validate input
         const { text, vibe } = req.body;
+        
+        console.log('✅ Extracted - text:', text ? '"' + text + '"' : 'undefined');
+        console.log('✅ Extracted - vibe:', vibe || 'undefined');
         
         // Input validation and sanitization
         if (!text || typeof text !== 'string' || text.trim().length === 0) {
