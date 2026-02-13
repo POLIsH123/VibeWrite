@@ -113,6 +113,15 @@ app.get('/health', (req, res) => {
 // API Routes
 // ===========================
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        message: 'Server is running'
+    });
+});
+
 /**
  * POST /api/rewrite
  * Generate a rewrite in a specific vibe
