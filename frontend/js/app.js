@@ -32,14 +32,14 @@ function toggleDiffView() {
     if (btn) btn.classList.toggle('active', showDiff);
 
     // Re-render output if it exists
-    const container = document.getElementById('output-content');
+    const container = document.getElementById('result-text');
     if (container && container.lastResult) {
         renderOutput(container.lastResult);
     }
 }
 
 function renderOutput(data) {
-    const container = document.getElementById('output-content');
+    const container = document.getElementById('result-text');
     if (!container) return;
 
     // Store data for toggling

@@ -1899,36 +1899,9 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                     </svg>
-                    <!-- Output Area -->
-                    <div class="output-container">
-                        <div class="output-header">
-                            <h3 class="output-title">Refined Output</h3>
-                            <div class="output-actions">
-                                <button class="action-btn" id="diff-toggle" title="Show Changes">
-                                    <span class="icon">📝</span> Diff View
-                                </button>
-                                <button class="action-btn" id="copy-btn" title="Copy to Clipboard">
-                                    <span class="icon">📋</span> Copy
-                                </button>
-                                <button class="action-btn" id="save-btn" title="Save to Favorites">
-                                    <span class="icon">⭐</span> Save
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Tone Analysis Badge -->
-                        <div id="tone-badge" class="tone-badge" style="display: none;">
-                            <span class="tone-label">Analysis:</span>
-                            <span id="tone-result">Loading...</span>
-                        </div>
-
-                        <div class="output-content" id="output-content">
-                            <p class="placeholder-text">Your transformed text will appear here...</p>
-                        </div>
-
-                        <!-- Multi-Gen Container -->
-                        <div id="multi-gen-container" class="multi-gen-grid" style="display: none;"></div>
-                    </div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
                 </div>
 
                 <!-- Templates Library Sidebar (Hidden by default) -->
@@ -2392,6 +2365,11 @@
                                     maxlength="5100"></textarea>
                                 <div class="input-footer">
                                     <span class="char-count" id="char-count">0/5100</span>
+                                    <button class="text-btn" id="templates-btn"
+                                        onclick="document.getElementById('templates-sidebar').classList.add('active')"
+                                        style="margin-right: auto; margin-left: 10px;">
+                                        📄 Templates
+                                    </button>
                                     <button class="send-btn" id="rewrite-btn" onclick="generateRewrite()" disabled>
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="2.5">
@@ -2438,6 +2416,38 @@
                                 <div class="vibe-card" data-vibe="hype" onclick="selectVibe('hype')">
                                     <div class="vibe-icon">🚀</div>
                                     <div class="vibe-label">Hype</div>
+                                </div>
+                            </div>
+
+                            <!-- Utility Vibes Section -->
+                            <div class="vibe-selection-header" style="margin-top: 20px;">
+                                <h3>Utility</h3>
+                            </div>
+                            <div class="vibe-grid">
+                                <div class="vibe-card" data-vibe="grammar" onclick="selectVibe('grammar')">
+                                    <div class="vibe-icon">📝</div>
+                                    <div class="vibe-label">Grammar</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="concise" onclick="selectVibe('concise')">
+                                    <div class="vibe-icon">✂️</div>
+                                    <div class="vibe-label">Concise</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="expand" onclick="selectVibe('expand')">
+                                    <div class="vibe-icon">➕</div>
+                                    <div class="vibe-label">Expand</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="professional_email"
+                                    onclick="selectVibe('professional_email')">
+                                    <div class="vibe-icon">📧</div>
+                                    <div class="vibe-label">Email</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="bullet_points" onclick="selectVibe('bullet_points')">
+                                    <div class="vibe-icon">•</div>
+                                    <div class="vibe-label">Bullets</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="tone_analysis" onclick="selectVibe('tone_analysis')">
+                                    <div class="vibe-icon">📊</div>
+                                    <div class="vibe-label">Analyze</div>
                                 </div>
                             </div>
 
@@ -2525,10 +2535,23 @@
                                 </div>
 
                                 <!-- Actual result hidden initially -->
-                                <div id="actual-result" style="display: none; height: 100%; flex-direction: column;">
+                                <div id="actual-result" class="output-container"
+                                    style="display: none; height: 100%; flex-direction: column;">
                                     <div class="result-header">
                                         <div class="result-vibe" id="result-vibe">Funny</div>
                                         <div class="result-actions">
+                                            <button class="icon-btn" id="diff-toggle" title="Show Changes">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z">
+                                                    </path>
+                                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                                </svg>
+                                            </button>
                                             <button class="icon-btn" onclick="copyResult()" title="Copy">
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2">
@@ -2538,8 +2561,22 @@
                                             </button>
                                         </div>
                                     </div>
+
+                                    <!-- Tone Analysis Badge -->
+                                    <div id="tone-badge" class="tone-badge"
+                                        style="display: none; margin-bottom: 10px; padding: 5px 10px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; font-size: 12px;">
+                                        <span class="tone-label"
+                                            style="opacity: 0.7; margin-right: 5px;">Analysis:</span>
+                                        <span id="tone-result"
+                                            style="font-weight: bold; color: #4ade80;">Loading...</span>
+                                    </div>
+
                                     <div class="result-text" id="result-text">Your rewritten text will appear here...
                                     </div>
+
+                                    <!-- Multi-Gen Results (if needed) -->
+                                    <div id="multi-gen-container" class="multi-gen-grid" style="display: none;"></div>
+
                                     <button class="empty-state-btn" onclick="resetRewrite()">Reset & Start Over</button>
                                 </div>
                             </div>
