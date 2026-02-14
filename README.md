@@ -2,15 +2,14 @@
 
 Transform boring text into pure vibes! VibeWrite.ai is an AI-powered text rewriting tool that lets you rewrite any text in 5 unique styles: Funny, Hype, Savage, Cute, and Professional.
 
-## ✨ Features
+### ✨ Features
 
-- **5 Unique Vibes**: Choose from Funny 😂, Hype 🔥, Savage 💀, Cute 💖, or Professional 💼
-- **AI-Powered**: Uses Hugging Face's advanced language models
-- **Instant Rewrites**: Get creative rewrites in seconds
-- **Free & Pro Plans**: 5 free rewrites per day, unlimited with Pro ($10/month)
-- **Soft Login**: No complex authentication - just enter your name once
-- **Modern UI**: Clean, responsive design that works on all devices
-- **Stripe Integration**: Secure payment processing for subscriptions
+- **20+ Unique Vibes**: Choose from Funny 😂, Hype 🚀, Professional 💼, Savage 💀, Poetic 📜, and many more!
+- **AI-Powered**: Uses advanced Transformers models for high-quality text transformation.
+- **100% Free & Unlimited**: No subscriptions, no daily limits, no hidden costs.
+- **Open Source**: Built with pure web tech (HTML/CSS/JS) and a lightweight Node.js backend.
+- **Soft Login**: No complex authentication - just enter your name and start vibing.
+- **Modern UI**: Clean, responsive design with glassmorphism and smooth animations.
 
 ## 🚀 Tech Stack
 
@@ -22,9 +21,9 @@ Transform boring text into pure vibes! VibeWrite.ai is an AI-powered text rewrit
 
 ### Backend
 - Node.js + Express
-- Hugging Face Inference API for AI rewrites
-- Stripe for payment processing
-- CORS enabled for frontend communication
+- Hugging Face / Transformers for AI rewrites
+- Lightweight SQLite storage for statistics
+- CORS enabled for cross-origin deployments
 
 ## 🤖 AI Pipeline Details
 
@@ -78,8 +77,7 @@ The app includes smart rule-based rewrites as fallback if:
 ### Prerequisites
 - Node.js 16+ installed
 - npm or yarn package manager
-- Hugging Face account (free)
-- Stripe account (free for testing)
+- A creative mind!
 
 ### Step 1: Clone and Install
 
@@ -92,52 +90,19 @@ cd backend
 npm install
 ```
 
-### Step 2: Set Up Environment Variables
+The `.env` file is already included with placeholder values. For most local dev cases, the defaults work fine!
 
-The `.env` file is already included with placeholder values. Just fill in your actual Stripe keys:
+**Good News: NO API Keys Needed! 🎉**
 
-```bash
-cd backend
-nano .env  # or use any text editor
-```
+The app uses local/cached AI models. Everything works out of the box.
 
-You need to replace the placeholder values for:
+### Step 3: Update Frontend API URL (If deploying)
 
-**Good News: NO Hugging Face API Key Needed! 🎉**
-
-The app now uses **local AI models** via `@xenova/transformers`. Models will automatically download on first run (takes 1-2 minutes). No API keys, no rate limits, no API costs!
-
-**Stripe Keys** (still required):
-- Go to https://stripe.com
-- Sign up for a free account
-- Navigate to Developers > API Keys
-- Copy the "Secret key" to `STRIPE_SECRET_KEY`
-- Copy the "Publishable key" to `STRIPE_PUBLISHABLE_KEY`
-
-**Create Stripe Product**:
-- In Stripe Dashboard, go to Products
-- Click "Add Product"
-- Name: "VibeWrite Pro"
-- Price: $10/month (recurring)
-- Copy the Price ID (starts with `price_`) to `STRIPE_PRICE_ID`
-
-**Stripe Webhook** (for production):
-- In Stripe Dashboard, go to Developers > Webhooks
-- Click "Add endpoint"
-- Endpoint URL: `https://your-domain.com/api/webhook`
-- Select events: `checkout.session.completed`, `customer.subscription.deleted`, `invoice.payment_failed`
-- Copy the webhook secret to `STRIPE_WEBHOOK_SECRET`
-
-### Step 3: Update Frontend API URL
-
-Edit `frontend/js/app.js` and update the API URL:
+Edit `public/js/app.js` and update the API URL:
 
 ```javascript
-// For local development
-const API_URL = 'http://localhost:3000/api';
-
-// For production (update to your deployed backend URL)
-const API_URL = 'https://your-backend-domain.com/api';
+// For local development (Auto-detected)
+const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
 ```
 
 ## 🏃‍♂️ Running Locally
@@ -225,29 +190,14 @@ After deploying, update the backend's `.env`:
 FRONTEND_URL=https://your-frontend-domain.com
 ```
 
-## 🧪 Testing the App
+## 🧪 Verification
 
-### Free Version Test:
 1. Open the app
 2. Enter your name
 3. Paste some text
 4. Select a vibe
 5. Click "Rewrite"
-6. Try up to 5 rewrites
-7. You should see the limit modal after 5 rewrites
-
-### Pro Subscription Test:
-1. Click "Upgrade to Pro"
-2. Use Stripe test card: `4242 4242 4242 4242`
-3. Any future expiry date
-4. Any 3-digit CVC
-5. Complete checkout
-6. You should be redirected back with unlimited rewrites
-
-### Stripe Test Cards:
-- Success: `4242 4242 4242 4242`
-- Decline: `4000 0000 0000 0002`
-- Requires Auth: `4000 0025 0000 3155`
+6. Enjoy unlimited creative rewrites! 🎉
 
 ## 🎨 Customization
 
@@ -322,14 +272,9 @@ vibewrite-ai/
   - `Xenova/t5-small` for more accurate text-to-text
 - The fallback system will kick in if generation fails
 
-### Stripe checkout not working
-- Verify all Stripe keys are correct
-- Use test mode keys for development
-- Check webhook is set up correctly for production
-
-### Daily limit not resetting
-- Clear localStorage: `localStorage.clear()`
-- Check browser console for errors
+### Daily limits or Upgrade prompts
+- If you see any "Pro" or "Upgrade" mentions, ensure you are using the latest version of `public/js/app.js`.
+- The app is now set to `isPro = true` by default.
 
 ## 🔒 Security Notes
 

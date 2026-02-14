@@ -2112,12 +2112,11 @@ window.resetUserData = () => {
 let communityScripts = [];
 let currentFilter = 'all';
 let currentSearch = '';
-const UNLOCK_THRESHOLD = 50;
+const UNLOCK_THRESHOLD = 0; // Everything is free - unlock community by default
 
 // Load community script count and check if unlocked
 async function loadCommunityScripts() {
     try {
-        console.log('🌐 Loading community script count...');
 
         const response = await fetch(`${API_URL}/community/scripts/count`);
         const data = await response.json();
