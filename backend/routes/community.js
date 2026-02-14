@@ -18,7 +18,7 @@ const requireDB = (req, res, next) => {
 router.post('/scripts', requireDB, async (req, res) => {
   try {
     const { name, instructions, author = 'Anonymous', example } = req.body;
-    
+
     if (!name || !instructions) {
       return res.status(400).json({
         success: false,
@@ -61,14 +61,14 @@ router.get('/scripts/count', requireDB, async (req, res) => {
     const result = await pool.query(
       `SELECT COUNT(*) as count FROM community_scripts`
     );
-    
+
     const count = result.rows[0].count;
     console.log(`📊 Community script count: ${count}`);
-    
-    res.json({ 
-      success: true, 
+
+    res.json({
+      success: true,
       count: parseInt(count),
-      unlocked: count >= 50
+      unlocked: count >= 51
     });
   } catch (error) {
     console.error('❌ Error getting script count:', error);
@@ -80,7 +80,7 @@ router.get('/scripts/count', requireDB, async (req, res) => {
 router.post('/contribute', requireDB, async (req, res) => {
   try {
     const { name, scriptName, instructions, example } = req.body;
-    
+
     if (!name || !scriptName || !instructions) {
       return res.status(400).json({
         success: false,
@@ -99,14 +99,14 @@ router.post('/contribute', requireDB, async (req, res) => {
     const countResult = await pool.query(
       `SELECT COUNT(*) as count FROM community_scripts`
     );
-    
+
     const newCount = parseInt(countResult.rows[0].count);
-    const unlocked = newCount >= 50;
-    
-    console.log(`✅ Contribution added by ${name}: "${scriptName}" (${newCount}/50)`);
-    
-    // If we just hit 50, auto-approve all pending scripts
-    if (unlocked && newCount === 50) {
+    const unlocked = newCount >= 51;
+
+    console.log(`✅ Contribution added by ${name}: "${scriptName}" (${newCount}/51)`);
+
+    // If we just hit 51, auto-approve all pending scripts
+    if (unlocked && newCount === 51) {
       await pool.query(
         `UPDATE community_scripts SET status = 'approved' WHERE status = 'pending'`
       );
@@ -133,11 +133,11 @@ router.get('/scripts', requireDB, async (req, res) => {
       `SELECT id, name, instructions, author, votes, created_at, status
        FROM community_scripts WHERE status = 'approved' ORDER BY created_at DESC`
     );
-    
+
     console.log(`📚 Fetched ${result.rows.length} community scripts`);
-    
-    res.json({ 
-      success: true, 
+
+    res.json({
+      success: true,
       scripts: result.rows,
       total: result.rows.length
     });
@@ -152,26 +152,26 @@ router.post('/scripts/:id/vote', requireDB, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const { direction = 'up', voter = 'Anonymous' } = req.body;
-    
+
     if (Number.isNaN(id)) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Invalid script ID' 
+        error: 'Invalid script ID'
       });
     }
 
     // For now, just increment/decrement votes (no duplicate vote checking)
     const voteChange = direction === 'up' ? 1 : -1;
-    
+
     const result = await pool.query(
       `UPDATE community_scripts SET votes = votes + ? WHERE id = ?`,
       [voteChange, id]
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        error: 'Script not found' 
+        error: 'Script not found'
       });
     }
 
@@ -182,11 +182,11 @@ router.post('/scripts/:id/vote', requireDB, async (req, res) => {
     );
 
     const newVotes = updatedScript.rows[0].votes;
-    
+
     console.log(`🗳️ Script ${id} voted ${direction}, new total: ${newVotes}`);
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       votes: newVotes,
       direction: direction
     });
@@ -200,11 +200,11 @@ router.post('/scripts/:id/vote', requireDB, async (req, res) => {
 router.get('/scripts/:id', requireDB, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
-    
+
     if (Number.isNaN(id)) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        error: 'Invalid script ID' 
+        error: 'Invalid script ID'
       });
     }
 
@@ -215,14 +215,14 @@ router.get('/scripts/:id', requireDB, async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        error: 'Script not found' 
+        error: 'Script not found'
       });
     }
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       script: result.rows[0]
     });
   } catch (error) {

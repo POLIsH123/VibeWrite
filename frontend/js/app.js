@@ -2111,7 +2111,7 @@ window.resetUserData = () => {
 let communityScripts = [];
 let currentFilter = 'all';
 let currentSearch = '';
-const UNLOCK_THRESHOLD = 0; // Everything is free - unlock community by default
+const UNLOCK_THRESHOLD = 51; // Community unlocks after 51 scripts are collected
 
 // Load community script count and check if unlocked
 async function loadCommunityScripts() {
@@ -2209,7 +2209,7 @@ function showUnlockCelebration() {
     celebration.innerHTML = `
         <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
         <div>Community Unlocked!</div>
-        <div style="font-size: 16px; opacity: 0.9; margin-top: 8px;">50+ scripts collected!</div>
+        <div style="font-size: 16px; opacity: 0.9; margin-top: 8px;">51+ scripts collected!</div>
     `;
 
     document.body.appendChild(celebration);
