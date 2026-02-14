@@ -1193,7 +1193,7 @@ function handleInput() {
     const sendBtn = document.getElementById('rewrite-btn');
 
     const len = textarea.value.trim().length;
-    charCount.textContent = `${len}/500`;
+    charCount.textContent = `${len}/5000`;
 
     // Enable only if text exists AND a vibe is selected
     const isActive = len > 0 && currentVibe;
@@ -1418,7 +1418,8 @@ async function generateRewrite() {
     }
 
     // Show loading with OP animation
-    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('result-placeholder').style.display = 'none';
+    document.getElementById('actual-result').style.display = 'none';
     const loadingEl = document.getElementById('loading');
     loadingEl.style.display = 'flex';
     loadingEl.style.animation = 'slideInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -1601,7 +1602,6 @@ notificationStyle.textContent = `
 document.head.appendChild(notificationStyle);
 
 function displayResult(text) {
-    const resultsSection = document.getElementById('results-section');
     const resultVibe = document.getElementById('result-vibe');
     const resultText = document.getElementById('result-text');
 
@@ -1609,8 +1609,10 @@ function displayResult(text) {
     resultText.textContent = text;
 
     // Show with OP animation
-    resultsSection.style.display = 'block';
-    resultsSection.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    document.getElementById('result-placeholder').style.display = 'none';
+    const actualResult = document.getElementById('actual-result');
+    actualResult.style.display = 'flex';
+    actualResult.style.animation = 'scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
 
     // Add typewriter effect to result text
     const originalText = text;
@@ -1629,6 +1631,7 @@ function displayResult(text) {
 
     // Scroll into view smoothly
     setTimeout(() => {
+        const resultsSection = document.getElementById('results-section');
         resultsSection.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
@@ -1650,8 +1653,9 @@ function copyResult() {
 
 function resetRewrite() {
     document.getElementById('input-text').value = '';
-    document.getElementById('char-count').textContent = '0/500';
-    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('char-count').textContent = '0/5000';
+    document.getElementById('result-placeholder').style.display = 'flex';
+    document.getElementById('actual-result').style.display = 'none';
     document.getElementById('rewrite-btn').disabled = true;
 
     currentVibe = null;

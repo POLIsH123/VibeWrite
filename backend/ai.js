@@ -247,10 +247,10 @@ export async function rewriteText(req) {
       };
     }
 
-    if (text.length > 500) {
+    if (text.length > 5000) {
       return {
         success: false,
-        error: 'Text too long (max 500 chars)'
+        error: 'Text too long (max 5000 chars)'
       };
     }
 
