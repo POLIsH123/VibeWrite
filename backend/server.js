@@ -166,7 +166,9 @@ app.post('/api/rewrite', async (req, res) => {
             'funny', 'cute', 'sarcastic', 'romantic', 'motivational',
             'philosophical', 'nostalgic', 'scientific', 'conspiracy', 'zen',
             'vintage', 'cyberpunk', 'superhero', 'childlike', 'elderly', 'celebrity', 'robot', 'change the words',
-            'hype', 'professional'
+            'hype', 'professional',
+            // Utility Vibes
+            'grammar', 'concise', 'expand', 'professional_email', 'bullet_points', 'tone_analysis'
         ];
         if (!validVibes.includes(vibe)) {
             console.warn('Invalid vibe requested:', vibe);

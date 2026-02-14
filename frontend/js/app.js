@@ -4,12 +4,98 @@
 let currentVibe = null;
 let userName = localStorage.getItem('vibewrite_username');
 let isPro = true;
+// New State for Productivity Suite
+let showDiff = false;
+let templates = {
+    'cold-email': "Subject: Partnership Opportunity\n\nHi [Name],\n\nI hope this email finds you well. I'm reaching out because [Reason]. I believe we could [Value Proposition].\n\nBest,\n[Your Name]",
+    'tweet-thread': "1/5 Here's a thread about [Topic]. 🧵👇\n\n2/5 First point...\n\n3/5 Second point...\n\n4/5 Third point...\n\n5/5 Summary/CTA.",
+    'apology': "I wanted to sincerely apologize for [Situation]. It was not my intention to [Impact], and I am taking steps to ensure it doesn't happen again.",
+    'meeting-notes': "📅 Meeting: [Topic]\n👥 Attendees: [Names]\n\n✅ Action Items:\n- [Item 1]\n- [Item 2]\n\n📝 Key Discussion Points:\n- [Point 1]",
+    'landing-page': "Headline: [Catchy Value Prop]\n\nSubheadline: [Clear Explanation]\n\nCTA: [Action]\n\nSocial Proof: [Testimonial]"
+};
+
+// ... existing state ...
 let dailyUsage = 0;
 let lastUsageDate = localStorage.getItem('vibewrite_last_usage_date');
 let history = JSON.parse(localStorage.getItem('vibewrite_history') || '[]');
 let stats = JSON.parse(localStorage.getItem('vibewrite_stats') || '{"total":0,"vibes":{}}');
 
-const MAX_FREE_REWRITES = 999999; // Unlimited for all users
+// ... constants ...
+
+// ===========================
+// Productivity Functions
+// ===========================
+
+function toggleDiffView() {
+    showDiff = !showDiff;
+    const btn = document.getElementById('diff-toggle');
+    if (btn) btn.classList.toggle('active', showDiff);
+
+    // Re-render output if it exists
+    const container = document.getElementById('output-content');
+    if (container && container.lastResult) {
+        renderOutput(container.lastResult);
+    }
+}
+
+function renderOutput(data) {
+    const container = document.getElementById('output-content');
+    if (!container) return;
+
+    // Store data for toggling
+    container.lastResult = data;
+
+    if (showDiff && data.originalText) {
+        container.innerHTML = generateDiffHtml(data.originalText, data.rewrite);
+    } else {
+        container.innerHTML = `<p>${data.rewrite.replace(/\n/g, '<br>')}</p>`;
+    }
+}
+
+function generateDiffHtml(original, rewrite) {
+    // Simple word-level diff (can be improved with a lib like diff-match-patch)
+    const oWords = original.split(/\s+/);
+    const rWords = rewrite.split(/\s+/);
+    let html = '';
+
+    // Very basic visualization for now
+    html += '<div class="diff-view">';
+    html += '<div class="diff-left"><strong>Original:</strong><br>' + original + '</div>';
+    html += '<div class="diff-right"><strong>Rewrite:</strong><br>' + rewrite + '</div>';
+    html += '</div>';
+
+    return html;
+}
+
+function loadTemplate(templateKey) {
+    const text = templates[templateKey];
+    if (text) {
+        const input = document.getElementById('input-text');
+        if (input) {
+            input.value = text;
+            // Trigger auto-resize or input events if needed
+        }
+    }
+}
+
+function handleToneAnalysis(text) {
+    // Mock analysis for immediate feedback (or call API if implemented)
+    const badge = document.getElementById('tone-badge');
+    const result = document.getElementById('tone-result');
+    if (!badge || !result) return;
+
+    badge.style.display = 'flex';
+
+    // Simple client-side heuristics
+    let tone = "Neutral";
+    if (text.includes('!')) tone = "Excited";
+    if (text.length > 200) tone = "Detailed";
+    if (text.match(/\b(sorry|apologize)\b/i)) tone = "Apologetic";
+
+    result.textContent = tone;
+}
+
+// ... existing code ...
 // Backend API URL — use relative path for production/vercel compatibility
 const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
 
@@ -35,11 +121,39 @@ const vibeEmojis = {
     villain: '🦹',
     superheroVillain: '💀',
     businessPro: '👔',
-    genZTalk: '🧢'
+    superheroVillain: '💀',
+    businessPro: '👔',
+    genZTalk: '🧢',
+    // Utility Vibes
+    grammar: '📝',
+    concise: '✂️',
+    expand: '➕',
+    professional_email: '📧',
+    bullet_points: '•',
+    tone_analysis: '📊'
 };
 
 // All vibes are now free - no locked vibes
 const LOCKED_VIBES = [];
+
+function setupProductivityListeners() {
+    const diffBtn = document.getElementById('diff-toggle');
+    if (diffBtn) diffBtn.addEventListener('click', toggleDiffView);
+
+    // Template buttons
+    document.querySelectorAll('.template-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const template = e.target.getAttribute('data-template');
+            loadTemplate(template);
+            // Optional: Close sidebar on selection
+            const sidebar = document.getElementById('templates-sidebar');
+            if (sidebar) sidebar.classList.remove('active');
+        });
+    });
+
+    // Sidebar toggles
+    // Assuming you have a button to open sidebar - if not, add one or hook into existing UI
+}
 
 function markLockedVibes() {
     // No locked vibes anymore - all vibes are free
@@ -72,6 +186,7 @@ function initVibeWrite() {
         const textarea = document.getElementById('input-text');
         if (textarea) {
             textarea.addEventListener('input', handleInput);
+            textarea.addEventListener('input', (e) => handleToneAnalysis(e.target.value));
         }
 
         // OP Enhancements
@@ -79,6 +194,9 @@ function initVibeWrite() {
         setupIntersectionObserver();
         setupParallaxEffects();
         setupAdvancedAnimations();
+
+        // Output features
+        setupProductivityListeners();
 
         // Mark locked vibes in UI
         markLockedVibes();

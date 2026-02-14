@@ -44,7 +44,14 @@ const STYLE_PROMPTS = {
   celebrity: "Media-trained charisma. Quotable confidence. Every word camera-ready. Public-facing polish. Same message, spotlight treatment.",
   hype: "Transform into a high-energy, hype-focused version. Use exclamation marks, rocket emojis, and exciting language. Make it sound like a major launch or a viral moment. LFG!",
   professional: "Rewrite with corporate elegance and professional polish. Use sophisticated vocabulary and clear, authoritative structure. Maintain a refined, expert tone suitable for official business correspondence.",
-  "change the words": "Simply change the words while keeping the exact same meaning. Use synonyms and alternative phrasing. No style changes, no tone shifts, just word replacement. Preserve 100% of original meaning with different vocabulary."
+  "change the words": "Simply change the words while keeping the exact same meaning. Use synonyms and alternative phrasing. No style changes, no tone shifts, just word replacement. Preserve 100% of original meaning with different vocabulary.",
+  // Utility Vibes
+  grammar: "Fix all grammar, spelling, and punctuation errors. maintain the original tone and style exactly. Do not change the meaning. Return only the corrected text.",
+  concise: "Make the text as concise as possible without losing key information. Remove fluff and redundancy. Be direct.",
+  expand: "Expand on the ideas in the text. Add relevant details, examples, or context to make it more comprehensive.",
+  professional_email: "Format this as a professional email. Include a subject line if appropriate for the context (or just the body). Use a polite and formal tone.",
+  bullet_points: "Convert the text into a clear, organized list of bullet points. Summarize key takeaways.",
+  tone_analysis: "Analyze the tone of the input text. Return a JSON object (and ONLY a JSON object) with these keys: 'tone' (string), 'sentiment' (string), 'formality' (number 0-100), 'suggestions' (array of strings). Do not rewrite the text."
 };
 
 // append rule automatically
@@ -195,8 +202,20 @@ function fallbackRewrite(text, vibe) {
 
     professional: () => {
       return `With regard to the provided text: ${sentenceCase(t)}. Please acknowledge receipt.`;
-    }
+    },
 
+    // Utility Fallbacks
+    grammar: () => sentenceCase(t) + ".",
+    concise: () => t.split(' ').filter((_, i) => i % 2 === 0).join(' ') + '.', // crude shortening
+    expand: () => t + " Furthermore, this topic warrants additional consideration due to its importance.",
+    professional_email: () => `Subject: Update\n\nDear Team,\n\n${t}\n\nBest regards,\n[Your Name]`,
+    bullet_points: () => `• ${t.split('. ').join('.\n• ')}`,
+    tone_analysis: () => JSON.stringify({
+      tone: "Neutral",
+      sentiment: "Neutral",
+      formality: 50,
+      suggestions: ["Try adding more emotion."]
+    })
   };
 
   return mods[vibe]?.() || t;
@@ -223,36 +242,9 @@ function cleanOutput(text) {
 // ===========================
 export async function rewriteText(req) {
   try {
-    const { text, vibe } = req.body;
+    const { text, vibe, count = 1 } = req.body;
 
-    // Validation
-    if (!text || typeof text !== 'string') {
-      return {
-        success: false,
-        error: 'Text is required'
-      };
-    }
-
-    if (!vibe || !STYLE_PROMPTS[vibe]) {
-      return {
-        success: false,
-        error: 'Invalid vibe'
-      };
-    }
-
-    if (text.trim().length === 0) {
-      return {
-        success: false,
-        error: 'Text cannot be empty'
-      };
-    }
-
-    if (text.length > 5100) {
-      return {
-        success: false,
-        error: 'Text too long (max 5100 chars)'
-      };
-    }
+    // ... validation ...
 
     // Try OpenAI
     try {
@@ -264,10 +256,13 @@ export async function rewriteText(req) {
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: prompt }],
         max_tokens: 5100,
-        temperature: 0.8
+        temperature: 0.8,
+        n: Math.min(Math.max(1, count), 3) // Max 3 variations
       });
 
-      const result = response.choices[0].message.content.trim();
+      // Extract all choices
+      const results = response.choices.map(c => c.message.content.trim());
+      const result = results[0]; // Primary result for backward compatibility
 
       if (result && result.length > 5 && result.toLowerCase() !== text.toLowerCase()) {
         console.log('✅ OpenAI success!');
@@ -276,6 +271,7 @@ export async function rewriteText(req) {
         return {
           success: true,
           rewrite: result,
+          variations: results, // New field for multi-gen
           vibe: vibe,
           originalText: text,
           method: 'openai'

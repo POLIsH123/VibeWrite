@@ -1899,7 +1899,56 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                     </svg>
+                    <!-- Output Area -->
+                    <div class="output-container">
+                        <div class="output-header">
+                            <h3 class="output-title">Refined Output</h3>
+                            <div class="output-actions">
+                                <button class="action-btn" id="diff-toggle" title="Show Changes">
+                                    <span class="icon">📝</span> Diff View
+                                </button>
+                                <button class="action-btn" id="copy-btn" title="Copy to Clipboard">
+                                    <span class="icon">📋</span> Copy
+                                </button>
+                                <button class="action-btn" id="save-btn" title="Save to Favorites">
+                                    <span class="icon">⭐</span> Save
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tone Analysis Badge -->
+                        <div id="tone-badge" class="tone-badge" style="display: none;">
+                            <span class="tone-label">Analysis:</span>
+                            <span id="tone-result">Loading...</span>
+                        </div>
+
+                        <div class="output-content" id="output-content">
+                            <p class="placeholder-text">Your transformed text will appear here...</p>
+                        </div>
+
+                        <!-- Multi-Gen Container -->
+                        <div id="multi-gen-container" class="multi-gen-grid" style="display: none;"></div>
+                    </div>
                 </div>
+
+                <!-- Templates Library Sidebar (Hidden by default) -->
+                <div id="templates-sidebar" class="templates-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Templates</h3>
+                        <button id="close-templates">×</button>
+                    </div>
+                    <div class="templates-list">
+                        <button class="template-btn" data-template="cold-email">📧 Cold Email</button>
+                        <button class="template-btn" data-template="tweet-thread">🐦 Tweet Thread</button>
+                        <button class="template-btn" data-template="apology">🙏 Apology</button>
+                        <button class="template-btn" data-template="meeting-notes">📝 Meeting Notes</button>
+                        <button class="template-btn" data-template="landing-page">🚀 Landing Page Copy</button>
+                    </div>
+                </div>
+
+                <p class="hero-subtitle">
+                    Paste your text. Pick a style. Get <strong>AI-powered rewrites</strong> in seconds.
+                </p>
 
                 <h1 class="hero-title">
                     <span class="line">
