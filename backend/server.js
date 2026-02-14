@@ -120,10 +120,10 @@ app.post('/api/rewrite', async (req, res) => {
         }
 
         // Length limits to prevent abuse
-        if (text.length > 5000) {
+        if (text.length > 5100) {
             return res.status(400).json({
                 success: false,
-                error: 'Text too long. Maximum 5000 characters allowed.'
+                error: 'Text too long. Maximum 5100 characters allowed.'
             });
         }
 

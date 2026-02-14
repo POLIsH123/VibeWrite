@@ -1648,7 +1648,7 @@ function copyResult() {
 
 function resetRewrite() {
     document.getElementById('input-text').value = '';
-    document.getElementById('char-count').textContent = '0/5000';
+    document.getElementById('char-count').textContent = '0/5100';
     document.getElementById('result-placeholder').style.display = 'flex';
     document.getElementById('actual-result').style.display = 'none';
     document.getElementById('rewrite-btn').disabled = true;

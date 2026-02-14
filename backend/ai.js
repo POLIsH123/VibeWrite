@@ -247,10 +247,10 @@ export async function rewriteText(req) {
       };
     }
 
-    if (text.length > 5000) {
+    if (text.length > 5100) {
       return {
         success: false,
-        error: 'Text too long (max 5000 chars)'
+        error: 'Text too long (max 5100 chars)'
       };
     }
 
@@ -263,7 +263,7 @@ export async function rewriteText(req) {
       const response = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [{ role: "user", content: prompt }],
-        max_tokens: 150,
+        max_tokens: 5100,
         temperature: 0.8
       });
 
