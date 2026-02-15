@@ -3228,16 +3228,20 @@
             }
         }
         
-        // Universal navigation handler
+        // Universal navigation handler - CATCHES EVERYTHING
         document.addEventListener('click', function(e) {
             const button = e.target.closest('button');
             const navItem = e.target.closest('.nav-item');
             const link = e.target.closest('a');
+            const vibeCard = e.target.closest('.vibe-card');
+            const trendingCard = e.target.closest('.trending-card');
             
             console.log('🔘 Click detected:', {
                 button: button?.textContent,
                 navItem: navItem?.textContent,
                 link: link?.textContent,
+                vibeCard: vibeCard?.textContent,
+                trendingCard: trendingCard?.textContent,
                 target: e.target
             });
             
@@ -3257,9 +3261,30 @@
                 return;
             }
             
+            // Handle vibe cards
+            if (vibeCard) {
+                const vibe = vibeCard.getAttribute('data-vibe');
+                if (vibe) {
+                    console.log('🎨 Vibe selected:', vibe);
+                    selectVibe(vibe);
+                }
+                return;
+            }
+            
+            // Handle trending cards
+            if (trendingCard) {
+                const vibe = trendingCard.getAttribute('onclick')?.match(/quickRewrite\('(.+?)'\)/)?.[1];
+                if (vibe) {
+                    console.log('🔥 Trending vibe clicked:', vibe);
+                    quickRewrite(vibe);
+                }
+                return;
+            }
+            
             // Handle regular buttons with onclick
             if (button && button.onclick) {
                 try {
+                    console.log('🔘 Button onclick executing...');
                     button.onclick();
                 } catch (err) {
                     console.log('❌ Button onclick error:', err);
@@ -3281,6 +3306,15 @@
             if (selectedPage) {
                 selectedPage.style.display = 'flex';
                 console.log('✅ Showing page:', pageId);
+                
+                // Initialize page-specific content
+                if (pageId === 'history') {
+                    console.log('📚 Initializing history page...');
+                    renderHistory();
+                } else if (pageId === 'community') {
+                    console.log('👥 Initializing community page...');
+                    loadCommunityScripts();
+                }
             } else {
                 console.log('❌ Page not found:', pageId);
             }
@@ -3296,10 +3330,46 @@
             }
         }
         
+        // Backup functions for common actions
+        function selectVibe(vibe) {
+            console.log('🎨 Backup selectVibe called:', vibe);
+            document.querySelectorAll('.vibe-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            const selectedCard = document.querySelector(`[data-vibe="${vibe}"]`);
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+            }
+        }
+        
+        function quickRewrite(vibe) {
+            console.log('🔥 Backup quickRewrite called:', vibe);
+            showPage('rewrite');
+            selectVibe(vibe);
+        }
+        
+        function renderHistory() {
+            console.log('📚 Backup renderHistory called');
+            const historyList = document.getElementById('recent-list');
+            if (historyList) {
+                historyList.innerHTML = '<p style="text-align: center; opacity: 0.7;">No history yet</p>';
+            }
+        }
+        
+        function loadCommunityScripts() {
+            console.log('👥 Backup loadCommunityScripts called');
+            // Community page initialization
+        }
+        
+        // Make functions global
         window.openApp = openApp;
         window.showPage = showPage;
+        window.selectVibe = selectVibe;
+        window.quickRewrite = quickRewrite;
+        window.renderHistory = renderHistory;
+        window.loadCommunityScripts = loadCommunityScripts;
     </script>
-    <script src="js/app.js?v=50"></script>
+    <script src="js/app.js?v=55"></script>
 </body>
 
 </html>
