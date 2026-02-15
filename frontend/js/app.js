@@ -1057,7 +1057,7 @@ function showPage(targetPageId) {
         }, 100);
     } else {
         // First load - no exit animation needed
-        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+        document.querySelectorAll('.page').forEach(pageElement => pageElement.style.display = 'none');
         const targetSelectedPage = document.getElementById(`page-${targetPageId}`);
         if (targetSelectedPage) {
             targetSelectedPage.style.display = 'flex';
