@@ -1356,6 +1356,65 @@
             filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
         }
 
+        /* Diff/Highlight Styles */
+        .diff-highlight {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(16, 185, 129, 0.2));
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            border-radius: 4px;
+            padding: 2px 6px;
+            color: #10b981;
+            font-weight: 600;
+            position: relative;
+            animation: diff-pulse 2s ease-in-out infinite;
+        }
+
+        .diff-highlight.added {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3));
+            border-color: #22c55e;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .diff-highlight.removed {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3));
+            border-color: #ef4444;
+            color: #ef4444;
+            text-decoration: line-through;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        @keyframes diff-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.02);
+            }
+        }
+
+        /* Specific word highlighting */
+        .highlight-words {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            border-radius: 3px;
+            padding: 1px 4px;
+            color: #6366f1;
+            font-weight: 500;
+        }
+
+        .highlight-and {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.2));
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 3px;
+            padding: 1px 4px;
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
         .testimonials-nav {
             position: absolute;
             top: 50%;
@@ -1840,7 +1899,29 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
                     </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
                 </div>
+
+                <!-- Templates Library Sidebar (Hidden by default) -->
+                <div id="templates-sidebar" class="templates-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Templates</h3>
+                        <button id="close-templates">×</button>
+                    </div>
+                    <div class="templates-list">
+                        <button class="template-btn" data-template="cold-email">📧 Cold Email</button>
+                        <button class="template-btn" data-template="tweet-thread">🐦 Tweet Thread</button>
+                        <button class="template-btn" data-template="apology">🙏 Apology</button>
+                        <button class="template-btn" data-template="meeting-notes">📝 Meeting Notes</button>
+                        <button class="template-btn" data-template="landing-page">🚀 Landing Page Copy</button>
+                    </div>
+                </div>
+
+                <p class="hero-subtitle">
+                    Paste your text. Pick a style. Get <strong>AI-powered rewrites</strong> in seconds.
+                </p>
 
                 <h1 class="hero-title">
                     <span class="line">
@@ -1862,6 +1943,7 @@
                     Get started free
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9,18 15,12 9,6" />
+                        <polygon points="15,12 21,12 21,22 15,22" />
                     </svg>
                 </button>
             </div>
@@ -1908,8 +1990,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Privacy Section Removed - Modal still available via nav -->
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="section">
@@ -2006,7 +2086,8 @@
                         <div class="feature-icon orange">10+</div>
                         <h3 class="feature-title">Vibes</h3>
                         <p class="feature-description">From funny to professional, savage to romantic, pirate to
-                            shakespearean — we've got every vibe you need to express yourself perfectly.</p>
+                            shakespearean — we've got every vibe you need to express yourself perfectly. Yes! VibeWrite
+                            is completely free to use with unlimited rewrites and all vibes available.</p>
                     </div>
 
                     <div class="feature-card" data-tilt>
@@ -2081,9 +2162,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Pricing section removed as per user request (everything is free) -->
-
 
         <!-- Open Source Section -->
         <section class="section" style="padding: 100px 40px; text-align: center; background: rgba(0,0,0,0.5);">
@@ -2175,288 +2253,339 @@
                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                         <polyline points="16 17 21 12 16 7" />
                         <line x1="21" y1="12" x2="9" y2="12" />
+            </div>
+    </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
                     </svg>
-                    Logout
                 </button>
             </div>
-        </aside>
+            <div class="header-center">
+                <h1 class="page-title" id="page-title">Home</h1>
+            </div>
+            <div class="header-right">
+                <!-- Usage removed - unlimited rewrites -->
+            </div>
+        </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="header">
-                <div class="header-left">
-                    <button class="mobile-menu-btn" onclick="toggleSidebar()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <line x1="3" y1="6" x2="21" y2="6" />
-                            <line x1="3" y1="12" x2="21" y2="12" />
-                            <line x1="3" y1="18" x2="21" y2="18" />
-                        </svg>
-                    </button>
+        <!-- Home Page -->
+        <div id="page-home" class="page">
+            <div class="content-area">
+                <div class="welcome-section">
+                    <h2>Welcome back, <span id="welcome-name">User</span>!</h2>
+                    <p>Ready to transform your text with AI-powered vibes?</p>
                 </div>
-                <div class="header-center">
-                    <h1 class="page-title" id="page-title">Home</h1>
+
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-rewrites">0</div>
+                        <div class="stat-label">Total Rewrites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-favorite">-</div>
+                        <div class="stat-label">Favorite Vibe</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-today">0</div>
+                        <div class="stat-label">Today</div>
+                    </div>
                 </div>
-                <div class="header-right">
-                    <!-- Usage removed - unlimited rewrites -->
+
+                <button class="quick-start-btn" onclick="showPage('rewrite')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                    </svg>
+                    <span>Start rewriting</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6" />
+                    </svg>
+                </button>
+
+                <div class="section" id="recent-section" style="display: none;">
+                    <div class="section-header">
+                        <div class="section-title">Recent</div>
+                    </div>
+                    <div class="recent-list" id="recent-list"></div>
                 </div>
-            </header>
 
-            <!-- Home Page -->
-            <div id="page-home" class="page">
-                <div class="content-area">
-                    <div class="welcome-section">
-                        <h2>Welcome back, <span id="welcome-name">User</span>!</h2>
-                        <p>Ready to transform your text with AI-powered vibes?</p>
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">Trending Vibes</div>
                     </div>
-
-                    <div class="stats-row">
-                        <div class="stat-card">
-                            <div class="stat-value" id="stat-rewrites">0</div>
-                            <div class="stat-label">Total Rewrites</div>
+                    <div class="trending-grid">
+                        <div class="trending-card" onclick="quickRewrite('funny')">
+                            <div class="trending-icon">😂</div>
+                            <div class="trending-name">Funny</div>
+                            <div class="trending-stat">Hot</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="stat-favorite">-</div>
-                            <div class="stat-label">Favorite Vibe</div>
+                        <div class="trending-card" onclick="quickRewrite('cute')">
+                            <div class="trending-icon">💖</div>
+                            <div class="trending-name">Cute</div>
+                            <div class="trending-stat">Sweet</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="stat-today">0</div>
-                            <div class="stat-label">Today</div>
+                        <div class="trending-card" onclick="quickRewrite('sarcastic')">
+                            <div class="trending-icon">🙄</div>
+                            <div class="trending-name">Sarcastic</div>
+                            <div class="trending-stat">Fire</div>
                         </div>
-                    </div>
-
-                    <button class="quick-start-btn" onclick="showPage('rewrite')">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                        </svg>
-                        <span>Start rewriting</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polyline points="9,18 15,12 9,6" />
-                        </svg>
-                    </button>
-
-                    <div class="section" id="recent-section" style="display: none;">
-                        <div class="section-header">
-                            <div class="section-title">Recent</div>
+                        <div class="trending-card" onclick="quickRewrite('romantic')">
+                            <div class="trending-icon">💕</div>
+                            <div class="trending-name">Romantic</div>
+                            <div class="trending-stat">Sweet</div>
                         </div>
-                        <div class="recent-list" id="recent-list"></div>
-                    </div>
-
-                    <div class="section">
-                        <div class="section-header">
-                            <div class="section-title">Trending Vibes</div>
-                        </div>
-                        <div class="trending-grid">
-                            <div class="trending-card" onclick="quickRewrite('funny')">
-                                <div class="trending-icon">😂</div>
-                                <div class="trending-name">Funny</div>
-                                <div class="trending-stat">Hot</div>
-                            </div>
-                            <div class="trending-card" onclick="quickRewrite('cute')">
-                                <div class="trending-icon">💖</div>
-                                <div class="trending-name">Cute</div>
-                                <div class="trending-stat">Sweet</div>
-                            </div>
-                            <div class="trending-card" onclick="quickRewrite('sarcastic')">
-                                <div class="trending-icon">🙄</div>
-                                <div class="trending-name">Sarcastic</div>
-                                <div class="trending-stat">Fire</div>
-                            </div>
-                            <div class="trending-card" onclick="quickRewrite('romantic')">
-                                <div class="trending-icon">💕</div>
-                                <div class="trending-name">Romantic</div>
-                                <div class="trending-stat">Sweet</div>
-                            </div>
-                            <div class="trending-card" onclick="quickRewrite('hype')">
-                                <div class="trending-icon">🚀</div>
-                                <div class="trending-name">Hype</div>
-                                <div class="trending-stat">Viral</div>
-                            </div>
+                        <div class="trending-card" onclick="quickRewrite('hype')">
+                            <div class="trending-icon">🚀</div>
+                            <div class="trending-name">Hype</div>
+                            <div class="trending-stat">Viral</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Rewrite Page -->
-            <div id="page-rewrite" class="page" style="display: none;">
-                <div class="content-area">
-                    <div class="rewrite-workspace">
-                        <div class="rewrite-main">
-                            <div class="input-container">
-                                <div class="input-box">
-                                    <textarea id="input-text" placeholder="Paste your text here..."
-                                        maxlength="5100"></textarea>
-                                    <div class="input-footer">
-                                        <span class="char-count" id="char-count">0/5100</span>
-                                        <button class="send-btn" id="rewrite-btn" onclick="generateRewrite()" disabled>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2.5">
-                                                <path d="M5 12h14M12 5l7 7-7 7" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="vibe-selection-section">
-                                <div class="vibe-selection-header">
-                                    <h3>Select a vibe</h3>
-                                </div>
-                                <div class="vibe-grid">
-                                    <div class="vibe-card" data-vibe="funny" onclick="selectVibe('funny')">
-                                        <div class="vibe-icon">😂</div>
-                                        <div class="vibe-label">Funny</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="cute" onclick="selectVibe('cute')">
-                                        <div class="vibe-icon">💖</div>
-                                        <div class="vibe-label">Cute</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="sarcastic" onclick="selectVibe('sarcastic')">
-                                        <div class="vibe-icon">🙄</div>
-                                        <div class="vibe-label">Sarcastic</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="romantic" onclick="selectVibe('romantic')">
-                                        <div class="vibe-icon">💕</div>
-                                        <div class="vibe-label">Romantic</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="motivational"
-                                        onclick="selectVibe('motivational')">
-                                        <div class="vibe-icon">💪</div>
-                                        <div class="vibe-label">Motivational</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="philosophical"
-                                        onclick="selectVibe('philosophical')">
-                                        <div class="vibe-icon">🤔</div>
-                                        <div class="vibe-label">Philosophical</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="professional"
-                                        onclick="selectVibe('professional')">
-                                        <div class="vibe-icon">💼</div>
-                                        <div class="vibe-label">Professional</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="hype" onclick="selectVibe('hype')">
-                                        <div class="vibe-icon">🚀</div>
-                                        <div class="vibe-label">Hype</div>
-                                    </div>
-                                </div>
-
-                                <div class="vibe-grid-footer" style="margin-top: 25px; text-align: center;">
-                                    <button class="see-all-btn" onclick="toggleAllVibes()">
-                                        <span id="see-all-text">See all vibes</span>
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <polyline points="6 9 12 15 18 9" />
+        <!-- Rewrite Page -->
+        <div id="page-rewrite" class="page" style="display: none;">
+            <div class="content-area">
+                <div class="rewrite-workspace">
+                    <div class="rewrite-main">
+                        <div class="input-container">
+                            <div class="input-box">
+                                <textarea id="input-text" placeholder="Paste your text here..."
+                                    maxlength="5100"></textarea>
+                                <div class="input-footer">
+                                    <span class="char-count" id="char-count">0/5100</span>
+                                    <button class="text-btn" id="templates-btn"
+                                        onclick="document.getElementById('templates-sidebar').classList.add('active')"
+                                        style="margin-right: auto; margin-left: 10px;">
+                                        📄 Templates
+                                    </button>
+                                    <button class="send-btn" id="rewrite-btn" onclick="generateRewrite()" disabled>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5">
+                                            <path d="M5 12h14M12 5l7 7-7 7" />
                                         </svg>
                                     </button>
                                 </div>
-
-                                <div id="extended-vibes" class="vibe-grid"
-                                    style="display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                                    <div class="vibe-card" data-vibe="nostalgic" onclick="selectVibe('nostalgic')">
-                                        <div class="vibe-icon">🕰️</div>
-                                        <div class="vibe-label">Nostalgic</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="scientific" onclick="selectVibe('scientific')">
-                                        <div class="vibe-icon">🔬</div>
-                                        <div class="vibe-label">Scientific</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="conspiracy" onclick="selectVibe('conspiracy')">
-                                        <div class="vibe-icon">👁️</div>
-                                        <div class="vibe-label">Conspiracy</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="zen" onclick="selectVibe('zen')">
-                                        <div class="vibe-icon">🧘</div>
-                                        <div class="vibe-label">Zen</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="vintage" onclick="selectVibe('vintage')">
-                                        <div class="vibe-icon">📻</div>
-                                        <div class="vibe-label">Vintage</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="cyberpunk" onclick="selectVibe('cyberpunk')">
-                                        <div class="vibe-icon">🤖</div>
-                                        <div class="vibe-label">Cyberpunk</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="superhero" onclick="selectVibe('superhero')">
-                                        <div class="vibe-icon">🦸</div>
-                                        <div class="vibe-label">Superhero</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="childlike" onclick="selectVibe('childlike')">
-                                        <div class="vibe-icon">🧒</div>
-                                        <div class="vibe-label">Childlike</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="elderly" onclick="selectVibe('elderly')">
-                                        <div class="vibe-icon">🧓</div>
-                                        <div class="vibe-label">Elderly</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="celebrity" onclick="selectVibe('celebrity')">
-                                        <div class="vibe-icon">🌟</div>
-                                        <div class="vibe-label">Celebrity</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
-                                        <div class="vibe-icon">🤖</div>
-                                        <div class="vibe-label">Robot</div>
-                                    </div>
-                                    <div class="vibe-card" data-vibe="change the words"
-                                        onclick="selectVibe('change the words')">
-                                        <div class="vibe-icon">🔄</div>
-                                        <div class="vibe-label">Change Words</div>
-                                    </div>
-                                </div>
-
-                                <div class="vibe-designer-section"
-                                    style="margin-top: 40px; padding: 25px; background: rgba(99, 102, 241, 0.1); border: 1px dashed rgba(99, 102, 241, 0.4); border-radius: 20px; text-align: center;">
-                                    <div style="font-size: 24px; margin-bottom: 10px;">🎨</div>
-                                    <h3>Vibe Designer</h3>
-                                    <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">Create your own
-                                        custom
-                                        rewriting style</p>
-                                </div>
                             </div>
                         </div>
 
-                        <aside class="rewrite-side">
-                            <div class="results-section" id="results-section">
-                                <div class="result-box">
-                                    <!-- Placeholder shown when no result -->
-                                    <div class="result-placeholder" id="result-placeholder">
-                                        <div class="result-placeholder-icon">✨</div>
-                                        <h3>Your Vibe Awaits</h3>
-                                        <p>Enter your text and select a vibe to see the transformation.</p>
-                                    </div>
-
-                                    <!-- Actual result hidden initially -->
-                                    <div id="actual-result"
-                                        style="display: none; height: 100%; flex-direction: column;">
-                                        <div class="result-header">
-                                            <div class="result-vibe" id="result-vibe">Funny</div>
-                                            <div class="result-actions">
-                                                <button class="icon-btn" onclick="copyResult()" title="Copy">
-                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2">
-                                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                                        <path
-                                                            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="result-text" id="result-text">Your rewritten text will appear
-                                            here...</div>
-                                        <button class="empty-state-btn" onclick="resetRewrite()">Reset & Start
-                                            Over</button>
-                                    </div>
+                        <div class="vibe-selection-section">
+                            <div class="vibe-selection-header">
+                                <h3>Select a vibe</h3>
+                            </div>
+                            <div class="vibe-grid">
+                                <div class="vibe-card" data-vibe="funny" onclick="selectVibe('funny')">
+                                    <div class="vibe-icon">😂</div>
+                                    <div class="vibe-label">Funny</div>
                                 </div>
-                                <div class="loading" id="loading" style="display: none; margin-top: 20px;">
-                                    <div class="spinner"></div>
-                                    <div style="margin-top: 10px;">Vibeing your text...</div>
+                                <div class="vibe-card" data-vibe="cute" onclick="selectVibe('cute')">
+                                    <div class="vibe-icon">💖</div>
+                                    <div class="vibe-label">Cute</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="sarcastic" onclick="selectVibe('sarcastic')">
+                                    <div class="vibe-icon">🙄</div>
+                                    <div class="vibe-label">Sarcastic</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="romantic" onclick="selectVibe('romantic')">
+                                    <div class="vibe-icon">💕</div>
+                                    <div class="vibe-label">Romantic</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="motivational" onclick="selectVibe('motivational')">
+                                    <div class="vibe-icon">💪</div>
+                                    <div class="vibe-label">Motivational</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="philosophical" onclick="selectVibe('philosophical')">
+                                    <div class="vibe-icon">🤔</div>
+                                    <div class="vibe-label">Philosophical</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="professional" onclick="selectVibe('professional')">
+                                    <div class="vibe-icon">💼</div>
+                                    <div class="vibe-label">Professional</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="hype" onclick="selectVibe('hype')">
+                                    <div class="vibe-icon">🚀</div>
+                                    <div class="vibe-label">Hype</div>
                                 </div>
                             </div>
-                        </aside>
+
+                            <!-- Utility Vibes Section -->
+                            <div class="vibe-selection-header" style="margin-top: 20px;">
+                                <h3>Utility</h3>
+                            </div>
+                            <div class="vibe-grid">
+                                <div class="vibe-card" data-vibe="grammar" onclick="selectVibe('grammar')">
+                                    <div class="vibe-icon">📝</div>
+                                    <div class="vibe-label">Grammar</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="concise" onclick="selectVibe('concise')">
+                                    <div class="vibe-icon">✂️</div>
+                                    <div class="vibe-label">Concise</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="expand" onclick="selectVibe('expand')">
+                                    <div class="vibe-icon">➕</div>
+                                    <div class="vibe-label">Expand</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="professional_email"
+                                    onclick="selectVibe('professional_email')">
+                                    <div class="vibe-icon">📧</div>
+                                    <div class="vibe-label">Email</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="bullet_points" onclick="selectVibe('bullet_points')">
+                                    <div class="vibe-icon">•</div>
+                                    <div class="vibe-label">Bullets</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="tone_analysis" onclick="selectVibe('tone_analysis')">
+                                    <div class="vibe-icon">📊</div>
+                                    <div class="vibe-label">Analyze</div>
+                                </div>
+                            </div>
+
+                            <div class="vibe-grid-footer" style="margin-top: 25px; text-align: center;">
+                                <button class="see-all-btn" onclick="toggleAllVibes()">
+                                    <span id="see-all-text">See all vibes</span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div id="extended-vibes" class="vibe-grid"
+                                style="display: none; margin-top: 25px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                                <div class="vibe-card" data-vibe="nostalgic" onclick="selectVibe('nostalgic')">
+                                    <div class="vibe-icon">🕰️</div>
+                                    <div class="vibe-label">Nostalgic</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="scientific" onclick="selectVibe('scientific')">
+                                    <div class="vibe-icon">🔬</div>
+                                    <div class="vibe-label">Scientific</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="conspiracy" onclick="selectVibe('conspiracy')">
+                                    <div class="vibe-icon">👁️</div>
+                                    <div class="vibe-label">Conspiracy</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="zen" onclick="selectVibe('zen')">
+                                    <div class="vibe-icon">🧘</div>
+                                    <div class="vibe-label">Zen</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="vintage" onclick="selectVibe('vintage')">
+                                    <div class="vibe-icon">📻</div>
+                                    <div class="vibe-label">Vintage</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="cyberpunk" onclick="selectVibe('cyberpunk')">
+                                    <div class="vibe-icon">🤖</div>
+                                    <div class="vibe-label">Cyberpunk</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="superhero" onclick="selectVibe('superhero')">
+                                    <div class="vibe-icon">🦸</div>
+                                    <div class="vibe-label">Superhero</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="childlike" onclick="selectVibe('childlike')">
+                                    <div class="vibe-icon">🧒</div>
+                                    <div class="vibe-label">Childlike</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="elderly" onclick="selectVibe('elderly')">
+                                    <div class="vibe-icon">🧓</div>
+                                    <div class="vibe-label">Elderly</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="celebrity" onclick="selectVibe('celebrity')">
+                                    <div class="vibe-icon">🌟</div>
+                                    <div class="vibe-label">Celebrity</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="robot" onclick="selectVibe('robot')">
+                                    <div class="vibe-icon">🤖</div>
+                                    <div class="vibe-label">Robot</div>
+                                </div>
+                                <div class="vibe-card" data-vibe="change the words"
+                                    onclick="selectVibe('change the words')">
+                                    <div class="vibe-icon">🔄</div>
+                                    <div class="vibe-label">Change Words</div>
+                                </div>
+                            </div>
+
+                            <div class="vibe-designer-section"
+                                style="margin-top: 40px; padding: 25px; background: rgba(99, 102, 241, 0.1); border: 1px dashed rgba(99, 102, 241, 0.4); border-radius: 20px; text-align: center;">
+                                <div style="font-size: 24px; margin-bottom: 10px;">🎨</div>
+                                <h3>Vibe Designer</h3>
+                                <p style="font-size: 14px; opacity: 0.8; margin-bottom: 15px;">Create your own custom
+                                    rewriting style</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <aside class="rewrite-side">
+                        <div class="results-section" id="results-section">
+                            <div class="result-box">
+                                <!-- Placeholder shown when no result -->
+                                <div class="result-placeholder" id="result-placeholder">
+                                    <div class="result-placeholder-icon">✨</div>
+                                    <h3>Your Vibe Awaits</h3>
+                                    <p>Enter your text and select a vibe to see the transformation.</p>
+                                </div>
+
+                                <!-- Actual result hidden initially -->
+                                <div id="actual-result" class="output-container"
+                                    style="display: none; height: 100%; flex-direction: column;">
+                                    <div class="result-header">
+                                        <div class="result-vibe" id="result-vibe">Funny</div>
+                                        <div class="result-actions">
+                                            <button class="icon-btn" id="diff-toggle" title="Show Changes">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z">
+                                                    </path>
+                                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                                </svg>
+                                            </button>
+                                            <button class="icon-btn" onclick="copyResult()" title="Copy">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tone Analysis Badge -->
+                                    <div id="tone-badge" class="tone-badge"
+                                        style="display: none; margin-bottom: 10px; padding: 5px 10px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; font-size: 12px;">
+                                        <span class="tone-label"
+                                            style="opacity: 0.7; margin-right: 5px;">Analysis:</span>
+                                        <span id="tone-result"
+                                            style="font-weight: bold; color: #4ade80;">Loading...</span>
+                                    </div>
+
+                                    <div class="result-text" id="result-text">Your rewritten text will appear here...
+                                    </div>
+
+                                    <!-- Multi-Gen Results (if needed) -->
+                                    <div id="multi-gen-container" class="multi-gen-grid" style="display: none;"></div>
+
+                                    <button class="empty-state-btn" onclick="resetRewrite()">Reset & Start Over</button>
+                                </div>
+                            </div>
+                            <div class="loading" id="loading" style="display: none; margin-top: 20px;">
+                                <div class="spinner"></div>
+                                <div style="margin-top: 10px;">Vibeing your text...</div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
             </div>
 
@@ -2663,7 +2792,7 @@
                     </div>
                 </div>
             </div>
-        </main>
+    </main>
     </div>
 
     <!-- Modals -->
@@ -3088,8 +3217,6 @@
         });
     </script>
     <script src="js/app.js?v=19"></script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 
 </html>
