@@ -71,6 +71,27 @@
             visibility: visible !important;
             opacity: 1 !important;
             z-index: 1000 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #1a1a2e !important;
+            /* Force a dark blue background */
+        }
+
+        body.app-active .sidebar {
+            display: flex !important;
+            width: 280px !important;
+            /* Force width */
+            background: #0f0f23 !important;
+            /* Darker sidebar */
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.app-active .main-content {
+            display: flex !important;
+            flex-grow: 1 !important;
         }
     </style>
     <style>
