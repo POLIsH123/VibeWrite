@@ -991,8 +991,15 @@ document.head.appendChild(rippleStyle);
 // Landing Page
 // ===========================
 function openApp() {
+    console.log('🚀 openApp() called');
+    
     const landingPage = document.getElementById('landing-page');
     const mainApp = document.getElementById('main-app');
+    
+    console.log('🔍 Elements found:', {
+        landingPage: !!landingPage,
+        mainApp: !!mainApp
+    });
     
     if (landingPage) landingPage.style.display = 'none';
     if (mainApp) mainApp.style.display = 'flex';
