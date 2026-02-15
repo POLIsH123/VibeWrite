@@ -992,6 +992,7 @@ document.head.appendChild(rippleStyle);
 // ===========================
 function openApp() {
     console.log('🚀 openApp() called');
+    console.log('🔍 Current userName:', userName);
     
     const landingPage = document.getElementById('landing-page');
     const mainApp = document.getElementById('main-app');
@@ -1001,10 +1002,25 @@ function openApp() {
         mainApp: !!mainApp
     });
     
-    if (landingPage) landingPage.style.display = 'none';
-    if (mainApp) mainApp.style.display = 'flex';
+    if (landingPage) {
+        console.log('✅ Hiding landing page');
+        landingPage.style.display = 'none';
+    } else {
+        console.log('❌ Landing page not found');
+    }
+    
+    if (mainApp) {
+        console.log('✅ Showing main app');
+        mainApp.style.display = 'flex';
+    } else {
+        console.log('❌ Main app not found');
+    }
+    
     if (!userName) {
+        console.log('👤 Showing name modal');
         showNameModal();
+    } else {
+        console.log('👤 User already has name:', userName);
     }
 }
 
