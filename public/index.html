@@ -3317,11 +3317,15 @@
             const mainApp = document.getElementById('main-app');
             
             if (landingPage) landingPage.style.display = 'none';
-            if (mainApp) mainApp.style.display = 'flex';
+            if (mainApp) {
+                mainApp.style.display = 'flex';
+                mainApp.style.visibility = 'visible';
+                mainApp.style.opacity = '1';
+            }
         }
         window.openApp = openApp;
     </script>
-    <script src="js/app.js?v=33"></script>
+    <script src="js/app.js?v=34"></script>
 </body>
 
 </html>
