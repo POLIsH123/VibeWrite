@@ -1037,11 +1037,21 @@ function showPage(pageId) {
         }, 300);
     } else {
         // First load - no exit animation needed
+        console.log(`[DEBUG] First load showing page-${pageId}`);
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
         const page = document.getElementById(`page-${pageId}`);
         if (page) {
             page.style.display = 'flex';
+            // Force reset opacity in case CSS messed it up
+            page.style.opacity = '1';
+            page.style.zIndex = '20';
             page.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            console.log(`[DEBUG] page-${pageId} display set to flex. InnerHTML len: ${page.innerHTML.length}`);
+            const computed = window.getComputedStyle(page);
+            console.log(`[DEBUG] Computed display: ${computed.display}, opacity: ${computed.opacity}, z-index: ${computed.zIndex}`);
+        } else {
+            console.error(`[DEBUG] page-${pageId} NOT FOUND in DOM`);
         }
     }
 
