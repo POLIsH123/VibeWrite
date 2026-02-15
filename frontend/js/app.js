@@ -1037,20 +1037,20 @@ function backToLanding() {
 // ===========================
 function showPage(targetPageId) {
     // Add exit animation to current page
-    const currentPage = document.querySelector('.page[style*="flex"]');
-    if (currentPage) {
-        currentPage.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    const currentPageElement = document.querySelector('.page[style*="flex"]');
+    if (currentPageElement) {
+        currentPageElement.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
     }
 
     // Show selected page with entrance animation
-    const selectedPage = document.getElementById(`page-${targetPageId}`);
-    if (selectedPage) {
-        selectedPage.style.display = 'flex';
-        selectedPage.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    const selectedPageElement = document.getElementById(`page-${targetPageId}`);
+    if (selectedPageElement) {
+        selectedPageElement.style.display = 'flex';
+        selectedPageElement.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         
         // Add stagger animations to page content
         setTimeout(() => {
-            const pageElements = selectedPage.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
+            const pageElements = selectedPageElement.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
             pageElements.forEach((el, index) => {
                 el.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
             });
