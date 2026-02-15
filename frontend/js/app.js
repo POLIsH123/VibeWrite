@@ -1031,12 +1031,6 @@ function showPage(pageId) {
     if (selectedPage) {
         selectedPage.style.display = 'flex';
         selectedPage.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-                // Add stagger animations to page content
-                setTimeout(() => {
-                    const pageElements = page.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
-                    pageElements.forEach((el, index) => {
-                        el.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
-                    });
                 }, 100);
             }
         }, 300);
