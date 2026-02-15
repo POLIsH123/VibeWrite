@@ -991,17 +991,22 @@ document.head.appendChild(rippleStyle);
 // Landing Page
 // ===========================
 function openApp() {
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('main-app').style.display = 'flex';
-
+    const landingPage = document.getElementById('landing-page');
+    const mainApp = document.getElementById('main-app');
+    
+    if (landingPage) landingPage.style.display = 'none';
+    if (mainApp) mainApp.style.display = 'flex';
     if (!userName) {
         showNameModal();
     }
 }
 
 function backToLanding() {
-    document.getElementById('main-app').style.display = 'none';
-    document.getElementById('landing-page').style.display = 'block';
+    const mainApp = document.getElementById('main-app');
+    const landingPage = document.getElementById('landing-page');
+    
+    if (mainApp) mainApp.style.display = 'none';
+    if (landingPage) landingPage.style.display = 'block';
 }
 
 // ===========================
