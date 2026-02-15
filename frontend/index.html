@@ -3231,24 +3231,78 @@
             }
         }
         
-        // Universal button click handler
+        // Universal navigation handler
         document.addEventListener('click', function(e) {
             const button = e.target.closest('button');
-            if (button) {
-                console.log('🔘 Button clicked:', button.textContent, button.className);
-                
-                // Handle different button types
-                if (button.id === 'nav-open-app' || button.id === 'hero-open-app') {
-                    openApp();
-                } else if (button.onclick) {
-                    button.click();
+            const navItem = e.target.closest('.nav-item');
+            const link = e.target.closest('a');
+            
+            console.log('🔘 Click detected:', {
+                button: button?.textContent,
+                navItem: navItem?.textContent,
+                link: link?.textContent,
+                target: e.target
+            });
+            
+            // Handle Open App buttons
+            if (button && (button.id === 'nav-open-app' || button.id === 'hero-open-app')) {
+                openApp();
+                return;
+            }
+            
+            // Handle navigation items
+            if (navItem) {
+                const pageId = navItem.getAttribute('data-page');
+                if (pageId) {
+                    console.log('🧭 Navigation clicked:', pageId);
+                    showPage(pageId);
+                }
+                return;
+            }
+            
+            // Handle regular buttons with onclick
+            if (button && button.onclick) {
+                try {
+                    button.onclick();
+                } catch (err) {
+                    console.log('❌ Button onclick error:', err);
                 }
             }
         });
         
+        // Backup showPage function
+        function showPage(pageId) {
+            console.log('📄 Backup showPage called with:', pageId);
+            
+            // Hide all pages first
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            const selectedPage = document.getElementById(`page-${pageId}`);
+            if (selectedPage) {
+                selectedPage.style.display = 'flex';
+                console.log('✅ Showing page:', pageId);
+            } else {
+                console.log('❌ Page not found:', pageId);
+            }
+            
+            // Update navigation
+            document.querySelectorAll('.nav-item').forEach(nav => {
+                nav.classList.remove('active');
+            });
+            
+            const activeNav = document.querySelector(`[data-page="${pageId}"]`);
+            if (activeNav) {
+                activeNav.classList.add('active');
+            }
+        }
+        
         window.openApp = openApp;
+        window.showPage = showPage;
     </script>
-    <script src="js/app.js?v=40"></script>
+    <script src="js/app.js?v=45"></script>
 </body>
 
 </html>
