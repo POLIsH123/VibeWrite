@@ -991,29 +991,39 @@ document.head.appendChild(rippleStyle);
 // Landing Page
 // ===========================
 function openApp() {
-    console.log('[DEBUG] openApp called');
+    console.log('[DEBUG] openApp called - Switching to App Mode');
+
+    // 1. State Management via Body Class (Most Robust)
+    document.body.classList.add('app-active');
+
+    // 2. Direct DOM Manipulation (Backup)
     const landing = document.getElementById('landing-page');
     const app = document.getElementById('main-app');
 
     if (landing) {
-        landing.style.setProperty('display', 'none', 'important');
-        console.log('[DEBUG] Hiding landing page (forced)');
+        landing.style.display = 'none';
+        landing.setAttribute('aria-hidden', 'true'); // Accessibility
     }
     if (app) {
-        app.style.setProperty('display', 'flex', 'important');
-        console.log('[DEBUG] Showing main app (forced)');
-        const computed = window.getComputedStyle(app);
-        console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
-    } else {
-        console.error('[DEBUG] #main-app NOT FOUND');
+        app.style.display = 'flex';
+        app.setAttribute('aria-hidden', 'false');
+
+        // Force layout recalculation
+        void app.offsetWidth;
     }
 
-    // Force render home page to ensure visibility & animations trigger
-    setTimeout(() => showPage('home'), 10);
+    const computed = window.getComputedStyle(app);
+    console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
+} else {
+    console.error('[DEBUG] #main-app NOT FOUND');
+}
 
-    if (!userName) {
-        showNameModal();
-    }
+// Force render home page to ensure visibility & animations trigger
+setTimeout(() => showPage('home'), 10);
+
+if (!userName) {
+    showNameModal();
+}
 }
 
 function backToLanding() {

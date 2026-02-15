@@ -57,6 +57,21 @@
 
         /* Layout Debugging - Subtle */
         /* .main-content { outline: 1px solid red; } */
+
+        /* STATE-BASED VISIBILITY CONTROL (The Real Fix) */
+        body.app-active #landing-page {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        body.app-active #main-app {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1000 !important;
+        }
     </style>
     <style>
         /* Emergency visibility fix */
