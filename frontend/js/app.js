@@ -1058,10 +1058,10 @@ function showPage(targetPageId) {
     } else {
         // First load - no exit animation needed
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        const selectedPage = document.getElementById(`page-${targetPageId}`);
-        if (selectedPage) {
-            selectedPage.style.display = 'flex';
-            selectedPage.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        const targetSelectedPage = document.getElementById(`page-${targetPageId}`);
+        if (targetSelectedPage) {
+            targetSelectedPage.style.display = 'flex';
+            targetSelectedPage.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         }
     }
 
