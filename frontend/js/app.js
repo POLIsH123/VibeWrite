@@ -1035,7 +1035,7 @@ function backToLanding() {
 // ===========================
 // OP Page Navigation - Ultra Modern
 // ===========================
-function showPage(pageId) {
+function showPage(targetPageId) {
     // Add exit animation to current page
     const currentPage = document.querySelector('.page[style*="flex"]');
     if (currentPage) {
@@ -1043,7 +1043,7 @@ function showPage(pageId) {
     }
 
     // Show selected page with entrance animation
-    const selectedPage = document.getElementById(`page-${pageId}`);
+    const selectedPage = document.getElementById(`page-${targetPageId}`);
     if (selectedPage) {
         selectedPage.style.display = 'flex';
         selectedPage.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -1058,7 +1058,7 @@ function showPage(pageId) {
     } else {
         // First load - no exit animation needed
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        const selectedPage = document.getElementById(`page-${pageId}`);
+        const selectedPage = document.getElementById(`page-${targetPageId}`);
         if (selectedPage) {
             selectedPage.style.display = 'flex';
             selectedPage.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -1071,7 +1071,7 @@ function showPage(pageId) {
         n.style.transform = '';
     });
 
-    const navItem = document.querySelector(`[data-page="${pageId}"]`);
+    const navItem = document.querySelector(`[data-page="${targetPageId}"]`);
     if (navItem) {
         navItem.classList.add('active');
         navItem.style.animation = 'glow-pulse 1s ease-in-out';
