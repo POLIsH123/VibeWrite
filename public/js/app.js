@@ -1010,20 +1010,19 @@ function openApp() {
 
         // Force layout recalculation
         void app.offsetWidth;
+
+        const computed = window.getComputedStyle(app);
+        console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
+    } else {
+        console.error('[DEBUG] #main-app NOT FOUND');
     }
 
-    const computed = window.getComputedStyle(app);
-    console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
-} else {
-    console.error('[DEBUG] #main-app NOT FOUND');
-}
+    // Force render home page to ensure visibility & animations trigger
+    setTimeout(() => showPage('home'), 10);
 
-// Force render home page to ensure visibility & animations trigger
-setTimeout(() => showPage('home'), 10);
-
-if (!userName) {
-    showNameModal();
-}
+    if (!userName) {
+        showNameModal();
+    }
 }
 
 function backToLanding() {
