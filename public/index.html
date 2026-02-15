@@ -3309,7 +3309,19 @@
             }
         });
     </script>
-    <script src="js/app.js?v=32"></script>
+    <script>
+        // Backup function to guarantee Open App works
+        function openApp() {
+            console.log('🚀 Backup openApp() called');
+            const landingPage = document.getElementById('landing-page');
+            const mainApp = document.getElementById('main-app');
+            
+            if (landingPage) landingPage.style.display = 'none';
+            if (mainApp) mainApp.style.display = 'flex';
+        }
+        window.openApp = openApp;
+    </script>
+    <script src="js/app.js?v=33"></script>
 </body>
 
 </html>
