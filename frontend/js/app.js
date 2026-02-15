@@ -1109,8 +1109,8 @@ function showPage(pageId) {
 }
 
 // Add CSS animations for page transitions
-const pageTransitionStyle = document.createElement('style');
-pageTransitionStyle.textContent = `
+const transitionStyle = document.createElement('style');
+transitionStyle.textContent = `
     @keyframes slideOutLeft {
         to {
             opacity: 0;
@@ -1147,7 +1147,7 @@ pageTransitionStyle.textContent = `
         }
     }
 `;
-document.head.appendChild(pageTransitionStyle);
+document.head.appendChild(transitionStyle);
 
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
