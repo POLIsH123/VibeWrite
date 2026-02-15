@@ -14,6 +14,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
+        /* CRITICAL RESCUE CSS - INJECTED DIRECTLY */
+        .main-content {
+            position: relative;
+            z-index: 5 !important;
+            opacity: 1 !important;
+        }
+
+        .main-content::before {
+            z-index: -1 !important;
+        }
+
+        .header {
+            z-index: 50 !important;
+        }
+
+        .page {
+            z-index: 10 !important;
+            opacity: 1 !important;
+            display: flex !important;
+            /* Ensure pages aren't hidden */
+        }
+
+        /* Ensure specific pages are hidden if not active (app.js handles this, but let's be safe) */
+        .page[style*="display: none"] {
+            display: none !important;
+        }
+
+        .rewrite-workspace,
+        .content-area,
+        .welcome-section {
+            opacity: 1 !important;
+            visibility: visible !important;
+            animation: none !important;
+            /* Disable animations in case they are stuck */
+        }
+
+        /* Sidebar safety */
+        .sidebar {
+            z-index: 100 !important;
+        }
+
+        /* Layout Debugging - Subtle */
+        /* .main-content { outline: 1px solid red; } */
+    </style>
+    <style>
         /* Emergency visibility fix */
         #main-app {
             display: flex !important;
