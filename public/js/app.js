@@ -995,10 +995,13 @@ function openApp() {
     const landing = document.getElementById('landing-page');
     const app = document.getElementById('main-app');
 
-    if (landing) landing.style.display = 'none';
+    if (landing) {
+        landing.style.setProperty('display', 'none', 'important');
+        console.log('[DEBUG] Hiding landing page (forced)');
+    }
     if (app) {
-        app.style.display = 'flex';
-        console.log('[DEBUG] Set #main-app display to flex');
+        app.style.setProperty('display', 'flex', 'important');
+        console.log('[DEBUG] Showing main app (forced)');
         const computed = window.getComputedStyle(app);
         console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
     } else {
