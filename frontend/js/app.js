@@ -1024,17 +1024,13 @@ function showPage(pageId) {
     const currentPage = document.querySelector('.page[style*="flex"]');
     if (currentPage) {
         currentPage.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
 
-        setTimeout(() => {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-
-            // Show selected page with entrance animation
-            const page = document.getElementById(`page-${pageId}`);
-            if (page) {
-                page.style.display = 'flex';
-                page.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-
+    // Show selected page with entrance animation
+    const selectedPage = document.getElementById(`page-${pageId}`);
+    if (selectedPage) {
+        selectedPage.style.display = 'flex';
+        selectedPage.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
                 // Add stagger animations to page content
                 setTimeout(() => {
                     const pageElements = page.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
