@@ -994,6 +994,9 @@ function openApp() {
     document.getElementById('landing-page').style.display = 'none';
     document.getElementById('main-app').style.display = 'flex';
 
+    // Force render home page to ensure visibility & animations trigger
+    setTimeout(() => showPage('home'), 10);
+
     if (!userName) {
         showNameModal();
     }
