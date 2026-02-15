@@ -4442,3 +4442,38 @@ body.modal-open {
     .templates-sidebar {
         z-index: 9999 !important;
     }
+/* ===========================
+   RESCUE CSS - BLACK SCREEN FIX
+   =========================== */
+.main-content {
+    position: relative;
+    z-index: 5;
+}
+
+.main-content::before {
+    z-index: -1 !important;
+}
+
+.header {
+    z-index: 50 !important;
+}
+
+.page {
+    z-index: 10 !important;
+}
+
+/* Ensure nothing is hidden by default animation state if animation fails */
+.rewrite-workspace, .content-area {
+    opacity: 1;
+}
+
+/* Ensure templates sidebar is above everything but hidden by default */
+.templates-sidebar {
+    z-index: 9999 !important;
+}
+
+/* Ensure main sidebar is above main content */
+.sidebar {
+    z-index: 100 !important;
+}
+
