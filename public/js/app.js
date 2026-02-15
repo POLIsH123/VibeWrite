@@ -991,8 +991,19 @@ document.head.appendChild(rippleStyle);
 // Landing Page
 // ===========================
 function openApp() {
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('main-app').style.display = 'flex';
+    console.log('[DEBUG] openApp called');
+    const landing = document.getElementById('landing-page');
+    const app = document.getElementById('main-app');
+
+    if (landing) landing.style.display = 'none';
+    if (app) {
+        app.style.display = 'flex';
+        console.log('[DEBUG] Set #main-app display to flex');
+        const computed = window.getComputedStyle(app);
+        console.log(`[DEBUG] #main-app Computed: display=${computed.display}, visibility=${computed.visibility}, height=${computed.height}, z-index=${computed.zIndex}`);
+    } else {
+        console.error('[DEBUG] #main-app NOT FOUND');
+    }
 
     // Force render home page to ensure visibility & animations trigger
     setTimeout(() => showPage('home'), 10);
