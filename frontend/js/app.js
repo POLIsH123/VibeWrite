@@ -1094,21 +1094,21 @@ function showPage(targetPageId) {
         titleEl.style.animation = 'slideOutUp 0.2s ease-in';
 
         setTimeout(() => {
-            titleEl.textContent = titles[pageId] || pageId;
+            titleEl.textContent = titles[targetPageId] || targetPageId;
             titleEl.style.animation = 'slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
         }, 200);
     }
 
     // Load page-specific content
-    if (pageId === 'history') {
+    if (targetPageId === 'history') {
         setTimeout(() => {
             renderHistory();
         }, 400);
-    } else if (pageId === 'community') {
+    } else if (targetPageId === 'community') {
         setTimeout(() => {
             loadCommunityScripts();
         }, 400);
-    } else if (pageId === 'settings') {
+    } else if (targetPageId === 'settings') {
         const nameInput = document.getElementById('settings-name-input');
         if (nameInput) nameInput.value = userName || '';
     }
