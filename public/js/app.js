@@ -1033,108 +1033,103 @@ function backToLanding() {
 // ===========================
 // OP Page Navigation - Ultra Modern
 // ===========================
-function showPage(pageId) {
-    // Add exit animation to current page
-    const currentPage = document.querySelector('.page[style*="flex"]');
-    if (currentPage) {
-        currentPage.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+// Simplified showPage to guarantee visibility
+document.querySelectorAll('.page').forEach(p => {
+    p.style.display = 'none';
+    p.classList.remove('active');
+});
 
-        setTimeout(() => {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+const page = document.getElementById(`page-${pageId}`);
+if (page) {
+    page.style.display = 'flex';
+    page.classList.add('active');
 
-            // Show selected page with entrance animation
-            const page = document.getElementById(`page-${pageId}`);
-            if (page) {
-                page.style.display = 'flex';
-                page.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    // Force critical styles
+    page.style.opacity = '1';
+    page.style.zIndex = '20';
+    page.style.visibility = 'visible';
 
-                // Add stagger animations to page content
-                setTimeout(() => {
-                    const pageElements = page.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
-                    pageElements.forEach((el, index) => {
-                        el.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
-                    });
-                }, 100);
-            }
-        }, 300);
-    } else {
-        // First load - no exit animation needed
-        console.log(`[DEBUG] First load showing page-${pageId}`);
-        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        const page = document.getElementById(`page-${pageId}`);
-        if (page) {
-            page.style.display = 'flex';
-            // Force reset opacity in case CSS messed it up
-            page.style.opacity = '1';
-            page.style.zIndex = '20';
-            page.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    console.log(`[DEBUG] Showing page-${pageId} (Simplified)`);
+} else {
+    console.error(`[DEBUG] page-${pageId} NOT FOUND`);
+}
 
-            console.log(`[DEBUG] page-${pageId} display set to flex. InnerHTML len: ${page.innerHTML.length}`);
-            const computed = window.getComputedStyle(page);
-            console.log(`[DEBUG] Computed display: ${computed.display}, opacity: ${computed.opacity}, z-index: ${computed.zIndex}`);
-        } else {
-            console.error(`[DEBUG] page-${pageId} NOT FOUND in DOM`);
-        }
+// First load - no exit animation needed
+console.log(`[DEBUG] First load showing page-${pageId}`);
+document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+const page = document.getElementById(`page-${pageId}`);
+if (page) {
+    page.style.display = 'flex';
+    // Force reset opacity in case CSS messed it up
+    page.style.opacity = '1';
+    page.style.zIndex = '20';
+    page.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+    console.log(`[DEBUG] page-${pageId} display set to flex. InnerHTML len: ${page.innerHTML.length}`);
+    const computed = window.getComputedStyle(page);
+    console.log(`[DEBUG] Computed display: ${computed.display}, opacity: ${computed.opacity}, z-index: ${computed.zIndex}`);
+} else {
+    console.error(`[DEBUG] page-${pageId} NOT FOUND in DOM`);
+}
     }
 
-    // Update nav with OP effects
-    document.querySelectorAll('.nav-item').forEach(n => {
-        n.classList.remove('active');
-        n.style.transform = '';
-    });
+// Update nav with OP effects
+document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    n.style.transform = '';
+});
 
-    const navItem = document.querySelector(`[data-page="${pageId}"]`);
-    if (navItem) {
-        navItem.classList.add('active');
-        navItem.style.animation = 'glow-pulse 1s ease-in-out';
+const navItem = document.querySelector(`[data-page="${pageId}"]`);
+if (navItem) {
+    navItem.classList.add('active');
+    navItem.style.animation = 'glow-pulse 1s ease-in-out';
 
-        // Reset animation after it completes
-        setTimeout(() => {
-            navItem.style.animation = '';
-        }, 1000);
-    }
+    // Reset animation after it completes
+    setTimeout(() => {
+        navItem.style.animation = '';
+    }, 1000);
+}
 
-    // Update title with OP gradient effect
-    const titles = {
-        home: 'Dashboard',
-        rewrite: 'AI Rewriter',
-        community: 'Community',
-        history: 'Your History'
-    };
-    const titleEl = document.getElementById('page-title');
-    if (titleEl) {
-        titleEl.style.animation = 'slideOutUp 0.2s ease-in';
+// Update title with OP gradient effect
+const titles = {
+    home: 'Dashboard',
+    rewrite: 'AI Rewriter',
+    community: 'Community',
+    history: 'Your History'
+};
+const titleEl = document.getElementById('page-title');
+if (titleEl) {
+    titleEl.style.animation = 'slideOutUp 0.2s ease-in';
 
-        setTimeout(() => {
-            titleEl.textContent = titles[pageId] || pageId;
-            titleEl.style.animation = 'slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        }, 200);
-    }
+    setTimeout(() => {
+        titleEl.textContent = titles[pageId] || pageId;
+        titleEl.style.animation = 'slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    }, 200);
+}
 
-    // Load page-specific content
-    if (pageId === 'history') {
-        setTimeout(() => {
-            renderHistory();
-        }, 400);
-    } else if (pageId === 'community') {
-        setTimeout(() => {
-            loadCommunityScripts();
-        }, 400);
-    } else if (pageId === 'settings') {
-        const nameInput = document.getElementById('settings-name-input');
-        if (nameInput) nameInput.value = userName || '';
-    }
+// Load page-specific content
+if (pageId === 'history') {
+    setTimeout(() => {
+        renderHistory();
+    }, 400);
+} else if (pageId === 'community') {
+    setTimeout(() => {
+        loadCommunityScripts();
+    }, 400);
+} else if (pageId === 'settings') {
+    const nameInput = document.getElementById('settings-name-input');
+    if (nameInput) nameInput.value = userName || '';
+}
 
-    // Close mobile sidebar with animation
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar.classList.contains('open')) {
-        sidebar.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-        setTimeout(() => {
-            sidebar.classList.remove('open');
-            sidebar.style.animation = '';
-        }, 300);
-    }
+// Close mobile sidebar with animation
+const sidebar = document.querySelector('.sidebar');
+if (sidebar.classList.contains('open')) {
+    sidebar.style.animation = 'slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    setTimeout(() => {
+        sidebar.classList.remove('open');
+        sidebar.style.animation = '';
+    }, 300);
+}
 }
 
 // Add CSS animations for page transitions

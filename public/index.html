@@ -92,6 +92,17 @@
         body.app-active .main-content {
             display: flex !important;
             flex-grow: 1 !important;
+            flex-direction: column !important;
+            /* Ensure vertical stacking */
+            overflow-y: auto !important;
+        }
+
+        body.app-active .page.active {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            height: 100% !important;
         }
     </style>
 
