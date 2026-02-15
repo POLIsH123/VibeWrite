@@ -1031,16 +1031,21 @@ function showPage(pageId) {
     if (selectedPage) {
         selectedPage.style.display = 'flex';
         selectedPage.style.animation = 'slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-                }, 100);
-            }
-        }, 300);
+        
+        // Add stagger animations to page content
+        setTimeout(() => {
+            const pageElements = selectedPage.querySelectorAll('.section, .stat-card, .trending-card, .vibe-card, .history-item');
+            pageElements.forEach((el, index) => {
+                el.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
+            });
+        }, 100);
     } else {
         // First load - no exit animation needed
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        const page = document.getElementById(`page-${pageId}`);
-        if (page) {
-            page.style.display = 'flex';
-            page.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        const selectedPage = document.getElementById(`page-${pageId}`);
+        if (selectedPage) {
+            selectedPage.style.display = 'flex';
+            selectedPage.style.animation = 'slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
         }
     }
 
