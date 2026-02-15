@@ -1917,12 +1917,10 @@ function renderHistory() {
     const historyItems = list.querySelectorAll('.history-item');
     historyItems.forEach((item, index) => {
         item.style.animation = `slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s both`;
-    });
-}
 
 function deleteHistoryItem(id) {
     console.log('🗑️ Deleting history item:', id);
-
+    
     // Add deletion animation
     const historyItem = document.querySelector(`[data-history-id="${id}"]`);
     if (historyItem) {
@@ -1932,14 +1930,18 @@ function deleteHistoryItem(id) {
     }
 
     // Actually delete from array
-    const originalLength = history.length;
-    history = history.filter(item => item.id !== id);
-
-    console.log(`📊 History items: ${originalLength} → ${history.length}`);
-
+    const currentHistory = JSON.parse(localStorage.getItem('vibewrite_history') || '[]');
+    const originalLength = currentHistory.length;
+    const updatedHistory = currentHistory.filter(item => item.id !== id);
+    
+    console.log(`📊 History items: ${originalLength} → ${updatedHistory.length}`);
+    
     // Save to localStorage
-    localStorage.setItem('vibewrite_history', JSON.stringify(history));
-
+    localStorage.setItem('vibewrite_history', JSON.stringify(updatedHistory));
+    
+    // Update global history variable
+    history = updatedHistory;
+    
     // Re-render after animation
     setTimeout(() => {
         renderHistory();
