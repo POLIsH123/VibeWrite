@@ -4411,6 +4411,34 @@ body.modal-open {
 
 .icon-btn.active {
     background: var(--accent);
-    color: white;
-    box-shadow: 0 0 10px var(--accent-glow);
-}
+
+    /* ===========================
+   RESCUE CSS - BLACK SCREEN FIX
+   =========================== */
+    .main-content {
+        position: relative;
+        z-index: 5;
+    }
+
+    .main-content::before {
+        z-index: -1 !important;
+    }
+
+    .header {
+        z-index: 50 !important;
+    }
+
+    .page {
+        z-index: 10 !important;
+    }
+
+    /* Ensure nothing is hidden by default animation state if animation fails */
+    .rewrite-workspace,
+    .content-area {
+        opacity: 1;
+    }
+
+    /* Ensure templates sidebar is above everything but hidden by default */
+    .templates-sidebar {
+        z-index: 9999 !important;
+    }
