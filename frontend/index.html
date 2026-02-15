@@ -3230,9 +3230,25 @@
                 mainApp.style.opacity = '1';
             }
         }
+        
+        // Universal button click handler
+        document.addEventListener('click', function(e) {
+            const button = e.target.closest('button');
+            if (button) {
+                console.log('🔘 Button clicked:', button.textContent, button.className);
+                
+                // Handle different button types
+                if (button.id === 'nav-open-app' || button.id === 'hero-open-app') {
+                    openApp();
+                } else if (button.onclick) {
+                    button.click();
+                }
+            }
+        });
+        
         window.openApp = openApp;
     </script>
-    <script src="js/app.js?v=34"></script>
+    <script src="js/app.js?v=35"></script>
 </body>
 
 </html>
